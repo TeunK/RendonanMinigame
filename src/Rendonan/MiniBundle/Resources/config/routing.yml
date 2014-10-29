@@ -1,3 +1,3 @@
 rendonan_mini_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: RendonanMiniBundle:Default:index }
+    path:     /main
+    defaults: { _controller: RendonanMiniBundle:Main:index }
