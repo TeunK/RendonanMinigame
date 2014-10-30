@@ -30,3 +30,5 @@
 !/src/Rendonan/MiniBundle/Form/Type/*
 !/src/Rendonan/MiniBundle/Repository/*
 
+!/web/css/*
+!/web/images/*

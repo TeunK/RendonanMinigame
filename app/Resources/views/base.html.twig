@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Rendonan Minigame{% endblock %}</title>
+    {% block stylesheets %}
+        <link href="{{ asset('css/stylesheet.css') }}" rel="stylesheet"/>
+    {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
 </head>
