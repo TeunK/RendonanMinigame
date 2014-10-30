@@ -1,3 +1,9 @@
 rendonan_mini_homepage:
     path:     /main
     defaults: { _controller: RendonanMiniBundle:Main:index }
+
+rendonan_mini_404:
+    path:     /{url}
+    defaults: { _controller: RendonanMiniBundle:PageNotFound:index }
+    requirements:
+        url:  .*$
