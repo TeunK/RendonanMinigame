@@ -17,7 +17,7 @@ namespace Rendonan\MiniBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Rendonan\TestBundle\Repository\PersonRepository")
+ * @ORM\Entity(repositoryClass="Rendonan\MiniBundle\Repository\PersonRepository")
  * @ORM\Table(name="tbl_Users")
  */
 
