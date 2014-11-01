@@ -6,6 +6,11 @@ rendonan_mini_game:
     path:     /game
     defaults: { _controller: RendonanMiniBundle:Game:index }
 
+rendonan_mini_scores:
+    path:     /highscore
+    defaults: { _controller: RendonanMiniBundle:Highscore:index }
+
+
 rendonan_mini_404:
     path:     /{url}
     defaults: { _controller: RendonanMiniBundle:PageNotFound:index }
