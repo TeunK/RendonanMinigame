@@ -10,6 +10,10 @@ rendonan_mini_scores:
     path:     /highscore
     defaults: { _controller: RendonanMiniBundle:Highscore:index }
 
+rendonan_mini_registration:
+    path:     /register
+    defaults: { _controller: RendonanMiniBundle:Register:index }
+
 
 rendonan_mini_404:
     path:     /{url}

@@ -1,0 +1,46 @@
+{% extends 'RendonanMiniBundle:Default:index.html.twig' %}
+
+{% block content %}
+
+    <div class="centerPanel">
+        <h3>Register:</h3>
+        <br/>
+        {{ form_start(registerForm) }}
+        {{ form_errors(registerForm) }}
+        <table class="form_register">
+            <tr>
+                <td>
+                    {{ form_label(registerForm.username) }}
+                </td>
+                <td>
+                    {{ form_widget(registerForm.username, {'attr': {'placeholder': 'Username'} }) }}
+                </td>
+                <td>
+                    {{ form_errors(registerForm.username) }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ form_label(registerForm.password) }}
+                </td>
+                <td>
+                    {{ form_widget(registerForm.password, {'attr': {'placeholder': 'Password'} }) }}
+                </td>
+                <td>
+                    {{ form_errors(registerForm.password) }}
+                </td>
+            </tr>
+        </table>
+        {{ form_end(registerForm) }}
+
+
+
+        <!--
+        <form action="registerForm.php" method="post">
+            Username: <input name="username" type="text"/>
+            Password: <input name="password" type="password"/>
+            <input type="submit"/>
+        </form>
+        -->
+    </div>
+{% endblock %}
