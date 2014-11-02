@@ -14,6 +14,10 @@ rendonan_mini_registration:
     path:     /register
     defaults: { _controller: RendonanMiniBundle:Register:index }
 
+rendonan_mini_thankyou:
+    path:     /thankyou
+    defaults: { _controller: RendonanMiniBundle:Register:thankyou }
+
 
 rendonan_mini_404:
     path:     /{url}
