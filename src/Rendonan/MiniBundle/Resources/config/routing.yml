@@ -18,6 +18,13 @@ rendonan_mini_thankyou:
     path:     /thankyou
     defaults: { _controller: RendonanMiniBundle:Register:thankyou }
 
+rendonan_mini_login:
+    path:     /login
+    defaults: { _controller: RendonanMiniBundle:Register:login }
+
+rendonan_mini_login_check:
+    pattern:  /login
+    defaults: { _controller: RendonanMiniBundle:Register:login }
 
 rendonan_mini_404:
     path:     /{url}
