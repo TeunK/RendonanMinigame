@@ -10,7 +10,11 @@
             </div>
             <div class="rightFloat">
                 <!-- TOOLBAR: DISPLAY LOGIN FORM / USER DETAILS -->
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     Logged in as [USERNAME] | Score: xxx.xxx.xxx
+                {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                    {% include 'RendonanMiniBundle:Default:Includes/login.html.twig' %}
+                {% endif %}
             </div>
         </div>
     {% endblock %}
