@@ -9,6 +9,9 @@ class MainController extends Controller
 {
     public function indexAction()
     {
+        $session = new \UserSession();
+        $session->init();
+
         $session = new Session();
 
         if ($session->get('online'))

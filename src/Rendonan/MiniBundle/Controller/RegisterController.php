@@ -6,6 +6,7 @@ use Rendonan\MiniBundle\Form\Type\AccountType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rendonan\MiniBundle\Entity\Account;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class RegisterController extends Controller
 {
@@ -71,6 +72,16 @@ class RegisterController extends Controller
             }
             return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig');
         }
+    }
+
+    public function logoutAction()
+    {
+        session_destroy();
+        return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
+            array(
+                'name'=>"XXX"
+            )
+        );
     }
 
     public function thankyouAction()

@@ -22,9 +22,9 @@ rendonan_mini_login:
     path:     /login
     defaults: { _controller: RendonanMiniBundle:Register:login }
 
-rendonan_mini_login_check:
-    pattern:  /login
-    defaults: { _controller: RendonanMiniBundle:Register:login }
+rendonan_mini_logout:
+    pattern:  /logout
+    defaults: { _controller: RendonanMiniBundle:Register:logout }
 
 rendonan_mini_404:
     path:     /{url}
