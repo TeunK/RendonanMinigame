@@ -3,28 +3,19 @@
 namespace Rendonan\MiniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Rendonan\MiniBundle\Scripts\GetSession;
 
 class MainController extends Controller
 {
     public function indexAction()
     {
-        $session = new \UserSession();
-        $session->init();
+        $session        = new GetSession();
+        $sessionData    = $session->getData();
 
-        $session = new Session();
-
-        if ($session->get('online'))
-        {
-            $username = $session->get('username');
-        }
-        else
-        {
-            $username = "no sessionname";
-        }
         return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
             array(
-                'name' => $username
+                'online'    => $sessionData[1],
+                'name'      => $sessionData[2]
             ));
     }
 

@@ -3,15 +3,19 @@
 namespace Rendonan\MiniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Rendonan\MiniBundle\Scripts\GetSession;
 
 class HighscoreController extends Controller
 {
     public function indexAction()
     {
+        $session        = new GetSession();
+        $sessionData    = $session->getData();
+
         return $this->render('RendonanMiniBundle:Default:Pages/highscore.html.twig',
             array(
-                'name' => 'name'
+                'online'    => $sessionData[1],
+                'name'      => $sessionData[2]
             ));
     }
 

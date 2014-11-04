@@ -6,13 +6,16 @@ use Rendonan\MiniBundle\Form\Type\AccountType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rendonan\MiniBundle\Entity\Account;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
+use Rendonan\MiniBundle\Scripts\GetSession;
 
 class RegisterController extends Controller
 {
     public function indexAction(Request $request)
     {
         $account = new Account();
+
+        $getSession        = new GetSession();
+        $getSessionData    = $getSession->getData();
 
         $form = $this->createForm(new AccountType(), $account, array(
             'action' => $this->generateUrl('rendonan_mini_registration'),
@@ -29,7 +32,11 @@ class RegisterController extends Controller
             $em->flush();
 
             //exit("form was valid.");
-            return $this->redirect($this->generateUrl("rendonan_mini_thankyou", array('name'=>$request->get('_username'))));
+            return $this->redirect($this->generateUrl("rendonan_mini_thankyou",
+                array(
+                    'online'    => 0,
+                    'name'=>$request->get('_username')
+                )));
 
 //            return $this->forward("RendonanMiniBundle:Default:thankyou", array(
 //                'username' => $account->getUsername()
@@ -39,6 +46,8 @@ class RegisterController extends Controller
 
         return $this->render('RendonanMiniBundle:Default:Pages/register.html.twig',
             array(
+                'online'    => $getSessionData[1],
+                'name'      => $getSessionData[2],
                 'registerForm' => $form->createView()
             ));
     }
@@ -56,46 +65,69 @@ class RegisterController extends Controller
                 $session->set('online',1);
                 $session->set('username',$username);
 
-                return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig', array('name' => $user->getUsername()));
+                $getSession        = new GetSession();
+                $getSessionData    = $getSession->getData();
+
+                return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
+                    array(
+                        'online'    => $getSessionData[1],
+                        'name'      => $getSessionData[2]
+                    ));
             } else {
-                return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig', array('name' => 'Login Error, user:'.$username.', pass:'.$password));
+                return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
+                    array(
+                        'online'    => 0,
+                        'name'      => 'Login Error, user:'.$username.', pass:'.$password)
+                );
             }
-        } else {
+        }/* else {
             if ($session->has('login')) {
                 $login = $session->get('login');
                 $username = $login->getUsername();
                 $password = $login->getPassword();
                 $user = $repository->findOneBy(array('username' => $username, 'password' => $password));
                 if ($user) {
-                    return $this->render('LoginLoginBundle:Default:Pages/welcome.html.twig', array('name' => $user->getUsername()));
+                    return $this->render('LoginLoginBundle:Default:Pages/welcome.html.twig',
+                        array(
+                            'online'    => $sessionData[1],
+                            'name'      => $sessionData[2]
+                        ));
                 }
             }
-            return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig');
-        }
+            return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
+                array(
+                    'online'    => $sessionData[1],
+                    'name'      => $sessionData[2]
+                ));
+        }*/
     }
 
     public function logoutAction()
     {
+        //destroy session
         session_destroy();
+
+        //restart session as anonymous user (online=false)
+        $session        = new GetSession();
+        $sessionData    = $session->getData();
+
         return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
             array(
-                'name'=>"XXX"
+                'online'    => $sessionData[1],
+                'name'      => $sessionData[2]
             )
         );
     }
 
     public function thankyouAction()
     {
+        $session        = new GetSession();
+        $sessionData    = $session->getData();
 
         return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
             array(
-                'name'=>"UUU"
+                'online'    => $sessionData[1],
+                'name'      => $sessionData[2]
             ));
     }
-
-    function registerUser($registration)
-    {
-
-    }
-
 }
