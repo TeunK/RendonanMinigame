@@ -14,8 +14,8 @@ class PageNotFoundController extends Controller
 
         return $this->render('RendonanMiniBundle:Default:Pages/404.html.twig',
             array(
-                'online'    => $sessionData[1],
-                'name'      => $sessionData[2]
+                'online'    => $sessionData["online"],
+                'name'      => $sessionData["username"]
             ));
     }
 }

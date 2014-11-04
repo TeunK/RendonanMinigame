@@ -14,8 +14,8 @@ class HighscoreController extends Controller
 
         return $this->render('RendonanMiniBundle:Default:Pages/highscore.html.twig',
             array(
-                'online'    => $sessionData[1],
-                'name'      => $sessionData[2]
+                'online'    => $sessionData["online"],
+                'name'      => $sessionData["username"]
             ));
     }
 

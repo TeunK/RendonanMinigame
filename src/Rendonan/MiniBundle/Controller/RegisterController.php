@@ -15,7 +15,8 @@ class RegisterController extends Controller
         $getSession        = new GetSession();
         $getSessionData    = $getSession->getData();
 
-        if (!$getSessionData[1]) //if user is already logged in, DO NOT allow registration
+        //if user is already logged in, DO NOT allow registration
+        if (!$getSessionData["online"])
         {
             $account = new Account();
 
@@ -27,14 +28,11 @@ class RegisterController extends Controller
             $form->handleRequest($request);
             if ($form->isValid())
             {
-                //registerUser($form->getData());
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($form->getData());
                 $em->flush();
 
                 $username = $request->get('_username');
-                //exit("form was valid.");
                 return $this->redirect($this->generateUrl("rendonan_mini_thankyou",
                     array(
                         'online'    => 0,
@@ -42,17 +40,12 @@ class RegisterController extends Controller
                         'title'     => "Congratulations ".$username."!",
                         'message'   => "You have been succesfully registered and can now log in to your account."
                     )));
-
-    //            return $this->forward("RendonanMiniBundle:Default:thankyou", array(
-    //                'username' => $account->getUsername()
-    //            ));
-
             }
 
             return $this->render('RendonanMiniBundle:Default:Pages/register.html.twig',
                 array(
-                    'online'    => $getSessionData[1],
-                    'name'      => $getSessionData[2],
+                    'online'    => $getSessionData["online"],
+                    'name'      => $getSessionData["username"],
                     'registerForm' => $form->createView()
                 ));
         }
@@ -60,8 +53,8 @@ class RegisterController extends Controller
         {
             return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
                 array(
-                    'online'    => $getSessionData[1],
-                    'name'      => $getSessionData[2],
+                    'online'    => $getSessionData["online"],
+                    'name'      => $getSessionData["username"],
                     'title'     => "Sorry,",
                     'message'   => "you are already logged in and can therefore not register again."
                 ));
@@ -90,10 +83,10 @@ class RegisterController extends Controller
 
                 return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
                     array(
-                        'online'    => $getSessionData[1],
-                        'name'      => $getSessionData[2],
+                        'online'    => $getSessionData["online"],
+                        'name'      => $getSessionData["username"],
                         'title'     => "Success!",
-                        'message'   => "Welcome ".$getSessionData[2].", you are now logged in."
+                        'message'   => "Welcome ".$getSessionData["username"].", you are now logged in."
                     ));
             }
             else
@@ -102,32 +95,13 @@ class RegisterController extends Controller
                 $getSessionData    = $getSession->getData();
                 return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
                     array(
-                        'online'    => $getSessionData[1],
-                        'name'      => $getSessionData[2],
+                        'online'    => $getSessionData["online"],
+                        'name'      => $getSessionData["username"],
                         'title'     => "Error,",
                         'message'   => "invalid username and/or password"
                     ));
             }
-        }/* else {
-            if ($session->has('login')) {
-                $login = $session->get('login');
-                $username = $login->getUsername();
-                $password = $login->getPassword();
-                $user = $repository->findOneBy(array('username' => $username, 'password' => $password));
-                if ($user) {
-                    return $this->render('LoginLoginBundle:Default:Pages/welcome.html.twig',
-                        array(
-                            'online'    => $sessionData[1],
-                            'name'      => $sessionData[2]
-                        ));
-                }
-            }
-            return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
-                array(
-                    'online'    => $sessionData[1],
-                    'name'      => $sessionData[2]
-                ));
-        }*/
+        }
     }
 
     public function logoutAction()
@@ -141,8 +115,8 @@ class RegisterController extends Controller
 
         return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
             array(
-                'online'    => $sessionData[1],
-                'name'      => $sessionData[2]
+                'online'    => $sessionData["online"],
+                'name'      => $sessionData["username"]
             )
         );
     }
@@ -152,12 +126,13 @@ class RegisterController extends Controller
         $session        = new GetSession();
         $sessionData    = $session->getData();
 
-        if (!$sessionData[1]) //if user is already logged in, DO NOT allow registration
+        //if user is already logged in, DO NOT allow registration
+        if (!$sessionData["online"])
         {
             return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
                 array(
-                    'online'    => $sessionData[1],
-                    'name'      => $sessionData[2],
+                    'online'    => $sessionData["online"],
+                    'name'      => $sessionData["username"],
                     'title'     => "other occasion",
                     'message'   => "hmm.."
                 ));

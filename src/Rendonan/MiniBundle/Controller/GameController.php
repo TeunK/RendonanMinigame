@@ -12,10 +12,18 @@ class GameController extends Controller
         $session        = new GetSession();
         $sessionData    = $session->getData();
 
-        return $this->render('RendonanMiniBundle:Default:Pages/game.html.twig',
-            array(
-                'online'    => $sessionData[1],
-                'name'      => $sessionData[2]
-            ));
+        if ($sessionData["online"]) //if user is logged in, display game, otherwise forward
+        {
+            return $this->render('RendonanMiniBundle:Default:Pages/game.html.twig',
+                array(
+                    'online'    => $sessionData["online"],
+                    'name'      => $sessionData["username"]
+                ));
+        }
+        else
+        {
+            //not logged in, redirect to registration page
+            return $this->redirect($this->generateUrl("rendonan_mini_registration"));
+        }
     }
 }

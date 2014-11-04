@@ -29,9 +29,9 @@ class GetSession
     public function getData()
     {
         return array(
-            $this->sessionID,
-            $this->online,
-            $this->username
+            "id" => $this->sessionID,
+            "online" => $this->online,
+            "username" => $this->username
         );
     }
 }

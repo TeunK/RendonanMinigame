@@ -14,8 +14,8 @@ class DefaultController extends Controller
 
         return $this->render('RendonanMiniBundle:Default:index.html.twig',
             array(
-                'online'    => $sessionData[1],
-                'name'      => $sessionData[2]
+                'online'    => $sessionData["online"],
+                'name'      => $sessionData["username"]
             )
         );
     }
