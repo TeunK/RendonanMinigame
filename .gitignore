@@ -34,3 +34,9 @@
 
 !/web/css/*
 !/web/images/*
+
+!/GM_SOURCE/sourcecode/rendonan_release\.gmx/objects/*
+!/GM_SOURCE/sourcecode/rendonan_release\.gmx/rooms/*
+!/GM_SOURCE/sourcecode/rendonan_release\.gmx/scripts/*
+!/GM_SOURCE/sourcecode/rendonan_release\.gmx/sprites/*
+!/GM_SOURCE/sourcecode/rendonan_release\.gmx/sprites/images/*
