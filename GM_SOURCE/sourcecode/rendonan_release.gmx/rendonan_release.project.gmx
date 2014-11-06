@@ -86,21 +86,33 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_Player</sprite>
+    <sprite>sprites\spr_Button</sprite>
+    <sprite>sprites\spr_Monster</sprite>
+    <sprite>sprites\spr_Controller</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\mouse_enter.gml</script>
-    <script>scripts\button_pressed.gml</script>
     <scripts name="UnitTests">
-      <script>scripts\test_mouse_enter.gml</script>
+      <script>scripts\test_enter_area.gml</script>
+      <script>scripts\test_calc_percent.gml</script>
+      <script>scripts\test_result.gml</script>
+    </scripts>
+    <scripts name="Drawing">
+      <script>scripts\draw_restore.gml</script>
+    </scripts>
+    <scripts name="Functions">
+      <script>scripts\button_pressed.gml</script>
+      <script>scripts\enter_area.gml</script>
+      <script>scripts\calc_percent.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
     <object>objects\obj_Controller</object>
   </objects>
-  <rooms name="rooms" roommaxid="100001" room_maxtileid="10000000">
+  <rooms name="rooms" roommaxid="100000" room_maxtileid="10000000">
     <room>rooms\room_Game</room>
+    <room>rooms\room_Test</room>
   </rooms>
   <help>
     <mimic>-1</mimic>
