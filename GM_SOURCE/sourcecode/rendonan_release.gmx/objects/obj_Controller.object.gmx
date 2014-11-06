@@ -45,7 +45,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//0 = game_mode, 1 = test_mode
+            <string>// TEST_MODE:
+// 0 = game_mode
+// 1 = test_mode
+
 test_mode = 1;
 
 if (test_mode)
