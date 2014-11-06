@@ -1,6 +1,9 @@
-//REMINDER
+//DOC:  calc_percent(part,total)
+//Note: returns percentage double between 0 and 100, based on the values partial and total
+
 //arg0 = partial
 //arg1 = total
+
 
 var correct, testcount;
 correct     = 0;
@@ -13,7 +16,7 @@ if (calc_percent(50,200) == 25) {correct +=1;} testcount+=1;
 if (calc_percent(1000,2000) == 50) {correct +=1;} testcount+=1;
 
 //FALSE statements
-if (calc_percent(25,50) == 120) {correct +=1;} testcount+=1;
+if (calc_percent(25,50) != 120) {correct +=1;} testcount+=1;
 
 //Calculate result
 return test_result(correct,testcount,"test_calc_percent");
