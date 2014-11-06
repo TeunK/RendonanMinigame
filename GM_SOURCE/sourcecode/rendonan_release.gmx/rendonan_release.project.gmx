@@ -97,9 +97,11 @@
       <script>scripts\test_enter_area.gml</script>
       <script>scripts\test_calc_percent.gml</script>
       <script>scripts\test_result.gml</script>
+      <script>scripts\test_exec.gml</script>
     </scripts>
     <scripts name="Drawing">
       <script>scripts\draw_restore.gml</script>
+      <script>scripts\draw_UI.gml</script>
     </scripts>
     <scripts name="Functions">
       <script>scripts\button_pressed.gml</script>
@@ -110,7 +112,7 @@
   <objects name="objects">
     <object>objects\obj_Controller</object>
   </objects>
-  <rooms name="rooms" roommaxid="100000" room_maxtileid="10000000">
+  <rooms name="rooms" roommaxid="100001" room_maxtileid="10000000">
     <room>rooms\room_Game</room>
     <room>rooms\room_Test</room>
   </rooms>
