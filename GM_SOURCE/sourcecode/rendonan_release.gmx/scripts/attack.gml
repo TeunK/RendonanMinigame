@@ -1,4 +1,4 @@
-//DOC:  attack(source_id, target_id, str, atktimer, atklimit, auto, force)
+//DOC:  attack(source_id, target_id, str, atkTimer, atkLimit, auto, force)
 //DESC: instance source_id attacks target_id, subtracts targets health based on str when the attack is executed (see variable description below)
 //NOTE: variables atkTimer, atkEvent must exist in source_id instance, currenthp must exist in target_id
 
