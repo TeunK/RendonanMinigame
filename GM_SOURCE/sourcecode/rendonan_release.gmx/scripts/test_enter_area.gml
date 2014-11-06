@@ -10,12 +10,12 @@ var correct;
 correct = 0;
 
 //TRUE statements
-if (mouse_enter(0,0,10,10,5,5)) {correct +=1;}
-if (mouse_enter(50,50,60,60,55,55)) {correct +=1;}
+if (enter_area(0,0,10,10,5,5)) {correct +=1;}
+if (enter_area(50,50,60,60,55,55)) {correct +=1;}
 
 //FALSE statements
-if (!mouse_enter(0,0,10,10,15,15)) {correct +=1;}
-if (!mouse_enter(50,50,60,60,65,65)) {correct +=1;}
+if (!enter_area(0,0,10,10,15,15)) {correct +=1;}
+if (!enter_area(50,50,60,60,65,65)) {correct +=1;}
 
 //Calculate result
 if (correct == 4) {return true;} else {return false;}
