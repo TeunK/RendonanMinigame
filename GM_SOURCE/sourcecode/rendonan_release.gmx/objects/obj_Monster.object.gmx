@@ -68,7 +68,7 @@ autostr         = "Auto Atk";
 xpgain      = obj_Controller.monsterLEVEL*3;
 moneygain   = obj_Controller.monsterLEVEL+round(random(5)*obj_Controller.monsterLEVEL);
 
-monster_death(hp,xpgain,moneygain);
+monster_death(currenthp,xpgain,moneygain);
 </string>
           </argument>
         </arguments>
