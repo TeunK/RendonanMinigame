@@ -157,6 +157,7 @@ else
 }
 
 
+
 </string>
           </argument>
         </arguments>
@@ -186,6 +187,18 @@ test_toggleActiveMode(toggle_active_testing);
 draw_UI(username, xp, coins, currenthp, maxhp, strength, agility);
 draw_menu();
 
+//Respawn Monsters
+if (!instance_exists(obj_Monster))
+{
+    monsterSpawnTimer +=1;
+    test_timer(760,200,monsterSpawnTimer,monsterSpawnLimit,"Respawn in... ");
+    
+    if (monsterSpawnTimer &gt;= monsterSpawnLimit)
+    {
+        instance_create(760,200,obj_Monster);
+        monsterSpawnTimer=0;
+    }
+}
 
 </string>
           </argument>
