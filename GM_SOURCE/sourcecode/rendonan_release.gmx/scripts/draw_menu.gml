@@ -29,7 +29,7 @@ if (button_pressed(310,room_height-100,400,room_height-80,autostr))
 *******************************/
 
 draw_set_alpha(1);
-draw_healthbar(room_width-20,room_height-15,10,room_height-10,calc_percent(currenthp,maxhp),c_red,c_red,c_lime,0,0,1);
+draw_healthbar(room_width-20,room_height-15,10,room_height-10,calc_percent(currenthp,maxhp),c_red,c_red,c_lime,1,0,1);
 
 /*******************************
         -- Formulae --
