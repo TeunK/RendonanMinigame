@@ -48,10 +48,11 @@
             <string>// TEST_MODE:
 // 0 = game_mode
 // 1 = test_mode
+// 2 = unit_tests
 
-test_mode = 0;
+test_mode = 1;
 
-if (test_mode)
+if (test_mode==2)
 {
     room_goto(room_Test);
 }
@@ -116,6 +117,10 @@ autostr     = "Manual Atk";
 btnHP   = instance_create(20,y+20+5*15,obj_Button);
 btnStr  = instance_create(20,y+20+6*15,obj_Button);
 btnAgi  = instance_create(20,y+20+7*15,obj_Button);
+
+//CREATE MONSTER
+monsterSpawnTimer      = 0 //sake of initialization, ignore.
+monsterSpawnLimit      = 60;
 </string>
           </argument>
         </arguments>
