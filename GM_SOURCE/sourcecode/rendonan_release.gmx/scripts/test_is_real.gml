@@ -1,26 +1,34 @@
-//DOC:  test_is_real(variable, desc)
-//DESC: checks whether stated variable is of type real (number) when active_testing is turned on
+//DOC:  test_is_real(variable, desc, passive)
+//DESC: checks whether stated variable is of type real (number) when active_testing is turned on. passive = 1 means it will ONLY return failed test-result regardless of active-testing
 
 //Initialize variables
-var variable, desc;
+var variable, desc, passive;
 variable    = argument0;
 desc        = argument1;
+passive     = argument2;
 
+//if in game test_mode
 if (obj_Controller.test_mode == 1)
 {
-    if (obj_Controller.active_testing)
+    var message;
+    message = desc;
+    
+    //test if variable matches the type-requirement
+    if is_real(variable)
     {
-        var message;
-        message = desc;
-        
-        if is_real(variable)
+        message += " Success!";
+           
+        //if active_testing is on, output success message
+        if (obj_Controller.active_testing && !passive)
         {
-            message += " Success!";
+            show_message(message);
         }
-        else
-        {
-            message += " Test failed!";
-        }
+    }
+    //if it doesn't match the requirement
+    else
+    {
+        //regardless if active_testing is on/off, output fail message
+        message += " Test failed!";
         show_message(message);
     }
 }
