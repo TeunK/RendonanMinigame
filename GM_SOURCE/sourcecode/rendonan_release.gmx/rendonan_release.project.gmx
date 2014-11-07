@@ -93,11 +93,16 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <scripts name="UnitTests">
-      <script>scripts\test_enter_area.gml</script>
-      <script>scripts\test_calc_percent.gml</script>
-      <script>scripts\test_result.gml</script>
-      <script>scripts\test_exec.gml</script>
+    <scripts name="Tests">
+      <scripts name="UnitTests">
+        <script>scripts\test_exec.gml</script>
+        <script>scripts\test_result.gml</script>
+        <script>scripts\test_calc_percent.gml</script>
+        <script>scripts\test_enter_area.gml</script>
+      </scripts>
+      <scripts name="LogicTests">
+        <script>scripts\test_timer.gml</script>
+      </scripts>
     </scripts>
     <scripts name="Drawing">
       <script>scripts\draw_restore.gml</script>
