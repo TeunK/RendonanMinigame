@@ -11,13 +11,34 @@ dmg         = argument3;
 //extract x/y positions from source and target instances
 src_x       = src_id.x;
 src_y       = src_id.y;
-tgt_x       = tgt_id.x;
+tgt_x       = tgt_id.x+40;
 tgt_y       = tgt_id.y;
 
+//markup variables
+message     = string(src_name)+string(" strikes!#DMG: ")+string(dmg);
+margin      = 10;
+
 //draw line and hit message
-draw_set_color(c_orange)
-draw_line(src_x,src_y,tgt_x,tgt_y)
-draw_text(tgt_x,tgt_y,string(src_name)+string(" strikes!#DMG: ")+string(dmg));
+if (src_id.atkEvent > 40)
+{
+    draw_set_color(c_red);
+    draw_line(src_x,src_y,tgt_x,tgt_y);
+    draw_set_color(c_orange);
+    draw_line(src_x,src_y-1,tgt_x,tgt_y-1);
+    draw_line(src_x,src_y+1,tgt_x,tgt_y+1);
+}
+
+draw_set_color(c_black);
+draw_set_alpha(1);
+draw_roundrect(tgt_x-margin, tgt_y-margin, tgt_x+margin+string_width(message), tgt_y+margin+string_height(message),1);
+draw_set_alpha(0.6);
+draw_roundrect(tgt_x-margin, tgt_y-margin, tgt_x+margin+string_width(message), tgt_y+margin+string_height(message),0);
+
+draw_set_alpha(1);
+draw_set_color(c_orange);
+draw_text(tgt_x,tgt_y,message);
 
 //subtract atkEvent timer (-1 every (1/30) seconds)
 src_id.atkEvent -=1;
+
+draw_restore();
