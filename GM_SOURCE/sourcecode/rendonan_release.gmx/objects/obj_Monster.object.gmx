@@ -92,7 +92,9 @@ monster_death(hp,xpgain,moneygain);
           <argument>
             <kind>1</kind>
             <string>draw_entity(name, currenthp, maxhp);
-test_timer(x, y+120, atkTimer, atkLimit);
+
+test_timer(x-70, y+70, currenthp, maxhp, "Health: ");
+test_timer(x, y+120, atkTimer, atkLimit, "Attack Due: ");
 //SETUP ATTACK
 if (instance_exists(obj_Player))
 {

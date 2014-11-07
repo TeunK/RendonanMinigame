@@ -1,15 +1,17 @@
-//DOC:  test_timer(x, y, atkTimer, atkLimit);
-//DESC: displays true values
+//DOC:  test_timer(x, y, timer, limit, desc);
+//DESC: displays true values of timer and limit
 
 //Initialize variables
+var xx, yy, timer, limit, desc;
 xx          = argument0;
 yy          = argument1;
-atkTimer    = argument2;
-atkLimit    = argument3;
+timer       = argument2;
+limit       = argument3;
+desc        = argument4;
 
 draw_restore();
 
 if (obj_Controller.test_mode == 1)
 {
-    draw_text_bg(xx,yy,"Attack due: "+string(atkTimer)+"/"+string(atkLimit));
+    draw_text_bg(xx,yy,string(desc)+string(timer)+"/"+string(limit));
 }

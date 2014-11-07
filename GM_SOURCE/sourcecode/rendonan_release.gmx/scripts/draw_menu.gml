@@ -4,7 +4,7 @@ draw_set_color(c_black);
 draw_rectangle(300,room_height-140,room_width-10,room_height-30,0);
 
 //Make distant variables local
-test_timer(150,room_height-30,atkTimer, atkLimit);
+test_timer(150,room_height-30,atkTimer, atkLimit, "Attack Due: ");
 
 //ATTACK BUTTON
 if (!autoatk)
