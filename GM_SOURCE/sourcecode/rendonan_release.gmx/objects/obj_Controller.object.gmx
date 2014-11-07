@@ -100,20 +100,19 @@ if (test_mode==2)
 
 //USER STATS FROM DATABASE
 username        = "TEST_USER";
-
 xp              = 0;
 coins           = 100;
-
 maxhp           = 100;
 currenthp       = 100;
 strength        = 1;
 agility         = 0;
-attacktimer     = 45;
 
 //CALC STAT
 hpPercent   = calc_percent(currenthp,maxhp);
 autoatk     = false;
 autostr     = "Manual Atk";
+atkTimer    = 5;
+atkLimit    = 45;
 
 //CREATE MENU BUTTONS
 btnHP   = instance_create(20,y+20+5*15,obj_Button);
@@ -123,6 +122,37 @@ btnAgi  = instance_create(20,y+20+7*15,obj_Button);
 //CREATE MONSTER
 monsterSpawnTimer      = 0 //sake of initialization, ignore.
 monsterSpawnLimit      = 60;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//set atkTimer increase depending on auto-atk-mode and agility
+if (!autoatk) 
+{
+    atkTimer += (0.6+agility/50);
+}
+else
+{
+    atkTimer += (0.3+agility/80);
+}
 </string>
           </argument>
         </arguments>
@@ -146,6 +176,8 @@ monsterSpawnLimit      = 60;
           <argument>
             <kind>1</kind>
             <string>draw_UI(username, xp, coins, currenthp, maxhp, strength, agility);
+
+draw_menu();
 </string>
           </argument>
         </arguments>

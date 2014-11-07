@@ -108,6 +108,7 @@
       <script>scripts\draw_restore.gml</script>
       <script>scripts\draw_UI.gml</script>
       <script>scripts\draw_dmg.gml</script>
+      <script>scripts\draw_menu.gml</script>
     </scripts>
     <scripts name="Functions">
       <script>scripts\button_pressed.gml</script>
