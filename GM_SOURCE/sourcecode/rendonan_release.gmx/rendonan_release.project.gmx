@@ -106,6 +106,7 @@
     </scripts>
     <scripts name="Functions">
       <script>scripts\button_pressed.gml</script>
+      <script>scripts\draw_entity.gml</script>
       <script>scripts\attack.gml</script>
       <script>scripts\enter_area.gml</script>
       <script>scripts\calc_percent.gml</script>
@@ -115,7 +116,6 @@
       </scripts>
       <scripts name="Player">
         <script>scripts\player_update.gml</script>
-        <script>scripts\draw_player.gml</script>
       </scripts>
     </scripts>
   </scripts>
@@ -123,6 +123,7 @@
     <object>objects\obj_Controller</object>
     <object>objects\obj_Button</object>
     <object>objects\obj_Player</object>
+    <object>objects\obj_Monster</object>
   </objects>
   <rooms name="rooms" roommaxid="100001" room_maxtileid="10000000">
     <room>rooms\room_Game</room>

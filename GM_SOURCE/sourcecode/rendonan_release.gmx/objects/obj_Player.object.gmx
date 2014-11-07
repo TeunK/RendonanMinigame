@@ -84,7 +84,7 @@ player_update();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_player();
+            <string>draw_entity(username, currenthp, maxhp);
 
 //SETUP ATTACK
 if (instance_exists(obj_Monster))
