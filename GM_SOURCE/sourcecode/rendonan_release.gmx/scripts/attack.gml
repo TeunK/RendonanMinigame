@@ -12,6 +12,17 @@ atkLimit    = argument4; //atktimer queue after which the attack is executed
 auto        = argument5; //defines if auto-attack is enabled
 force       = argument6; //force attack, this being 1 forces the attack to execute
 
+//Bugfix -> when attacking the player, the controllers stats should be affected
+subtarget   = target_id; //will change subtarget's stats, if target_id = player, subtarget = controller
+if (instance_exists(obj_Player) && instance_exists(obj_Controller))
+{
+    if (target_id == target_id)
+    {
+        subtarget = obj_Controller;
+    }
+}
+
+
 //dmg = amount of damage that will be done. May be changed into a formula based on str (and possible future stats such as defence, agility etc.)
 dmg = str;
 
@@ -27,7 +38,7 @@ if (instance_exists(source_id) && instance_exists(target_id))
             //reset atktimer, start atkEvent, subtract str from target_id
             source_id.atkTimer  =   0;
             source_id.atkEvent  =   20; //timer-variable, defines duration of displaying the hit-msg, counts down to 0
-            target_id.currenthp -=  dmg
+            subtarget.currenthp -=  dmg
         }
     }
 }
