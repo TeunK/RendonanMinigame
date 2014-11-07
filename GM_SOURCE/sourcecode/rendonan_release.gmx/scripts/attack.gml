@@ -45,6 +45,8 @@ if (instance_exists(source_id) && instance_exists(target_id))
             subsource.atkTimer  =   0;
             
             source_id.atkEvent  =   60; //timer-variable, defines duration of displaying the hit-msg, counts down to 0
+            
+            test_is_real(dmg, "Testing dmg variable in attack script: ");
             subtarget.currenthp -=  dmg
         }
     }
