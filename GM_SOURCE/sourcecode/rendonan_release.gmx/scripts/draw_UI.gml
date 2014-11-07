@@ -11,12 +11,12 @@ margin_top  = 20;
 spacing     = 15;
 
 username    = argument0;
-xp          = argument1;
-coins       = argument2;
-currenthp   = argument3;
-maxhp       = argument4;
-strength    = argument5;
-agility     = argument6;
+xp          = round(argument1);
+coins       = round(argument2);
+currenthp   = round(argument3);
+maxhp       = round(argument4);
+strength    = round(argument5);
+agility     = round(argument6);
 
 //draw background box
 draw_set_alpha(0.5);
