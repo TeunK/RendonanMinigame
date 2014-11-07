@@ -96,7 +96,9 @@ if (test_mode==2)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//USER STATS FROM DATABASE
+            <string>draw_set_font(font0);
+
+//USER STATS FROM DATABASE
 username        = "TEST_USER";
 
 xp              = 0;
