@@ -4,8 +4,8 @@
 
 //Initialize variables
 var source_id, target_id, str, atkTimer, atkLimit, auto, force;
-source_id   = argument0; //who executes the attack
-target_id   = argument1; //who is attacked
+source_id   = argument0.id; //who executes the attack
+target_id   = argument1.id; //who is attacked
 str         = argument2; //strength, how much dmg will be done
 atkTimer    = argument3; //current timer position, attack-delayer
 atkLimit    = argument4; //atktimer queue after which the attack is executed
@@ -43,7 +43,6 @@ if (instance_exists(source_id) && instance_exists(target_id))
         {
             //reset atktimer, start atkEvent, subtract str from target_id
             subsource.atkTimer  =   0;
-            show_message(string(subsource)+", "+string(obj_Controller.id));
             
             source_id.atkEvent  =   60; //timer-variable, defines duration of displaying the hit-msg, counts down to 0
             subtarget.currenthp -=  dmg
