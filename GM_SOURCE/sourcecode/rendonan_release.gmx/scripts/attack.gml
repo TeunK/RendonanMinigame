@@ -37,7 +37,7 @@ if (instance_exists(source_id) && instance_exists(target_id))
         {
             //reset atktimer, start atkEvent, subtract str from target_id
             source_id.atkTimer  =   0;
-            source_id.atkEvent  =   20; //timer-variable, defines duration of displaying the hit-msg, counts down to 0
+            source_id.atkEvent  =   60; //timer-variable, defines duration of displaying the hit-msg, counts down to 0
             subtarget.currenthp -=  dmg
         }
     }

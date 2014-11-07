@@ -35,7 +35,7 @@ maxhp           = 10;
 
 //Other variables
 hpPercent       = calc_percent(currenthp,maxhp);
-atkLimit        = 30;
+atkLimit        = 140;
 atkTimer        = 0;
 atkEvent        = 0
 
