@@ -4,14 +4,14 @@ draw_set_color(c_black);
 draw_rectangle(300,room_height-140,room_width-10,room_height-30,0);
 
 //Make distant variables local
-test_timer(20,room_height-20,atkTimer, atkLimit);
+test_timer(150,room_height-30,atkTimer, atkLimit);
 
 //ATTACK BUTTON
 if (!autoatk)
 {
     if (button_pressed(310,room_height-130,400,room_height-110,"Attack!"))
     {
-        attack(obj_Player, obj_Monster, str, atkTimer, atkLimit, auto, 1)
+        attack(obj_Player, obj_Monster, str, atkTimer, atkLimit, autoatk, 1)
     }
 }
 

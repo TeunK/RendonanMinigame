@@ -13,12 +13,18 @@ auto        = argument5; //defines if auto-attack is enabled
 force       = argument6; //force attack, this being 1 forces the attack to execute
 
 //Bugfix -> when attacking the player, the controllers stats should be affected
+var subsource, subtarget;
+subsource   = source_id;
 subtarget   = target_id; //will change subtarget's stats, if target_id = player, subtarget = controller
 if (instance_exists(obj_Player) && instance_exists(obj_Controller))
 {
-    if (target_id == target_id)
+    if (source_id == obj_Player.id)
     {
-        subtarget = obj_Controller;
+        subsource = obj_Controller.id;
+    }
+    if (target_id == obj_Player.id)
+    {
+        subtarget = obj_Controller.id;
     }
 }
 
@@ -36,7 +42,9 @@ if (instance_exists(source_id) && instance_exists(target_id))
         if (auto || force)
         {
             //reset atktimer, start atkEvent, subtract str from target_id
-            source_id.atkTimer  =   0;
+            subsource.atkTimer  =   0;
+            show_message(string(subsource)+", "+string(obj_Controller.id));
+            
             source_id.atkEvent  =   60; //timer-variable, defines duration of displaying the hit-msg, counts down to 0
             subtarget.currenthp -=  dmg
         }

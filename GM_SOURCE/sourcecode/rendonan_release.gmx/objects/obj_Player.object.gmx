@@ -35,7 +35,6 @@ maxhp       = 100;
 player_update();
 
 //Other variables
-atkTimer    = 0;
 atkEvent    = 0;
 hpPercent   = calc_percent(currenthp,maxhp);
 </string>
@@ -62,6 +61,8 @@ hpPercent   = calc_percent(currenthp,maxhp);
             <kind>1</kind>
             <string>//Synchronise the "true" player variables, which are stored in obj_Controller
 player_update();
+
+
 </string>
           </argument>
         </arguments>
@@ -91,7 +92,7 @@ if (instance_exists(obj_Monster))
 {
     
     //attack monster in case obj_Controller.autoatk is true (ie. auto-attack mode is active)
-    dmg = attack(id, obj_Monster, str, atkTimer, atkLimit, obj_Controller.autoatk, false)
+    dmg = attack(id, obj_Monster, str, obj_Controller.atkTimer, obj_Controller.atkLimit, obj_Controller.autoatk, false)
     
     //attacking monster emotion
     if (atkEvent&gt;0)
