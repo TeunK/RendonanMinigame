@@ -8,6 +8,19 @@ tgt_id      = argument1;
 src_name    = argument2;
 dmg         = argument3;
 
+/*******************************/
+/*Type-checking input arguments*/
+//DOC:  test_is_real(variable, desc, passive)
+//DOC:  test_is_string(variable, desc, passive)
+var testmodule;
+testmodule = "[draw_dmg] ";
+
+test_is_real(   src_id,         testmodule+"src_id: ",      true);
+test_is_real(   tgt_id,         testmodule+"tgt_id: ",      true);
+test_is_string( src_name,       testmodule+"src_name: ",    true);
+test_is_real(   dmg,            testmodule+"dmg: ",         true);
+/*******************************/
+
 //extract x/y positions from source and target instances
 src_x       = src_id.x;
 src_y       = src_id.y;

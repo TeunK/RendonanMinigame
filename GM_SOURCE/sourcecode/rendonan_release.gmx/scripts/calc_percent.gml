@@ -9,5 +9,16 @@ var partial, total;
 partial = argument0;
 total   = argument1;
 
+/*******************************/
+/*Type-checking input arguments*/
+//DOC:  test_is_real(variable, desc, passive)
+//DOC:  test_is_string(variable, desc, passive)
+var testmodule;
+testmodule = "[calc_percent] ";
+
+test_is_real(   partial,      testmodule+"partial: ",     true);
+test_is_real(   total,        testmodule+"total: ",       true);
+/*******************************/
+
 //return calculated percentage
 return ((partial/total)*100);

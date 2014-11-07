@@ -12,6 +12,22 @@ atkLimit    = argument4; //atktimer queue after which the attack is executed
 auto        = argument5; //defines if auto-attack is enabled
 force       = argument6; //force attack, this being 1 forces the attack to execute
 
+/*******************************/
+/*Type-checking input arguments*/
+//DOC:  test_is_real(variable, desc, passive)
+//DOC:  test_is_string(variable, desc, passive)
+var testmodule;
+testmodule = "[attack] ";
+
+test_is_real(   source_id,      testmodule+"source_id: ",   true);
+test_is_real(   target_id,      testmodule+"target_id: ",   true);
+test_is_real(   str,            testmodule+"str: ",         true);
+test_is_real(   atkTimer,       testmodule+"atkTimer: ",    true);
+test_is_real(   atkLimit,       testmodule+"atkLimit: ",    true);
+test_is_real(   auto,           testmodule+"auto: ",        true);
+test_is_real(   force,          testmodule+"force: ",       true);
+/*******************************/
+
 //Bugfix -> when attacking the player, the controllers stats should be affected
 var subsource, subtarget;
 subsource   = source_id;

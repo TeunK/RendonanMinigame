@@ -7,6 +7,18 @@ hp          = argument0;
 xpgain      = argument1;
 moneygain   = argument2;
 
+/*******************************/
+/*Type-checking input arguments*/
+//DOC:  test_is_real(variable, desc, passive)
+//DOC:  test_is_string(variable, desc, passive)
+var testmodule;
+testmodule = "[monster_death] ";
+
+test_is_real(   hp,         testmodule+"hp: ",          true);
+test_is_real(   xpgain,     testmodule+"xpgain: ",      true);
+test_is_real(   moneygain,  testmodule+"moneygain: ",   true);
+/*******************************/
+
 //main function
 if (hp <= 0)
 {

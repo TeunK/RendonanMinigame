@@ -17,6 +17,21 @@ y1      = argument3;
 x_pos   = argument4;
 y_pos   = argument5;
 
+/*******************************/
+/*Type-checking input arguments*/
+//DOC:  test_is_real(variable, desc, passive)
+//DOC:  test_is_string(variable, desc, passive)
+var testmodule;
+testmodule = "[enter_area] ";
+
+test_is_real(   x0,        testmodule+"x0: ",       true);
+test_is_real(   y0,        testmodule+"y0: ",       true);
+test_is_real(   x1,        testmodule+"x1: ",       true);
+test_is_real(   y1,        testmodule+"y1: ",       true);
+test_is_real(   x_pos,     testmodule+"x_pos: ",    true);
+test_is_real(   y_pos,     testmodule+"y_pos: ",    true);
+/*******************************/
+
 //Test positions and return the boolean accordingly
 if  (
         //(x_pos,y_pos) WITHIN RECTANGLE DEFINED BY INPUT POINTS

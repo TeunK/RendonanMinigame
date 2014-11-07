@@ -18,6 +18,23 @@ maxhp       = round(argument4);
 strength    = round(argument5);
 agility     = round(argument6);
 
+/*******************************/
+/*Type-checking input arguments*/
+//DOC:  test_is_real(variable, desc, passive)
+//DOC:  test_is_string(variable, desc, passive)
+var testmodule;
+testmodule = "[draw_UI] ";
+
+test_is_string( username,    testmodule+"username: ",    true);
+test_is_real(   xp,          testmodule+"xp: ",          true);
+test_is_real(   coins,       testmodule+"coins: ",       true);
+test_is_real(   currenthp,   testmodule+"currenthp: ",   true);
+test_is_real(   maxhp,       testmodule+"maxhp: ",       true);
+test_is_real(   strength,    testmodule+"strength: ",    true);
+test_is_real(   agility,     testmodule+"agility: ",     true);
+/*******************************/
+
+
 //draw background box
 draw_set_alpha(0.5);
 draw_set_color(c_black);

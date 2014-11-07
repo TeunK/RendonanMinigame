@@ -7,6 +7,18 @@ name        = argument0;
 currenthp   = argument1;
 maxhp       = argument2;
 
+/*******************************/
+/*Type-checking input arguments*/
+//DOC:  test_is_real(variable, desc, passive)
+//DOC:  test_is_string(variable, desc, passive)
+var testmodule;
+testmodule = "[draw_entity] ";
+
+test_is_string( name,           testmodule+"name: ",        true);
+test_is_real(   currenthp,      testmodule+"currenthp: ",   true);
+test_is_real(   maxhp,          testmodule+"maxhp: ",       true);
+/*******************************/
+
 //draw player name
 draw_set_halign(fa_center);
 draw_text(x, y-6-0.5*sprite_get_height(sprite_index), name);
