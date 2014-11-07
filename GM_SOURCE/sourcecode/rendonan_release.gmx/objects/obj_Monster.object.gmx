@@ -65,10 +65,11 @@ autostr         = "Auto Atk";
           <argument>
             <kind>1</kind>
             <string>var xpgain, moneygain;
-xpgain      = obj_Controller.monsterLEVEL*3;
-moneygain   = obj_Controller.monsterLEVEL+round(random(5)*obj_Controller.monsterLEVEL);
+xpgain      = level*3;
+moneygain   = level+round(random(5)*level);
 
 monster_death(currenthp,xpgain,moneygain);
+
 </string>
           </argument>
         </arguments>
