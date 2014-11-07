@@ -117,6 +117,9 @@
       <scripts name="Player">
         <script>scripts\player_update.gml</script>
       </scripts>
+      <scripts name="Monster">
+        <script>scripts\monster_death.gml</script>
+      </scripts>
     </scripts>
   </scripts>
   <objects name="objects">
@@ -125,7 +128,7 @@
     <object>objects\obj_Player</object>
     <object>objects\obj_Monster</object>
   </objects>
-  <rooms name="rooms" roommaxid="100001" room_maxtileid="10000000">
+  <rooms name="rooms" roommaxid="100003" room_maxtileid="10000000">
     <room>rooms\room_Game</room>
     <room>rooms\room_Test</room>
   </rooms>
