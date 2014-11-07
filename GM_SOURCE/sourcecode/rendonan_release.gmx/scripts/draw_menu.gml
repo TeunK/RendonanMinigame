@@ -11,7 +11,7 @@ if (!autoatk)
 {
     if (button_pressed(310,room_height-130,400,room_height-110,"Attack!"))
     {
-        attack(obj_Player, obj_Monster, str, atkTimer, atkLimit, autoatk, 1)
+        attack(obj_Player, obj_Monster, strength, atkTimer, atkLimit, autoatk, 1)
     }
 }
 
