@@ -68,7 +68,8 @@ class RegisterController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
         $repository = $em->getRepository('RendonanMiniBundle:Account');
-        if ($request->getMethod() == 'POST') {
+        if ($request->getMethod() == 'POST')
+        {
             $session->clear();
             $username = $request->get('_username');
             $password = ($request->get('_password'));
@@ -101,6 +102,10 @@ class RegisterController extends Controller
                         'message'   => "invalid username and/or password"
                     ));
             }
+        }
+        else
+        {
+
         }
     }
 
