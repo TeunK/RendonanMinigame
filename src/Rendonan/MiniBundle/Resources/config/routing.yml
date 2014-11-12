@@ -6,6 +6,14 @@ rendonan_mini_game:
     path:     /game
     defaults: { _controller: RendonanMiniBundle:Game:index }
 
+rendonan_mini_gameload:
+    pattern:  /gameload
+    defaults: { _controller: RendonanMiniBundle:Game:loaddata }
+
+rendonan_mini_gamesave:
+    pattern:  /gamesave
+    defaults: { _controller: RendonanMiniBundle:Game:savedata }
+
 rendonan_mini_scores:
     path:     /highscore
     defaults: { _controller: RendonanMiniBundle:Highscore:index }
