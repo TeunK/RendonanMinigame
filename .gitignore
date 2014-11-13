@@ -18,6 +18,8 @@
 !/src/Rendonan/MiniBundle/Resources/views/Default/*
 !/src/Rendonan/MiniBundle/Resources/views/Default/Pages/*
 !/src/Rendonan/MiniBundle/Resources/views/Default/Includes/*
+!/src/Rendonan/MiniBundle/Resources/views/Default/HTTPrequests/*
+
 
 !/web/html5game/*
 !/web/app.php
