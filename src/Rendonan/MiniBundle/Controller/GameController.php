@@ -51,7 +51,7 @@ class GameController extends Controller
         }
 
         //init user data to output in page for game to pick up
-        $username   = "CONNECTED BUT NOT LOGGED IN";
+        $username   = "LOCAL PLAYER";
         $xp         = 999999;
         $coins      = 999999;
         $maxhp      = 10000000;
