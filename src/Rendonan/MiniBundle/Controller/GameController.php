@@ -4,6 +4,7 @@ namespace Rendonan\MiniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rendonan\MiniBundle\Scripts\GetSession;
+use Rendonan\MiniBundle\Entity\Account;
 
 class GameController extends Controller
 {
@@ -61,15 +62,20 @@ class GameController extends Controller
 
         if ($sessionData["online"]) //if user is logged in, display game, otherwise forward
         {
-            $username   = $sessionData["username"];
-            /* LOAD THIS DATA FROM THE DATABASE WHERE USERNAME = $sessionData['username']
-            $xp         = 999999;
-            $coins      = 999999;
-            $maxhp      = 10000000;
-            $currenthp  = 10000000;
-            $strength   = 999999;
-            $agility    = 0;
-            */
+            //Init DB-Connection
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('RendonanMiniBundle:Account');
+            $user = $repository->findOneBy(array('username' => $sessionData["username"]));
+
+            // LOAD THIS DATA FROM THE DATABASE WHERE USERNAME = $sessionData['username']
+            $username   = $user->getUsername();
+            $xp         = $user->getUserExperience();
+            $coins      = $user->getUserCoins();
+            $maxhp      = $user->getStatHp();
+            $currenthp  = $user->getStatHp();
+            $strength   = $user->getStatStrength();
+            $agility    = $user->getStatAgility();
+
         }
 
         return $this->render('RendonanMiniBundle:Default:HTTPrequests/userdata.html.twig',
