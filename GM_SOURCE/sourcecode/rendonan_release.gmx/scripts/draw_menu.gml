@@ -11,7 +11,10 @@ if (!autoatk)
 {
     if (button_pressed(310,room_height-130,400,room_height-110,"Attack!"))
     {
-        attack(obj_Player, obj_Monster, strength, atkTimer, atkLimit, autoatk, 1)
+        if (instance_exists(obj_Player) && instance_exists(obj_Monster))
+        {
+            attack(obj_Player, obj_Monster, strength, atkTimer, atkLimit, autoatk, 1);
+        }
     }
 }
 
