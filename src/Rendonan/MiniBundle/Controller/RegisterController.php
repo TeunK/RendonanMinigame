@@ -66,7 +66,7 @@ class RegisterController extends Controller
 
 
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('RendonanMiniBundle:Account');
         if ($request->getMethod() == 'POST')
         {
