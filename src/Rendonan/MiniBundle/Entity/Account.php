@@ -95,7 +95,6 @@ Class Account
     public function setId($id)
     {
         $this->id = $id;
-        return $this;
     }
 
     public function getId()
@@ -106,7 +105,6 @@ Class Account
     public function setUsername($username)
     {
         $this->username = $username;
-        return $this;
     }
 
     public function getUsername()
@@ -117,7 +115,6 @@ Class Account
     public function setPassword($password)
     {
         $this->password = $password;
-        return $this;
     }
 
     public function getPassword()
@@ -138,7 +135,6 @@ Class Account
     public function setStatAgility($stat_agility)
     {
         $this->stat_agility = $stat_agility;
-        return $this;
     }
 
     public function getStatAgility()
@@ -149,7 +145,6 @@ Class Account
     public function setStatHp($stat_hp)
     {
         $this->stat_hp = $stat_hp;
-        return $this;
     }
 
     public function getStatHp()
@@ -160,7 +155,6 @@ Class Account
     public function setStatStrength($stat_strength)
     {
         $this->stat_strength = $stat_strength;
-        return $this;
     }
 
     public function getStatStrength()
@@ -171,7 +165,6 @@ Class Account
     public function setUserCoins($user_coins)
     {
         $this->user_coins = $user_coins;
-        return $this;
     }
 
     public function getUserCoins()
@@ -182,7 +175,6 @@ Class Account
     public function setUserExperience($user_experience)
     {
         $this->user_experience = $user_experience;
-        return $this;
     }
 
     public function getUserExperience()
