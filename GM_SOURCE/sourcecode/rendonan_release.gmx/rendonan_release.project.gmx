@@ -18,6 +18,8 @@
       <scripts name="UnitTests">
         <script>scripts\test_calc_percent.gml</script>
         <script>scripts\test_enter_area.gml</script>
+        <script>scripts\test_explode_string.gml</script>
+        <script>scripts\test_implode_array.gml</script>
       </scripts>
       <scripts name="LogicTests">
         <script>scripts\test_timer.gml</script>
@@ -41,10 +43,6 @@
       <script>scripts\draw_text_bg.gml</script>
     </scripts>
     <scripts name="Functions">
-      <script>scripts\button_pressed.gml</script>
-      <script>scripts\attack.gml</script>
-      <script>scripts\enter_area.gml</script>
-      <script>scripts\calc_percent.gml</script>
       <scripts name="Buttons">
         <script>scripts\btn_update.gml</script>
         <script>scripts\btn_purchase.gml</script>
@@ -54,6 +52,14 @@
       </scripts>
       <scripts name="Monster">
         <script>scripts\monster_death.gml</script>
+      </scripts>
+      <scripts name="General">
+        <script>scripts\calc_percent.gml</script>
+        <script>scripts\enter_area.gml</script>
+        <script>scripts\implode_array.gml</script>
+        <script>scripts\explode_string.gml</script>
+        <script>scripts\button_pressed.gml</script>
+        <script>scripts\attack.gml</script>
       </scripts>
     </scripts>
   </scripts>
