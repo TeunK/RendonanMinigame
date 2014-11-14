@@ -46,9 +46,9 @@ Class Account
     protected $password;
 
     /**
-     * @ORM\Column(type="string",length=100)
+     * @ORM\Column(type="integer",length=1)
      */
-    protected $playing; //check if user is currently playing. Prevents multiple instances of the game running simultaneously.
+    protected $playing = 0; //check if user is currently playing. Prevents multiple instances of the game running simultaneously.
 
 /////////////////////////////////////////////////////////////////
 ////////////////////////USER GAME STATISTICS/////////////////////
