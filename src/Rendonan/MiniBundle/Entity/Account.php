@@ -45,10 +45,6 @@ Class Account
      */
     protected $password;
 
-    /**
-     * @ORM\Column(type="integer",length=1)
-     */
-    protected $playing = 0; //check if user is currently playing. Prevents multiple instances of the game running simultaneously.
 
 /////////////////////////////////////////////////////////////////
 ////////////////////////USER GAME STATISTICS/////////////////////
@@ -72,12 +68,7 @@ Class Account
     /**
      * @ORM\Column(type="integer", options={"default" = 100})
      */
-    protected $stat_hp = 100; //max hp level
-
-    /**
-     * @ORM\Column(type="integer", options={"default" = 0})
-     */
-    protected $current_hp = 100; //current state of hp
+    protected $stat_hp = 100;
 
     /**
      * @ORM\Column(type="integer", options={"default" = 1})
@@ -132,17 +123,6 @@ Class Account
         return $this->password;
     }
 
-    public function setPlaying($playing)
-    {
-        $this->playing = $playing;
-    }
-
-    public function getPlaying()
-    {
-        return $this->playing;
-    }
-
-
     /**
      * @inheritDoc
      */
@@ -171,16 +151,6 @@ Class Account
     public function getStatHp()
     {
         return $this->stat_hp;
-    }
-
-    public function setCurrentHp($current_hp)
-    {
-        $this->current_hp = $current_hp;
-    }
-
-    public function getCurrentHp()
-    {
-        return $this->current_hp;
     }
 
     public function setStatStrength($stat_strength)
