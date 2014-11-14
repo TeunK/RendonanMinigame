@@ -11,7 +11,9 @@
     <sprite>sprites\spr_Monster</sprite>
     <sprite>sprites\spr_Controller</sprite>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bg_sky</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <scripts name="Tests">
