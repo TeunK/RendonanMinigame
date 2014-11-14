@@ -82,6 +82,16 @@ class GameController extends Controller
 
         }
 
+        //Init DB-Connection
+
+        if ($user->getUsername() == $name)
+        {
+            $user->setPlaying(1);
+
+            $em->persist($user);
+            $em->flush();
+        }
+
         return $this->render('RendonanMiniBundle:Default:HTTPrequests/userdata.html.twig',
             array(
                 'name'      => $username,
@@ -143,6 +153,7 @@ class GameController extends Controller
                 $user->setUserExperience($xp);
                 $user->setUserCoins($coins);
                 $user->setStatHp($maxhp);
+                $user->setCurrentHp($currenthp);
                 $user->setStatStrength($strength);
                 $user->setStatAgility($agility);
 
