@@ -5,6 +5,10 @@ namespace Rendonan\MiniBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rendonan\MiniBundle\Scripts\GetSession;
 use Rendonan\MiniBundle\Entity\Account;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session;
+
+
 
 class GameController extends Controller
 {
@@ -91,8 +95,62 @@ class GameController extends Controller
     }
 
     //executes user game-save into database
-    public function savedataAction()
+    public function savedataAction(Request $request)
     {
+        $session = $request->getSession();
+        //init session
+        //$session        = new GetSession();
+        //$sessionData    = $session->getData();
+
+        //$session->set('username',"XXX");
+
+
+        //bypass SSX security issues that would otherwise occur in certain browsers when trying to connect game using http_get():
+        //this allows cross-domain access to happen
+        if (isset($_SERVER["HTTP_ORIGIN"]))
+        {
+            //only allow access to local domain
+            $http_origin = $_SERVER['HTTP_ORIGIN'];
+            if ($http_origin == "http://127.0.0.1:51268")
+            {
+                header('Access-Control-Allow-Origin: *');
+            }
+        }
+        else
+        {
+            header('Access-Control-Allow-Origin: *');
+        }
+
+        //fetch data from POST-data received from game
+        if ($request->isMethod('POST')) {
+            // data is an array with "name", "xp", "coins", "maxhp", "currenthp", "strength" and "agility" keys
+            //$sessionData["username"] = $request->get('coins');
+            $name       = $request->request->get('name');
+            $xp         = $request->request->get('xp');
+            $coins      = $request->request->get('coins');
+            $maxhp      = $request->request->get('maxhp');
+            $currenthp  = $request->request->get('currenthp');
+            $strength   = $request->request->get('strength');
+            $agility    = $request->request->get('agility');
+
+            //Init DB-Connection
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('RendonanMiniBundle:Account');
+            $user = $repository->findOneBy(array('username' => $session->get('username')));
+
+            if ($user->getUsername() == $name)
+            {
+                $user->setUserExperience($xp);
+                $user->setUserCoins($coins);
+                $user->setStatHp($maxhp);
+                $user->setStatStrength($strength);
+                $user->setStatAgility($agility);
+
+                $em->persist($user);
+                $em->flush();
+            }
+        }
+
         return $this->redirect($this->generateUrl("rendonan_mini_registration"));
     }
 }
