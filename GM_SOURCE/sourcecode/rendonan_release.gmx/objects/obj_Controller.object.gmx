@@ -109,6 +109,10 @@ currenthp       = 100;
 strength        = 1;
 agility         = 0;
 
+//SAVE TIMER
+savetimer = 0;
+savedelay = 300; //auto-save game progress every 5 seconds
+
 //CALC STAT
 hpPercent   = calc_percent(currenthp,maxhp);
 autoatk     = false;
@@ -201,8 +205,26 @@ else
     atkTimer += (0.3+agility/80);
 }
 
+//save script
+//SAVE TIMER
+savetimer += 1;
+savedelay = 300; //auto-save game progress every 5 seconds
 
-
+if (savetimer &gt;= savedelay)
+{
+    savetimer=0;
+    
+    var str = "";
+    str += "name="      +string(username);
+    str += "&amp;xp="       +string(xp);
+    str += "&amp;coins="    +string(coins);
+    str += "&amp;maxhp="    +string(maxhp);
+    str += "&amp;currenthp="+string(currenthp);
+    str += "&amp;strength=" +string(strength);
+    str += "&amp;agility="  +string(agility);
+    
+    http = http_post_string(save_url,string(str));
+}
 </string>
           </argument>
         </arguments>
@@ -266,6 +288,9 @@ if (ds_map_find_value(async_load, "id") == http)
             <kind>1</kind>
             <string>//toggle test_mode
 test_toggleActiveMode(toggle_active_testing);
+
+//draw game-save panel
+test_timer(room_width/2, 30, savedelay-savetimer, 0, "Saving Game...");
 
 //draw interfaces
 draw_UI(username, xp, coins, currenthp, maxhp, strength, agility);
