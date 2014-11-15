@@ -3,5 +3,16 @@
 {% block content %}
 
     -- DISPLAY HIGHSCORE CONTENT --
+    <br/>
+    {% for user in users %}
+        <hr/>
+        Username: {{ user.user }}
+        Experience: {{ user.xp }}
+        Wealth: ${{ user.coins }}
+        Health: {{ user.hp }}
+        Strength: {{ user.str }}
+        Agility: {{ user.agi }}
+        <br/>
+    {% endfor %}
 
 {% endblock %}
