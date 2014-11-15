@@ -19,7 +19,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="Rendonan\MiniBundle\Repository\PersonRepository")
- * @ORM\Table(name="tbl_Users")
+ * @ORM\Table(name="tbl_Highscore")
  * @UniqueEntity(fields="username", message="Sorry, this username is already taken.")
  */
 
