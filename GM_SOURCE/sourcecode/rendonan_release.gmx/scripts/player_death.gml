@@ -3,7 +3,10 @@
 
 if (currenthp <= 0)
 {
-    save_game(score_url);
-    
+    save_game(score_url);    
+
     room_goto(room_Connect);
+
 }
+
+

@@ -18,6 +18,10 @@ rendonan_mini_scores:
     path:     /highscore
     defaults: { _controller: RendonanMiniBundle:Highscore:index }
 
+rendonan_mini_scoresave:
+    path:     /scoresave
+    defaults: { _controller: RendonanMiniBundle:Highscore:scoresave }
+
 rendonan_mini_registration:
     path:     /register
     defaults: { _controller: RendonanMiniBundle:Register:index }
