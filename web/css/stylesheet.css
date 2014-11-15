@@ -89,6 +89,30 @@ canvas {
     color:#FFA400;
     font-weight:bold;
 }
+.searchbar .rightFloat
+{
+    float:right;
+    margin-top: -3px;
+    width:auto;
+}
+.searchbar .searchbox
+{
+    width: 570px;
+    -webkit-border-radius: 6px;
+    background: #303035;
+    color: #C7C6C4;
+    border-color: rgba(74, 74, 74, 0.63);
+    text-align: center;
+    padding: 0px 22px;
+    margin-right: 10px;
+}
+.searchbar .submit
+{
+    -webkit-border-radius: 8px;
+    background: #303035;
+    color: #C7C6C4;
+    border-color: rgba(74, 74, 74, 0.63);
+}
 table.highscore
 {
     box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.44);

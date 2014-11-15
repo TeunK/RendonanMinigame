@@ -4,6 +4,13 @@
 
     <div class="searchbar">
         Highscores - Memorial of Honour:
+
+        <div class="rightFloat">
+            <form action="{{ path('rendonan_mini_scores') }}" method="post">
+                <input class="searchbox" type="text" id="username" name="_username" value=""/>
+                <button class="submit" type="submit"/>Search</button>
+            </form>
+        </div>
     </div>
 
     <br/>
