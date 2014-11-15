@@ -146,14 +146,7 @@ save_url = "http://localhost/rendonan_release/web/app_dev.php/gamesave";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//USER STATS FROM DATABASE
-username        = "NOT CONNECTED";
-xp              = 0;
-coins           = 100;
-maxhp           = 100;
-currenthp       = 100;
-strength        = 1;
-agility         = 0;
+            <string>init_userStats();
 </string>
           </argument>
         </arguments>
@@ -196,17 +189,7 @@ agility         = 0;
     if (savetimer &gt;= savedelay)
     {
         savetimer=0;
-        
-        var str = "";
-        str += "name="      +string(username);
-        str += "&amp;xp="       +string(xp);
-        str += "&amp;coins="    +string(coins);
-        str += "&amp;maxhp="    +string(maxhp);
-        str += "&amp;currenthp="+string(currenthp);
-        str += "&amp;strength=" +string(strength);
-        str += "&amp;agility="  +string(agility);
-        
-        http = http_post_string(save_url,string(str));
+        save_game();
     }
 }
 </string>
@@ -246,10 +229,6 @@ if (ds_map_find_value(async_load, "id") == http)
         {
             room_goto(room_Game)
         }
-    }
-    else
-    {
-       //not receiving any http data
     }
 }
 </string>
@@ -296,8 +275,6 @@ if (ds_map_find_value(async_load, "id") == http)
             <kind>1</kind>
             <string>if (room==room_Game)
 {
-
-    
     //SAVE TIMER
     savetimer = 0;
     savedelay = 300; //auto-save game progress every 5 seconds
@@ -365,17 +342,7 @@ else if (room==room_Game)
     draw_menu();
     
     //Respawn Monsters
-    if (!instance_exists(obj_Monster))
-    {
-        monsterSpawnTimer +=1;
-        test_timer(760,200,monsterSpawnTimer,monsterSpawnLimit,"Respawn in... ");
-        
-        if (monsterSpawnTimer &gt;= monsterSpawnLimit)
-        {
-            instance_create(760,200,obj_Monster);
-            monsterSpawnTimer=0;
-        }
-    }
+    monster_respawn();
 }
 </string>
           </argument>
