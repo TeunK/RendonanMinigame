@@ -107,14 +107,6 @@ Class Highscore
         return $this->username;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
     ///////////////////////////////////////
 
     public function setStatAgility($stat_agility)

@@ -76,7 +76,7 @@ class GameController extends Controller
             $xp         = $user->getUserExperience();
             $coins      = $user->getUserCoins();
             $maxhp      = $user->getStatHp();
-            $currenthp  = $user->getStatHp();
+            $currenthp  = $user->getHp();
             $strength   = $user->getStatStrength();
             $agility    = $user->getStatAgility();
 
@@ -145,7 +145,7 @@ class GameController extends Controller
                 $user->setUserExperience($xp);
                 $user->setUserCoins($coins);
                 $user->setStatHp($maxhp);
-                $user->setCurrentHp($currenthp);
+                $user->setHp($currenthp);
                 $user->setStatStrength($strength);
                 $user->setStatAgility($agility);
 

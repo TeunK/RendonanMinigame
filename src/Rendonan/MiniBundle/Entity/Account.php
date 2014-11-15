@@ -63,7 +63,7 @@ Class Account
     /**
      * @ORM\Column(type="integer", options={"default" = 100})
      */
-    protected $user_hp = 0;
+    protected $user_hp = 100;
 
     /**
      * @ORM\Column(type="integer", options={"default" = 0})
@@ -198,28 +198,4 @@ Class Account
         return $this->user_experience;
     }
 
-
-
-    /**
-     * Set user_hp
-     *
-     * @param integer $userHp
-     * @return Account
-     */
-    public function setUserHp($userHp)
-    {
-        $this->user_hp = $userHp;
-
-        return $this;
-    }
-
-    /**
-     * Get user_hp
-     *
-     * @return integer 
-     */
-    public function getUserHp()
-    {
-        return $this->user_hp;
-    }
 }
