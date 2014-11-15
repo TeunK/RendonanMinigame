@@ -9,6 +9,17 @@ var str, splitter;
 splitter    = argument1;
 str         = argument0 + splitter;
 
+/*******************************/
+/*Type-checking input arguments*/
+//DOC:  test_is_real(variable, desc, passive)
+//DOC:  test_is_string(variable, desc, passive)
+var testmodule;
+testmodule = "[explode_string] ";
+
+test_is_string(   splitter, testmodule+"splitter: ", true);
+test_is_string(   str,      testmodule+"str: ",      true);
+/*******************************/
+
 var ind, len, pos, array;
 ind         = 0;
 len         = string_length(splitter);

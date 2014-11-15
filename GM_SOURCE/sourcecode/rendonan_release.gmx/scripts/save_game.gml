@@ -7,6 +7,16 @@
 var url;
 url = argument0
 
+/*******************************/
+/*Type-checking input arguments*/
+//DOC:  test_is_real(variable, desc, passive)
+//DOC:  test_is_string(variable, desc, passive)
+var testmodule;
+testmodule = "[save_game] ";
+
+test_is_string(   url,         testmodule+"url: ",          true);
+/*******************************/
+
 //prepare player stats to be sent to server
 var str = "";
 str += "name="      +string(username);
