@@ -45,7 +45,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// TEST_MODE:
+            <string>draw_set_font(font0);
+connectTimer = 60;
+
+// TEST_MODE:
 // 0 = game_mode
 // 1 = test_mode
 // 2 = unit_tests
@@ -58,76 +61,6 @@ if (test_mode==2)
 {
     room_goto(room_Test);
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>605</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>INIT VARIABLES</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_set_font(font0);
-
-//USER STATS FROM DATABASE
-username        = "NOT CONNECTED";
-xp              = 0;
-coins           = 100;
-maxhp           = 100;
-currenthp       = 100;
-strength        = 1;
-agility         = 0;
-
-//SAVE TIMER
-savetimer = 0;
-savedelay = 300; //auto-save game progress every 5 seconds
-
-//CALC STAT
-hpPercent   = calc_percent(currenthp,maxhp);
-autoatk     = false;
-autostr     = "Manual Atk";
-atkTimer    = 5;
-atkLimit    = 45;
-
-//CREATE MENU BUTTONS
-btnHP   = instance_create(20,y+20+5*15,obj_Button);
-btnStr  = instance_create(20,y+20+6*15,obj_Button);
-btnAgi  = instance_create(20,y+20+7*15,obj_Button);
-
-//CREATE MONSTER
-monsterSpawnTimer      = 0 //sake of initialization, ignore.
-monsterSpawnLimit      = 60;
 </string>
           </argument>
         </arguments>
@@ -172,7 +105,55 @@ monsterSpawnLimit      = 60;
 load_url = "http://localhost/rendonan_release/web/app_dev.php/gameload";
 save_url = "http://localhost/rendonan_release/web/app_dev.php/gamesave";
 
-http = http_get(load_url);
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>INIT DUMMY USER STATS</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//USER STATS FROM DATABASE
+username        = "NOT CONNECTED";
+xp              = 0;
+coins           = 100;
+maxhp           = 100;
+currenthp       = 100;
+strength        = 1;
+agility         = 0;
 </string>
           </argument>
         </arguments>
@@ -195,35 +176,38 @@ http = http_get(load_url);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//set atkTimer increase depending on auto-atk-mode and agility
-if (!autoatk) 
+            <string>if (room==room_Game)
 {
-    atkTimer += (0.6+agility/50);
-}
-else
-{
-    atkTimer += (0.3+agility/80);
-}
-
-//save script
-//SAVE TIMER
-savetimer += 1;
-savedelay = 300; //auto-save game progress every 5 seconds
-
-if (savetimer &gt;= savedelay)
-{
-    savetimer=0;
+    //set atkTimer increase depending on auto-atk-mode and agility
+    if (!autoatk) 
+    {
+        atkTimer += (0.6+agility/50);
+    }
+    else
+    {
+        atkTimer += (0.3+agility/80);
+    }
     
-    var str = "";
-    str += "name="      +string(username);
-    str += "&amp;xp="       +string(xp);
-    str += "&amp;coins="    +string(coins);
-    str += "&amp;maxhp="    +string(maxhp);
-    str += "&amp;currenthp="+string(currenthp);
-    str += "&amp;strength=" +string(strength);
-    str += "&amp;agility="  +string(agility);
+    //save script
+    //SAVE TIMER
+    savetimer += 1;
+    savedelay = 300; //auto-save game progress every 5 seconds
     
-    http = http_post_string(save_url,string(str));
+    if (savetimer &gt;= savedelay)
+    {
+        savetimer=0;
+        
+        var str = "";
+        str += "name="      +string(username);
+        str += "&amp;xp="       +string(xp);
+        str += "&amp;coins="    +string(coins);
+        str += "&amp;maxhp="    +string(maxhp);
+        str += "&amp;currenthp="+string(currenthp);
+        str += "&amp;strength=" +string(strength);
+        str += "&amp;agility="  +string(agility);
+        
+        http = http_post_string(save_url,string(str));
+    }
 }
 </string>
           </argument>
@@ -258,11 +242,81 @@ if (ds_map_find_value(async_load, "id") == http)
         
         //render user_data array into user stat variables
         read_userdata(user_data);
+        if (room==room_Connect)
+        {
+            room_goto(room_Game)
+        }
     }
     else
     {
        //not receiving any http data
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>605</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>0</useapplyto>
+        <exetype>0</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>INIT VARIABLES</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (room==room_Game)
+{
+
+    
+    //SAVE TIMER
+    savetimer = 0;
+    savedelay = 300; //auto-save game progress every 5 seconds
+    
+    //CALC STAT
+    hpPercent   = calc_percent(currenthp,maxhp);
+    autoatk     = false;
+    autostr     = "Manual Atk";
+    atkTimer    = 5;
+    atkLimit    = 45;
+    
+    //CREATE MENU BUTTONS
+    btnHP   = instance_create(20,y+20+5*15,obj_Button);
+    btnStr  = instance_create(20,y+20+6*15,obj_Button);
+    btnAgi  = instance_create(20,y+20+7*15,obj_Button);
+    
+    //CREATE MONSTER
+    monsterSpawnTimer      = 0 //sake of initialization, ignore.
+    monsterSpawnLimit      = 60;
 }
 </string>
           </argument>
@@ -286,29 +340,43 @@ if (ds_map_find_value(async_load, "id") == http)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//toggle test_mode
-test_toggleActiveMode(toggle_active_testing);
-
-//draw game-save panel
-test_timer(room_width/2, 30, savedelay-savetimer, 0, "Saving Game...");
-
-//draw interfaces
-draw_UI(username, xp, coins, currenthp, maxhp, strength, agility);
-draw_menu();
-
-//Respawn Monsters
-if (!instance_exists(obj_Monster))
+            <string>if (room==room_Connect)
 {
-    monsterSpawnTimer +=1;
-    test_timer(760,200,monsterSpawnTimer,monsterSpawnLimit,"Respawn in... ");
+    connectTimer -=1;
     
-    if (monsterSpawnTimer &gt;= monsterSpawnLimit)
+    if (connectTimer &lt;= 0)
     {
-        instance_create(760,200,obj_Monster);
-        monsterSpawnTimer=0;
+        http = http_get(load_url);
+        connectTimer = 60;
+    }
+    
+    draw_text_bg(room_width/2,room_height/2,"Attempting to establish connection to server...#Please Wait");
+}
+else if (room==room_Game)
+{
+    //toggle test_mode
+    test_toggleActiveMode(toggle_active_testing);
+    
+    //draw game-save panel
+    test_timer(room_width/2, 30, savedelay-savetimer, 0, "Saving Game...");
+    
+    //draw interfaces
+    draw_UI(username, xp, coins, currenthp, maxhp, strength, agility);
+    draw_menu();
+    
+    //Respawn Monsters
+    if (!instance_exists(obj_Monster))
+    {
+        monsterSpawnTimer +=1;
+        test_timer(760,200,monsterSpawnTimer,monsterSpawnLimit,"Respawn in... ");
+        
+        if (monsterSpawnTimer &gt;= monsterSpawnLimit)
+        {
+            instance_create(760,200,obj_Monster);
+            monsterSpawnTimer=0;
+        }
     }
 }
-
 </string>
           </argument>
         </arguments>
