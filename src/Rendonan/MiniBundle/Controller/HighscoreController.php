@@ -9,7 +9,7 @@ use Rendonan\MiniBundle\Entity\Highscore;
 
 class HighscoreController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         //init session
         $session        = new GetSession();
@@ -24,8 +24,42 @@ class HighscoreController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $tbl = $em->getClassMetadata('RendonanMiniBundle:Highscore')->getTableName();
-        $orderstat  = "user_experience";
-        $order      = "DESC";
+
+        $orderstat = $request->get("stat");
+        $order = $request->get("order");
+
+        switch ($orderstat)
+        {
+            case "xp":
+                $orderstat = "xp";
+                break;
+            case "wealth":
+                $orderstat = "coins";
+                break;
+            case "health":
+                $orderstat = "hp";
+                break;
+            case "strength":
+                $orderstat = "str";
+                break;
+            case "agility":
+                $orderstat = "agi";
+                break;
+            default:
+                $orderstat = "xp";
+                break;
+        }
+
+        switch ($order)
+        {
+            case "0":
+                $order = "ASC";
+                break;
+            default:
+                $order = "DESC";
+                break;
+        }
+        
         $limit      = 100;
 
         $query = "
