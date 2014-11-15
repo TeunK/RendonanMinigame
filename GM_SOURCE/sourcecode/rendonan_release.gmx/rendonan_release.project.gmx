@@ -76,6 +76,7 @@
     <object>objects\obj_Monster</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room_Connect</room>
     <room>rooms\room_Game</room>
     <room>rooms\room_Test</room>
   </rooms>
