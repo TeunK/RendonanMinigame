@@ -61,6 +61,11 @@ Class Account
     protected $user_experience = 0;
 
     /**
+     * @ORM\Column(type="integer", options={"default" = 100})
+     */
+    protected $user_hp = 0;
+
+    /**
      * @ORM\Column(type="integer", options={"default" = 0})
      */
     protected $user_coins = 0;
@@ -121,6 +126,16 @@ Class Account
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function setHp($user_hp)
+    {
+        $this->user_hp = $user_hp;
+    }
+
+    public function getHp()
+    {
+        return $this->user_hp;
     }
 
     /**
@@ -184,4 +199,27 @@ Class Account
     }
 
 
+
+    /**
+     * Set user_hp
+     *
+     * @param integer $userHp
+     * @return Account
+     */
+    public function setUserHp($userHp)
+    {
+        $this->user_hp = $userHp;
+
+        return $this;
+    }
+
+    /**
+     * Get user_hp
+     *
+     * @return integer 
+     */
+    public function getUserHp()
+    {
+        return $this->user_hp;
+    }
 }
