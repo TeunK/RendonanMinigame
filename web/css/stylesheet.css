@@ -78,6 +78,17 @@ canvas {
 }
 
 /*Highscore Table Styling*/
+.searchbar
+{
+    width:940px;
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.44);
+    padding: 1em 20px;
+    height:1em;
+    background: #151515;
+    vertical-align: middle;
+    color:#FFA400;
+    font-weight:bold;
+}
 table.highscore
 {
     box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.44);
@@ -102,9 +113,14 @@ table.highscore tr:hover.bottom
 {
     background: #343D47;
 }
+table.highscore td
+{
+    box-shadow: inset 0px 1px 1px #545454;
+}
 table.highscore td.rank
 {
     text-align: right;
+    box-shadow: inset -2px 0px 5px #181818;
 }
 /*-----------------------*/
 

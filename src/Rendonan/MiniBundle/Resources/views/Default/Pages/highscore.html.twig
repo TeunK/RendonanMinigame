@@ -2,7 +2,9 @@
 
 {% block content %}
 
-    -- DISPLAY HIGHSCORE CONTENT --
+    <div class="searchbar">
+        Highscores - Memorial of Honour:
+    </div>
 
     <br/>
     <table class="highscore">
@@ -14,19 +16,19 @@
                 Username
             </td>
             <td>
-                Experience
+                Experience <a href="{{ path('rendonan_mini_scores') }}?stat=xp&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?stat=xp&order=0">v</a>
             </td>
             <td>
-                Wealth
+                Wealth <a href="{{ path('rendonan_mini_scores') }}?stat=wealth&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?stat=wealth&order=0">v</a>
             </td>
             <td>
-                Health
+                Health <a href="{{ path('rendonan_mini_scores') }}?stat=health&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?stat=health&order=0">v</a>
             </td>
             <td>
-                Strength
+                Strength <a href="{{ path('rendonan_mini_scores') }}?stat=strength&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?stat=strength&order=0">v</a>
             </td>
             <td>
-                Agility
+                Agility <a href="{{ path('rendonan_mini_scores') }}?stat=agility&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?stat=agility&order=0">v</a>
             </td>
         </tr>
 
