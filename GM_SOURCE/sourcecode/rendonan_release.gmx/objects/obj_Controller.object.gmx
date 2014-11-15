@@ -102,9 +102,15 @@ if (test_mode==2)
           <argument>
             <kind>1</kind>
             <string>//HTTP CONNECTION URL'S
-load_url = "http://localhost/rendonan_release/web/app_dev.php/gameload";
-save_url = "http://localhost/rendonan_release/web/app_dev.php/gamesave";
 
+//url for loading user data
+load_url    = "http://localhost/rendonan_release/web/app_dev.php/gameload";
+
+//url for saving user progress
+save_url    = "http://localhost/rendonan_release/web/app_dev.php/gamesave";
+
+//url for saving user stats into highscores
+score_url   = "http://localhost/rendonan_release/web/app_dev.php/savescore";
 
 </string>
           </argument>
@@ -189,7 +195,7 @@ save_url = "http://localhost/rendonan_release/web/app_dev.php/gamesave";
     if (savetimer &gt;= savedelay)
     {
         savetimer=0;
-        save_game();
+        save_game(save_url);
     }
 }
 </string>
@@ -343,6 +349,9 @@ else if (room==room_Game)
     
     //Respawn Monsters
     monster_respawn();
+    
+    //Player Death
+    player_death();
 }
 </string>
           </argument>
