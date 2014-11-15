@@ -77,6 +77,37 @@ canvas {
     box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.16);
 }
 
+/*Highscore Table Styling*/
+table.highscore
+{
+    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.44);
+    background-color: rgba(17, 17, 17, 0.56);
+    border: 1px groove rgba(209, 209, 209, 0.44);
+
+    width:980px;
+}
+table.highscore td
+{
+    padding:15px;
+}
+table.highscore tr.top
+{
+    background: #151515;
+    color: #FFA400;
+    font-size: 1.1em;
+    font-weight: bold;
+    vertical-align: middle;
+}
+table.highscore tr:hover.bottom
+{
+    background: #343D47;
+}
+table.highscore td.rank
+{
+    text-align: right;
+}
+/*-----------------------*/
+
 #banner
 {
     margin: 0px 0px;
