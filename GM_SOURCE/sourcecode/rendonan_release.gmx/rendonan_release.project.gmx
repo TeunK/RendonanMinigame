@@ -68,6 +68,7 @@
         <script>scripts\init_userStats.gml</script>
         <script>scripts\save_game.gml</script>
         <script>scripts\monster_respawn.gml</script>
+        <script>scripts\player_death.gml</script>
       </scripts>
     </scripts>
   </scripts>
