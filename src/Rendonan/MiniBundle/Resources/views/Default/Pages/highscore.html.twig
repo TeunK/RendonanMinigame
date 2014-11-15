@@ -3,16 +3,46 @@
 {% block content %}
 
     -- DISPLAY HIGHSCORE CONTENT --
+
     <br/>
-    {% for user in users %}
-        <hr/>
-        Username: {{ user.user }}
-        Experience: {{ user.xp }}
-        Wealth: ${{ user.coins }}
-        Health: {{ user.hp }}
-        Strength: {{ user.str }}
-        Agility: {{ user.agi }}
-        <br/>
-    {% endfor %}
+    <table class="highscore">
+        <tr class="top">
+            <td class="rank">
+                Rank
+            </td>
+            <td>
+                Username
+            </td>
+            <td>
+                Experience
+            </td>
+            <td>
+                Wealth
+            </td>
+            <td>
+                Health
+            </td>
+            <td>
+                Strength
+            </td>
+            <td>
+                Agility
+            </td>
+        </tr>
+
+        {% set rank = 1 %}
+        {% for user in users %}
+            <tr class="bottom">
+                <td class="rank">{{ rank }}</td>
+                <td>{{ user.user }}</td>
+                <td>{{ user.xp }}</td>
+                <td>${{ user.coins }}</td>
+                <td>{{ user.hp }}</td>
+                <td>{{ user.str }}</td>
+                <td>{{ user.agi }}</td>
+            </tr>
+            {% set rank = rank+1 %}
+        {% endfor %}
+    </table>
 
 {% endblock %}
