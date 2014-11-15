@@ -11,23 +11,15 @@ class HighscoreController extends Controller
 {
     public function indexAction(Request $request)
     {
-        //init session
+        //INITIALISE SESSION
         $session        = new GetSession();
         $sessionData    = $session->getData();
 
-
-
-        //Init DB-Connection
-        //$em = $this->getDoctrine()->getManager();
-        //$repository = $em->getRepository('RendonanMiniBundle:Account');
-        //$user = $repository->findOneBy(array('username' => $sessionData["username"]));
-
-        $em = $this->getDoctrine()->getManager();
-        $tbl = $em->getClassMetadata('RendonanMiniBundle:Highscore')->getTableName();
-
+        //FETCH GET-INPUT
         $orderstat = $request->get("stat");
         $order = $request->get("order");
 
+        //DEFINE STAT FILTER FOR DB-QUERY
         switch ($orderstat)
         {
             case "xp":
@@ -50,6 +42,7 @@ class HighscoreController extends Controller
                 break;
         }
 
+        //DEFINE ORDER FILTER FOR DB-QUERY
         switch ($order)
         {
             case "0":
@@ -59,9 +52,11 @@ class HighscoreController extends Controller
                 $order = "DESC";
                 break;
         }
-        
-        $limit      = 100;
 
+        //PREPARE DB-QUERY TO RECEIVE HIGHSCORES
+        $em = $this->getDoctrine()->getManager();
+        $tbl = $em->getClassMetadata('RendonanMiniBundle:Highscore')->getTableName();
+        $limit = 100;
         $query = "
             SELECT
                 scores.username         AS user,
@@ -76,12 +71,12 @@ class HighscoreController extends Controller
                 "   .$orderstat.    " ".$order."
             LIMIT
                 "   .$limit;
-
+        //EXECUTE DB-QUERY
         $stmt = $em->getConnection()->prepare($query);
         $stmt->execute();
         $results = $stmt->fetchAll();
 
-
+        //RENDER HTML WEBPAGE
         return $this->render('RendonanMiniBundle:Default:Pages/highscore.html.twig',
             array(
                 'online'    => $sessionData["online"],
@@ -109,17 +104,15 @@ class HighscoreController extends Controller
         }
         else
         {
+            //if HTTP_ORIGIN is not set, allow any origin (priority on working game rather than security for now)
             header('Access-Control-Allow-Origin: *');
         }
 
         //fetch data from POST-data received from game
-        if ($request->isMethod('POST')) {
+        if ($request->isMethod('POST'))
+        {
 
-            /************************************
-             * FETCH DATA FROM REQUEST
-             */
-            // data is an array with "name", "xp", "coins", "maxhp", "currenthp", "strength" and "agility" keys
-            //$sessionData["username"] = $request->get('coins');
+            //FETCH DATA FROM REQUEST
             $name       = $request->request->get('name');
             $xp         = $request->request->get('xp');
             $coins      = $request->request->get('coins');
@@ -127,13 +120,10 @@ class HighscoreController extends Controller
             $strength   = $request->request->get('strength');
             $agility    = $request->request->get('agility');
 
-            //Init DB-Connection
+            //INITIALIZE DB-CONNECTION
             $em = $this->getDoctrine()->getManager();
 
-            /************************************
-             * STORE DATA INTO HIGHSCORE TABLE
-             */
-            //create new highscore object
+            //STORE NEW HIGHSCORE OBJECT DATA INTO HIGHSCORE TABLE
             $score = new Highscore();
 
             //Insert received data into score object
@@ -148,15 +138,16 @@ class HighscoreController extends Controller
             $em->persist($score);
             $em->flush();
 
-            /************************************
-             * RESET USER DATA
-             */
-            //Init DB-Connection
+
+            //RESET USER GAME DATA
+            //INITIALIZE DB-CONNECTION
             $repository = $em->getRepository('RendonanMiniBundle:Account');
             $user = $repository->findOneBy(array('username' => $session->get('username')));
 
+            //UPDATE ACCOUNT DATABASE: reset user account stats
             if ($user->getUsername() == $name)
             {
+                //prepare data
                 $user->setUserExperience(0);
                 $user->setUserCoins(0);
                 $user->setStatHp(100);
@@ -164,10 +155,12 @@ class HighscoreController extends Controller
                 $user->setStatStrength(1);
                 $user->setStatAgility(0);
 
+                //persist and execute query
                 $em->persist($user);
                 $em->flush();
             }
         }
+
         return $this->redirect($this->generateUrl("rendonan_mini_registration"));
     }
 }
