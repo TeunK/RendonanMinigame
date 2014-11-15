@@ -138,8 +138,8 @@ class RegisterController extends Controller
                 array(
                     'online'    => $sessionData["online"],
                     'name'      => $sessionData["username"],
-                    'title'     => "other occasion",
-                    'message'   => "hmm.."
+                    'title'     => "Registration Successful!",
+                    'message'   => "Congratulations, your account has been created!"
                 ));
         }
         else
