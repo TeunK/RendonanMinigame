@@ -21,7 +21,7 @@ test_is_real(   maxhp,          testmodule+"maxhp: ",       true);
 
 //draw player name
 draw_set_halign(fa_center);
-draw_text(x, y-6-0.5*sprite_get_height(sprite_index), name);
+draw_text_bg(x, y-6-0.5*sprite_get_height(sprite_index), name);
 draw_set_halign(fa_left);
 
 //draw player sprite
