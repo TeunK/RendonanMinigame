@@ -30,11 +30,13 @@ test_is_string( str,     testmodule+"str: ",  true);
 /*******************************/
 
 //modify button's opacity if cursor enters button area
-if (enter_area(x0,y0,x1,y1,mouse_x,mouse_y)) { draw_set_alpha(0.2); } else { draw_set_alpha(0.6); }
+if (enter_area(x0,y0,x1,y1,mouse_x,mouse_y)) { draw_set_alpha(0.6); } else { draw_set_alpha(1); }
 
 //raw white rectangle at button position with given opacity
 draw_set_color(c_white);
 draw_rectangle(x0,y0,x1,y1,0);
+draw_set_color(c_gray);
+draw_rectangle(x0,y0,x1,y1,1);
 
 //return opacity back to 1 and draw inner text in the center (in black)
 draw_set_alpha(1);
