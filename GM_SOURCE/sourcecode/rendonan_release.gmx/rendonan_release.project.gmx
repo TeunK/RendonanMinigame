@@ -56,6 +56,7 @@
       <scripts name="Buttons">
         <script>scripts\btn_update.gml</script>
         <script>scripts\btn_purchase.gml</script>
+        <script>scripts\button_pressed.gml</script>
       </scripts>
       <scripts name="Player">
         <script>scripts\player_update.gml</script>
@@ -68,7 +69,6 @@
         <script>scripts\enter_area.gml</script>
         <script>scripts\implode_array.gml</script>
         <script>scripts\explode_string.gml</script>
-        <script>scripts\button_pressed.gml</script>
         <script>scripts\attack.gml</script>
         <script>scripts\read_userdata.gml</script>
       </scripts>
