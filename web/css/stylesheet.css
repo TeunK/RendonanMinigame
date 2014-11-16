@@ -109,9 +109,10 @@ canvas {
 .searchbar .submit
 {
     -webkit-border-radius: 8px;
-    background: #303035;
-    color: #C7C6C4;
-    border-color: rgba(74, 74, 74, 0.63);
+    background: #FFA400;
+    color: #151515;
+    font-weight: bold;
+    box-shadow: inset -2px -3px 10px #FFF298;
 }
 table.highscore
 {
