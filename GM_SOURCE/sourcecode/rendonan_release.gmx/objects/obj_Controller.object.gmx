@@ -187,8 +187,8 @@ score_url   = "http://localhost/rendonan_release/web/app_dev.php/scoresave";
         atkTimer += (0.3+agility/80);
     }
     
-    //save script
-    //SAVE TIMER
+    //SAVE SCRIPT
+    //save timer
     savetimer += 1;
     savedelay = 300; //auto-save game progress every 5 seconds
     
@@ -325,23 +325,25 @@ if (ds_map_find_value(async_load, "id") == http)
             <kind>1</kind>
             <string>if (room==room_Connect)
 {
+
+    //delay to trigger connection
     connectTimer -=1;
-    
     if (connectTimer &lt;= 0)
     {
         http = http_get(load_url);
         connectTimer = 60;
     }
     
+    //draw test-timers (in test-mode)
     test_timer(80,40,connectTimer,0,"Connecting..");
     draw_text_bg(room_width/2,room_height/2,"Attempting to establish connection to server...#Please Wait");
 }
 else if (room==room_Game)
 {
-    //toggle test_mode
+    //toggle test_mode (in test-mode)
     test_toggleActiveMode(toggle_active_testing);
     
-    //draw game-save panel
+    //draw game-save panel (in test-mode)
     test_timer(room_width/2, 30, savedelay-savetimer, 0, "Saving Game...");
     
     //draw interfaces
@@ -353,6 +355,14 @@ else if (room==room_Game)
     
     //Player Death
     player_death();
+    
+    //Health Regeneration
+    if (currenthp &lt; maxhp)
+    { currenthp += 0.0001*maxhp; }
+    
+    //Limit Health
+    if currenthp &gt; maxhp
+    { currenthp = maxhp; }
 }
 </string>
           </argument>
