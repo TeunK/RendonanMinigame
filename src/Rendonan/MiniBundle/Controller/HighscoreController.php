@@ -72,6 +72,7 @@ class HighscoreController extends Controller
         $query = "
             SELECT
                 scores.username         AS user,
+                scores.user_score       AS score,
                 scores.user_experience  AS xp,
                 scores.user_coins       AS coins,
                 scores.stat_hp          AS hp,
@@ -136,6 +137,8 @@ class HighscoreController extends Controller
             $maxhp      = $request->request->get('maxhp');
             $strength   = $request->request->get('strength');
             $agility    = $request->request->get('agility');
+            //calculate score
+            $userscore  = (($xp + $coins + 1) * ceil($maxhp/10) * ceil($strength+1) * ceil($agility+1));
 
             //INITIALIZE DB-CONNECTION
             $em = $this->getDoctrine()->getManager();
@@ -145,6 +148,7 @@ class HighscoreController extends Controller
 
             //Insert received data into score object
             $score->setUsername($name);
+            $score->setScore($userscore);
             $score->setUserExperience($xp);
             $score->setUserCoins($coins);
             $score->setStatHp($maxhp);

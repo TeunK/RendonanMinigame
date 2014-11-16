@@ -28,6 +28,9 @@
                 Username
             </td>
             <td>
+                Score
+            </td>
+            <td>
                 Experience <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=xp&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=xp&order=0">v</a>
             </td>
             <td>
@@ -49,6 +52,7 @@
             <tr class="bottom">
                 <td class="rank">{{ rank }}</td>
                 <td>{{ user.user }}</td>
+                <td>{{ user.score }}</td>
                 <td>{{ user.xp }}</td>
                 <td>${{ user.coins }}</td>
                 <td>{{ user.hp }}</td>
