@@ -3,7 +3,6 @@ draw_set_alpha(0.5);
 draw_set_color(c_black);
 draw_rectangle(300,room_height-140,room_width-10,room_height-30,0);
 
-//Make distant variables local
 test_timer(150,room_height-30,atkTimer, atkLimit, "Attack Due: ");
 
 //ATTACK BUTTON
@@ -37,7 +36,7 @@ if (button_pressed(310,room_height-100,400,room_height-80,autostr))
 }
 
 //BUTTONS TO CHANGE ENCOUNTER MONSTER LEVEL
-draw_monster_controller(370,room_height-60);
+draw_monster_controller(880,room_height-60);
 
 /*******************************
  -- Healthbar / Experiencebar --
