@@ -300,6 +300,7 @@ if (ds_map_find_value(async_load, "id") == http)
     //CREATE MONSTER
     monsterSpawnTimer      = 0 //sake of initialization, ignore.
     monsterSpawnLimit      = 60;
+    monsterSpawnLevel      = 1;
 }
 </string>
           </argument>

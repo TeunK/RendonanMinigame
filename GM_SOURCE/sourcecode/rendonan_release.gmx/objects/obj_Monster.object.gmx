@@ -28,10 +28,10 @@
             <string>//MONSTER STATS
 name            = "Big Mean Green Slime";
 level           = 1;
-str             = level*2+random(2);
-agi             = round(0.5*level);
-maxhp           = round(8+power(level,2));
-currenthp       = maxhp;
+str             = 3;
+agi             = 0;
+currenthp       = 10;
+maxhp           = 10;
 
 
 //Other variables
@@ -66,8 +66,8 @@ autostr         = "Auto Atk";
           <argument>
             <kind>1</kind>
             <string>var xpgain, moneygain;
-xpgain      = level*3;
-moneygain   = level+round(random(5)*level);
+xpgain      = level*(5+round(random(2)));
+moneygain   = level*(5+round(random(5)));
 
 monster_death(currenthp,xpgain,moneygain);
 
@@ -102,7 +102,7 @@ if (instance_exists(obj_Player))
 {
     if (autoatk)
     {
-        atkTimer +=1;
+        atkTimer += (0.6+agi/50);
     }
     
     
