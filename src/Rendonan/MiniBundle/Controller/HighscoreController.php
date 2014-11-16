@@ -43,7 +43,7 @@ class HighscoreController extends Controller
                 $orderstat = "agi";
                 break;
             default:
-                $orderstat = "xp";
+                $orderstat = "score DESC, xp";
                 break;
         }
 
