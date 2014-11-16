@@ -28,10 +28,11 @@
             <string>//MONSTER STATS
 name            = "Big Mean Green Slime";
 level           = 1;
-str             = 3;
-agi             = 0;
-currenthp       = 10;
-maxhp           = 10;
+str             = level*2+random(2);
+agi             = round(0.5*level);
+maxhp           = round(8+power(level,2));
+currenthp       = maxhp;
+
 
 //Other variables
 hpPercent       = calc_percent(currenthp,maxhp);
