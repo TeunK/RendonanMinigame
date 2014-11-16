@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity(repositoryClass="Rendonan\MiniBundle\Repository\PersonRepository")
+ * @ORM\Entity
  * @ORM\Table(name="tbl_Highscore")
  * @UniqueEntity(fields="username", message="Sorry, this username is already taken.")
  */

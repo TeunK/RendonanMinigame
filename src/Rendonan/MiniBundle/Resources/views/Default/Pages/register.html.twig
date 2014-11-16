@@ -43,4 +43,33 @@
         </form>
         -->
     </div>
+
+    <div class="centerPanel">
+        {% if not online %}
+            <h3>Log-In:</h3>
+            <form action="{{ path('rendonan_mini_login') }}" method="post">
+                <table class="form_register">
+                    <tr>
+                        <td>
+                            <label for="username">username:</label>
+                        </td>
+                        <td>
+                            <input type="text" id="username" name="_username" value=""/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="password">password:</label>
+                        </td>
+                        <td>
+                            <input type="password" name="_password"/>
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit"/>Log-in!</button>
+            </form>
+        {% else %}
+            Logged in as: {{ name }} | <a href="{{ path('rendonan_mini_logout') }}">LOGOUT</a>
+        {% endif %}
+    </div>
 {% endblock %}
