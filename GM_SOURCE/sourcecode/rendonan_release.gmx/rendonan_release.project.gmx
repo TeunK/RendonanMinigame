@@ -10,9 +10,15 @@
     <sprite>sprites\spr_Button</sprite>
     <sprite>sprites\spr_Monster</sprite>
     <sprite>sprites\spr_Controller</sprite>
+    <sprites name="Inferno">
+      <sprite>sprites\spr_Effect</sprite>
+      <sprite>sprites\spr_Inferno</sprite>
+      <sprite>sprites\spr_Smoke</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
+    <background>background\bg_floor</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -71,6 +77,9 @@
         <script>scripts\player_death.gml</script>
       </scripts>
     </scripts>
+    <scripts name="Particles">
+      <script>scripts\scr_inferno_init.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font0</font>
@@ -80,6 +89,7 @@
     <object>objects\obj_Button</object>
     <object>objects\obj_Player</object>
     <object>objects\obj_Monster</object>
+    <object>objects\obj_Inferno</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_Connect</room>
