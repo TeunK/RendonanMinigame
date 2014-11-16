@@ -40,6 +40,11 @@ Class Highscore
      */
     protected $username;
 
+
+    /**
+     * @ORM\Column(type="integer", options={"default" = 0})
+     */
+    protected $user_score = 0;
 /////////////////////////////////////////////////////////////////
 ////////////////////////USER GAME STATISTICS/////////////////////
 /////////////////////////////////////////////////////////////////
@@ -107,6 +112,15 @@ Class Highscore
         return $this->username;
     }
 
+    public function setScore($user_score)
+    {
+        $this->user_score = $user_score;
+    }
+
+    public function getScore()
+    {
+        return $this->user_score;
+    }
     ///////////////////////////////////////
 
     public function setStatAgility($stat_agility)
