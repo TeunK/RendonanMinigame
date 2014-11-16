@@ -20,6 +20,14 @@ test_is_real(   centery,      testmodule+"centery: ",   true);
 /*******************************/
 
 
+draw_set_color(c_black);
+draw_set_alpha(0.6);
+draw_roundrect(centerx-190,centery-25,centerx+70,centery+25,0);
+draw_set_color(c_orange);
+draw_set_alpha(1);
+draw_roundrect(centerx-190,centery-25,centerx+70,centery+25,1);
+draw_restore();
+draw_text_bg(centerx-120,centery,"Monster Lv:");
 //Draw +- buttons and level
 if (button_pressed(centerx-60,centery-10,centerx-20,centery+10,"<<<"))
 {
