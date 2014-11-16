@@ -16,8 +16,13 @@ class HighscoreController extends Controller
         $sessionData    = $session->getData();
 
         //FETCH GET-INPUT
-        $orderstat = $request->get("stat");
-        $order = $request->get("order");
+        $orderstat      = $request->get("stat");
+        $order          = $request->get("order");
+        $user           = $request->get("_username");
+        $filterstat     = $orderstat;
+        $filterorder    = $order;
+        $filteruser     = $user;
+
 
         //DEFINE STAT FILTER FOR DB-QUERY
         switch ($orderstat)
@@ -53,6 +58,13 @@ class HighscoreController extends Controller
                 break;
         }
 
+        //IF NO USER SPECIFIED, TRANSLATE INTO * FOR DB-QUERY
+        $WHERE = "";
+        if ($user != "") { $WHERE = "WHERE scores.username = '".$user."' "; }
+
+        //FETCH POST(-username) INPUT
+
+
         //PREPARE DB-QUERY TO RECEIVE HIGHSCORES
         $em = $this->getDoctrine()->getManager();
         $tbl = $em->getClassMetadata('RendonanMiniBundle:Highscore')->getTableName();
@@ -67,10 +79,12 @@ class HighscoreController extends Controller
                 scores.stat_agility     AS agi
             FROM
                 "   .$tbl.          " scores
+            $WHERE
             ORDER BY
                 "   .$orderstat.    " ".$order."
             LIMIT
                 "   .$limit;
+
         //EXECUTE DB-QUERY
         $stmt = $em->getConnection()->prepare($query);
         $stmt->execute();
@@ -79,10 +93,13 @@ class HighscoreController extends Controller
         //RENDER HTML WEBPAGE
         return $this->render('RendonanMiniBundle:Default:Pages/highscore.html.twig',
             array(
-                'online'    => $sessionData["online"],
-                'name'      => $sessionData["username"],
+                'online'        => $sessionData["online"],
+                'name'          => $sessionData["username"],
 
-                'users'      => $results
+                'filter_stat'   => $filterstat,
+                'filter_order'  => $filterorder,
+                'filter_user'   => $filteruser,
+                'users'         => $results
             ));
 
     }

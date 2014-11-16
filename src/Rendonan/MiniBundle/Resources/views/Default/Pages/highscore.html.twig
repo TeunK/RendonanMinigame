@@ -6,9 +6,14 @@
         Highscores - Memorial of Honour:
 
         <div class="rightFloat">
-            <form action="{{ path('rendonan_mini_scores') }}" method="post">
+            <form action="{{ path('rendonan_mini_scores') }}" method="get">
+                <input type="hidden" name="stat" value="{{ filter_stat }}">
+                <input type="hidden" name="order" value="{{ filter_order }}">
                 <input class="searchbox" type="text" id="username" name="_username" value=""/>
                 <button class="submit" type="submit"/>Search</button>
+
+
+
             </form>
         </div>
     </div>
@@ -23,19 +28,19 @@
                 Username
             </td>
             <td>
-                Experience <a href="{{ path('rendonan_mini_scores') }}?stat=xp&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?stat=xp&order=0">v</a>
+                Experience <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=xp&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=xp&order=0">v</a>
             </td>
             <td>
-                Wealth <a href="{{ path('rendonan_mini_scores') }}?stat=wealth&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?stat=wealth&order=0">v</a>
+                Wealth <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=wealth&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=wealth&order=0">v</a>
             </td>
             <td>
-                Health <a href="{{ path('rendonan_mini_scores') }}?stat=health&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?stat=health&order=0">v</a>
+                Health <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=health&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=health&order=0">v</a>
             </td>
             <td>
-                Strength <a href="{{ path('rendonan_mini_scores') }}?stat=strength&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?stat=strength&order=0">v</a>
+                Strength <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=strength&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=strength&order=0">v</a>
             </td>
             <td>
-                Agility <a href="{{ path('rendonan_mini_scores') }}?stat=agility&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?stat=agility&order=0">v</a>
+                Agility <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=agility&order=1">^</a> <a href="{{ path('rendonan_mini_scores') }}?_username={{ filter_user }}&stat=agility&order=0">v</a>
             </td>
         </tr>
 
