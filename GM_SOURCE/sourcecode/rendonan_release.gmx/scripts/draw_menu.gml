@@ -1,7 +1,11 @@
 //background box
-draw_set_alpha(0.5);
+draw_set_alpha(0.8);
 draw_set_color(c_black);
-draw_rectangle(300,room_height-140,room_width-10,room_height-30,0);
+draw_roundrect(300,room_height-140,room_width-10,room_height-30,0);
+draw_set_alpha(0.4);
+draw_set_color(c_orange);
+draw_roundrect(300,room_height-140,room_width-10,room_height-30,1);
+
 
 test_timer(150,room_height-30,atkTimer, atkLimit, "Attack Due: ");
 
@@ -34,6 +38,7 @@ if (button_pressed(310,room_height-100,400,room_height-80,autostr))
         autostr = "Auto Atk";
     }
 }
+
 
 //BUTTONS TO CHANGE ENCOUNTER MONSTER LEVEL
 draw_monster_controller(880,room_height-60);
