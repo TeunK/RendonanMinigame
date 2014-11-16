@@ -39,9 +39,18 @@ if (button_pressed(310,room_height-100,400,room_height-80,autostr))
     }
 }
 
+//HEALTH POTION
+if (button_pressed_ext(310,room_height-70,400,room_height-50,"Potion","+HP10: $20"))
+{
+    if (coins >= 20)
+    {
+        coins -= 20;
+        currenthp += 10;
+    }
+}
 
 //BUTTONS TO CHANGE ENCOUNTER MONSTER LEVEL
-draw_monster_controller(880,room_height-60);
+draw_monster_controller(880,room_height-70);
 
 /*******************************
  -- Healthbar / Experiencebar --
