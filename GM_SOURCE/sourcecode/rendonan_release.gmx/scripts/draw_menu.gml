@@ -41,4 +41,8 @@ draw_healthbar(room_width-20,room_height-15,10,room_height-10,calc_percent(curre
 if (currenthp < maxhp)
 {
     currenthp += 0.0001*maxhp;
+    if currenthp > maxhp
+    {
+        currenthp = maxhp;
+    }
 }
