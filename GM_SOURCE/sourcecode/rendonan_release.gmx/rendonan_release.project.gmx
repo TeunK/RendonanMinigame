@@ -84,6 +84,7 @@
   <rooms name="rooms">
     <room>rooms\room_Connect</room>
     <room>rooms\room_Game</room>
+    <room>rooms\room_Death</room>
     <room>rooms\room_Test</room>
   </rooms>
   <help>

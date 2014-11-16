@@ -5,7 +5,7 @@ if (currenthp <= 0)
 {
     save_game(score_url);    
 
-    game_restart();
+    room_goto(room_Death);
 
 }
 
