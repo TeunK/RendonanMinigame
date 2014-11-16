@@ -57,6 +57,7 @@
         <script>scripts\btn_update.gml</script>
         <script>scripts\btn_purchase.gml</script>
         <script>scripts\button_pressed.gml</script>
+        <script>scripts\button_pressed_ext.gml</script>
       </scripts>
       <scripts name="Player">
         <script>scripts\player_update.gml</script>
