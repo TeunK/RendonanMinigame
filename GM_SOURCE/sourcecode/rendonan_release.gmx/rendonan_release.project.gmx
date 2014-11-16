@@ -49,6 +49,7 @@
       <script>scripts\draw_menu.gml</script>
       <script>scripts\draw_entity.gml</script>
       <script>scripts\draw_text_bg.gml</script>
+      <script>scripts\draw_monster_controller.gml</script>
     </scripts>
     <scripts name="Functions">
       <scripts name="Buttons">

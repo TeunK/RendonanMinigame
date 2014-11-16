@@ -25,7 +25,19 @@ draw_healthbar(420,room_height-130,room_width-40,room_height-110,calc_percent(at
 if (button_pressed(310,room_height-100,400,room_height-80,autostr))
 {
     autoatk = !autoatk;
+    
+    if (!autoatk)
+    {
+        autostr = "Manual Atk";    
+    }
+    else
+    {
+        autostr = "Auto Atk";
+    }
 }
+
+//BUTTONS TO CHANGE ENCOUNTER MONSTER LEVEL
+draw_monster_controller(370,room_height-60);
 
 /*******************************
  -- Healthbar / Experiencebar --
