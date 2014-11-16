@@ -324,7 +324,14 @@ if (ds_map_find_value(async_load, "id") == http)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (room==room_Connect)
+            <string>//Crosshair for in-game building purpose:
+if (keyboard_check(vk_control))
+{
+    draw_crosshair(mouse_x,mouse_y);
+}
+/////////////////////////////////////////
+
+if (room==room_Connect)
 {
 
     //delay to trigger connection
