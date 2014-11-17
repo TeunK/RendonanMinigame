@@ -11,6 +11,18 @@ correct = argument0;
 testcount = argument1;
 test_unit = argument2;
 
+/*******************************/
+/*Type-checking input arguments*/
+//DOC:  test_is_real(variable, desc, passive)
+//DOC:  test_is_string(variable, desc, passive)
+var testmodule;
+testmodule = "[test_result] ";
+
+test_is_real(   correct,    testmodule+"correct: ",    true);
+test_is_real(   testcount,  testmodule+"testcount: ",  true);
+test_is_string( test_unit,  testmodule+"test_unit: ",  true);
+/*******************************/
+
 //Calculate result
 if (correct == testcount) {return true;} 
 else 
