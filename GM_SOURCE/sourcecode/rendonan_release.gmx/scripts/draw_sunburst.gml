@@ -67,13 +67,21 @@ if (percent == 100)
             obj_Controller.sunburstTimer = 0;
             
             //add special effect: sunflash particles
-            instance_create(obj_Monster.x,obj_Monster.y,obj_Sunflash);
-            
-            //deal damage
-            for (i=0; i<10; i+=1)
+            sunflash = instance_create(obj_Monster.x,obj_Monster.y,obj_Sunflash);
+
+            //deal damage, and store each hit in an array to pass on to sunflash instance
+            var arr_dmg;
+            for (i=0; i<30; i+=1)
             {
-                attack(obj_Player, obj_Monster, obj_Controller.strength+random(4), 1, 1, 0, 1);
+                var dmg;
+                dmg = round((0.02*obj_Controller.strength+random(4))*random(5));
+                arr_dmg[i] = dmg;
             }
+            sunflash.dmg = arr_dmg;
+
+            
+            //indicate the instance has been created, at the instance itself. This way it is confirmed that all the dmg variables have been set
+            sunflash.created = 1; 
         }
     }
 }
