@@ -54,16 +54,28 @@ draw_healthbar(left,bottom,right,bottom+10,percent,c_black,c_blue,c_red,0,1,1);
 //fully charged
 if (percent == 100)
 {
-    if (button_pressed_ext(left+20,bottom-10,right-20,bottom+20,"CHARGE COMPLETE","Activate Sunburst"))
+    if (instance_exists(obj_Monster) && instance_exists(obj_Player))
     {
-        obj_Controller.sunburstTimer = 0;
+        if (button_pressed_ext(left+20,bottom-10,right-20,bottom+20,"CHARGE COMPLETE","Activate Sunburst"))
+        {
+            //sfx flash screen
+            draw_set_alpha(0.9);
+            draw_set_color(c_white);
+            draw_rectangle(0,0,room_width,room_height,0);
+            
+            //reset timer
+            obj_Controller.sunburstTimer = 0;
+            
+            //add special effect: sunflash particles
+            instance_create(obj_Monster.x,obj_Monster.y,obj_Sunflash);
+            
+            //deal damage
+            for (i=0; i<10; i+=1)
+            {
+                attack(obj_Player, obj_Monster, obj_Controller.strength+random(4), 1, 1, 0, 1);
+            }
+        }
     }
 }
-
-
-
-
-
-
 
 
