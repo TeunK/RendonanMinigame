@@ -29,7 +29,7 @@
 xxx=x
 yyy=y
 
-//calculate position of sky, relative to original x,y positions. (sunburst sprite is drawn as a straight line dropping from the sky, yinit is where this ray comes from)
+//calculate position of sky, relative to original x,y positions. (sunflash sprite is drawn as a straight line dropping from the sky, yinit is where this ray comes from)
 xinit=xxx
 yinit=yyy-650;
 

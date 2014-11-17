@@ -52,16 +52,16 @@ if (button_pressed_ext(310,room_height-70,400,room_height-50,"Potion","+HP10: $2
 //BUTTONS TO CHANGE ENCOUNTER MONSTER LEVEL
 draw_monster_controller(880,room_height-70);
 
-//DRAW SUNBURST
-if (sunburstTimer < sunburstLimit)
+//DRAW SUNFLASH
+if (sunflashTimer < sunflashLimit)
 {
-    sunburstTimer +=1;
+    sunflashTimer +=1;
 }
 else
 {
-    sunburstTimer = sunburstLimit
+    sunflashTimer = sunflashLimit
 }
-draw_sunburst(420,405, sunburstTimer, sunburstLimit);
+draw_sunflash(420,405, sunflashTimer, sunflashLimit);
 
 /*******************************
  -- Healthbar / Experiencebar --

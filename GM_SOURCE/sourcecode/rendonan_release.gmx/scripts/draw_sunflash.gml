@@ -1,10 +1,10 @@
-//DOC:  draw_sunburst(x,y, sunburstTimer, sunburstLimit);
-//DESC: draws sunburst super-skill at x,y position, using given timer for cooldown
+//DOC:  draw_sunflash(x,y, sunflashTimer, sunflashLimit);
+//DESC: draws sunflash super-skill at x,y position, using given timer for cooldown
 
 //arg0 = x
 //arg0 = y
-//arg0 = sunburstTimer, counting
-//arg0 = sunburstLimit, point when counting finishes
+//arg0 = sunflashTimer, counting
+//arg0 = sunflashLimit, point when counting finishes
 
 
 //Initialize variables
@@ -19,7 +19,7 @@ limit   = argument3;
 //DOC:  test_is_real(variable, desc, passive)
 //DOC:  test_is_string(variable, desc, passive)
 var testmodule;
-testmodule = "[draw_sunburst] ";
+testmodule = "[draw_sunflash] ";
 
 test_is_real(   xx,      testmodule+"xx: ",     true);
 test_is_real(   yy,      testmodule+"yy: ",     true);
@@ -38,7 +38,7 @@ top     = yy;
 right   = left+260
 bottom  = yy+40
 
-//Draw Sunburst Icon
+//Draw sunflash Icon
 draw_sprite(spr_Sunburst,0,left,top);
 draw_set_color(c_orange);
 
@@ -56,7 +56,7 @@ if (percent == 100)
 {
     if (instance_exists(obj_Monster) && instance_exists(obj_Player))
     {
-        if (button_pressed_ext(left+20,bottom-10,right-20,bottom+20,"CHARGE COMPLETE","Activate Sunburst"))
+        if (button_pressed_ext(left+20,bottom-10,right-20,bottom+20,"CHARGE COMPLETE","Activate Sunflash"))
         {
             //sfx flash screen
             draw_set_alpha(0.9);
@@ -64,7 +64,7 @@ if (percent == 100)
             draw_rectangle(0,0,room_width,room_height,0);
             
             //reset timer
-            obj_Controller.sunburstTimer = 0;
+            obj_Controller.sunflashTimer = 0;
             
             //add special effect: sunflash particles
             sunflash = instance_create(obj_Monster.x,obj_Monster.y,obj_Sunflash);
