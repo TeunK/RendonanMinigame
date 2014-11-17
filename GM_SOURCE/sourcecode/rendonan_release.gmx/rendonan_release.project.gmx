@@ -15,6 +15,7 @@
       <sprite>sprites\spr_Inferno</sprite>
       <sprite>sprites\spr_Smoke</sprite>
     </sprites>
+    <sprite>sprites\spr_Sunburst</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -51,6 +52,7 @@
       <script>scripts\draw_text_bg.gml</script>
       <script>scripts\draw_monster_controller.gml</script>
       <script>scripts\draw_crosshair.gml</script>
+      <script>scripts\draw_sunburst.gml</script>
     </scripts>
     <scripts name="Functions">
       <scripts name="Buttons">
