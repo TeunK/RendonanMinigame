@@ -27,31 +27,28 @@
             <kind>1</kind>
             <string>created=0;
 
+//store original x- and y positions of instance
 xxx=x
 yyy=y
+
+//calculate position of sky, relative to original x,y positions. (sunburst sprite is drawn as a straight line dropping from the sky, yinit is where this ray comes from)
 xinit=xxx
 yinit=yyy-650;
 
-time=90 //defines when dead (90)
+time=90     //defines when instance is dead (90)
 
-radmax=300;
-rad1=0;
-edges=4;
-
-time1=0;
-time2=0;
-time3=0;
-time4=0;
-time5=0;
-alpha1=0;
-alpha2=0;
+radmax=300; //max distance (radius) after which radius will reset to distance 0 from center (animation)
+rad1=0;     //counter which increases (mod radmax), draws particles at rad1-distance from center
+edges=4;    //number of directions the lightray deflects off the ground
 
 //call the particle creation script
 scr_sunflash_init(0);
-//set up the particle emitter
+
+//set up the particle emitter region
 //center
 part_emitter_region(sunflashpartsys_fire,mypart[0],xxx-10,xxx+10,yyy-5,yyy+5,ps_shape_rectangle,ps_distr_linear);
 
+//initialise initial position-values for deflected lightrays
 for (i=0; i&lt;edges; i+=1)
 {
     x1[i+1] = xxx+rad1*cos(-(360/edges)/2)
@@ -82,7 +79,8 @@ for (i=0; i&lt;edges; i+=1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>for (i=0; i&lt;edges+1; i+=1)
+            <string>//destroy emitter when instance is destroyed
+for (i=0; i&lt;edges+1; i+=1)
 {
     part_emitter_destroy(sunflashpartsys_fire,mypart[i]);
 }
