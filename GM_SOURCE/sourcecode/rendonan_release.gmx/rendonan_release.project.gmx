@@ -15,7 +15,11 @@
       <sprite>sprites\spr_Inferno</sprite>
       <sprite>sprites\spr_Smoke</sprite>
     </sprites>
-    <sprite>sprites\spr_Sunburst</sprite>
+    <sprites name="Sunflash">
+      <sprite>sprites\spr_Sunburst</sprite>
+      <sprite>sprites\spr_Sunflash</sprite>
+      <sprite>sprites\spr_sunflash_fire</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
@@ -84,6 +88,7 @@
     </scripts>
     <scripts name="Particles">
       <script>scripts\scr_inferno_init.gml</script>
+      <script>scripts\scr_sunflash_init.gml</script>
     </scripts>
   </scripts>
   <fonts name="fonts">
@@ -94,7 +99,10 @@
     <object>objects\obj_Button</object>
     <object>objects\obj_Player</object>
     <object>objects\obj_Monster</object>
-    <object>objects\obj_Inferno</object>
+    <objects name="ParticleControllers">
+      <object>objects\obj_Inferno</object>
+      <object>objects\obj_Sunflash</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_Connect</room>
