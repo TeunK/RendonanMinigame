@@ -25,9 +25,7 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>created=0;
-
-//store original x- and y positions of instance
+            <string>//store original x- and y positions of instance
 xxx=x
 yyy=y
 
@@ -35,17 +33,34 @@ yyy=y
 xinit=xxx
 yinit=yyy-650;
 
-time=90     //defines when instance is dead (90)
+time=90         //defines when instance is dead (90)
 
-radmax=300; //max distance (radius) after which radius will reset to distance 0 from center (animation)
-rad1=0;     //counter which increases (mod radmax), draws particles at rad1-distance from center
-edges=4;    //number of directions the lightray deflects off the ground
+radmax=300;     //max distance (radius) after which radius will reset to distance 0 from center (animation)
+rad1=0;         //counter which increases (mod radmax), draws particles at rad1-distance from center
+edges=4;        //number of directions the lightray deflects off the ground
+hitcount = 30   //number of times the sunflash skill will hit the monster
+
+//for each hit
+for (i=0; i&lt;hitcount; i+=1)
+{
+    //Initiate damage per hit
+    dmg[i] = round((0.02*obj_Controller.strength+random(4))*random(5));
+    
+    //set a random position near x and y position for each strike
+    draw_dmg_x[i]           = x-300+round(random(450));
+    draw_dmg_y[i]           = y-250+round(random(450));
+    
+    //timers, starttimer=queue for msg to popup, stoptimer = queue for msg to stop, timer = counter throughout.
+    draw_dmg_timer[i]       = 0
+    draw_dmg_starttimer[i]  = round(random(40));
+    draw_dmg_stoptimer[i]   = 45 + round(random(45));
+}
 
 //call the particle creation script
 scr_sunflash_init(0);
 
 //set up the particle emitter region
-//center
+//center burn
 part_emitter_region(sunflashpartsys_fire,mypart[0],xxx-10,xxx+10,yyy-5,yyy+5,ps_shape_rectangle,ps_distr_linear);
 
 //initialise initial position-values for deflected lightrays
@@ -154,53 +169,32 @@ if rad1 &gt;= radmax {rad1=0};
             <string>//draw main line of sunflash in the skill center
 draw_sprite_ext(spr_Sunflash,0,xinit,yinit,1,(y-yinit),0,c_white,1);
 
-//all dmg-variables were received from draw_sunburst after creating this instance
-if (created==1)
+//draw each damage message-box
+for (i=0; i&lt;array_length_1d(dmg); i+=1)
 {
-    for (i=0; i&lt;array_length_1d(dmg); i+=1)
+    draw_dmg_timer[i] +=1; //increment all timers
+    
+    //more special effects: flash screen each time a new box pops up
+    //..and of course inflict the damage
+    if (draw_dmg_timer[i] == draw_dmg_starttimer[i])
     {
-        //set a random position near x and y position for each strike
-        draw_dmg_x[i]           = x-300+round(random(450));
-        draw_dmg_y[i]           = y-250+round(random(450));
-        
-        //timers, starttimer=queue for msg to popup, stoptimer = queue for msg to stop, timer = counter throughout.
-        draw_dmg_timer[i]       = 0
-        draw_dmg_starttimer[i]  = round(random(60));
-        draw_dmg_stoptimer[i]   = 90 + round(random(60));
+        draw_set_color(c_white);
+        draw_set_alpha(0.2+random(0.4));
+        draw_rectangle(0,0,room_width,room_height,0);
+        draw_restore();
+        if (instance_exists(obj_Monster))
+        {
+            obj_Monster.currenthp -= dmg[i];
+        }
     }
     
-    //prevent positions from being set again
-    created=2;
-}
-
-if (created==2)
-{    
-    //draw each damage message-box
-    for (i=0; i&lt;array_length_1d(dmg); i+=1)
+    if (draw_dmg_timer[i] &gt;= draw_dmg_starttimer[i] &amp;&amp; draw_dmg_timer[i] &lt;= draw_dmg_stoptimer[i])
     {
-        draw_dmg_timer[i] +=1; //increment all timers
-        
-        //more special effects: flash screen each time a new box pops up
-        //..and of course inflict the damage
-        if (draw_dmg_timer[i] == draw_dmg_starttimer[i])
-        {
-            draw_set_color(c_white);
-            draw_set_alpha(0.2+random(0.4));
-            draw_rectangle(0,0,room_width,room_height,0);
-            draw_restore();
-            if (instance_exists(obj_Monster))
-            {
-                obj_Monster.currenthp -= dmg[i];
-            }
-        }
-        
-        if (draw_dmg_timer[i] &gt;= draw_dmg_starttimer[i] &amp;&amp; draw_dmg_timer[i] &lt;= draw_dmg_stoptimer[i])
-        {
-            //draw damage done by sunflash skill, from- and to a random amount of time
-            draw_text_bg(draw_dmg_x[i],draw_dmg_y[i],string(dmg[i]));
-        }
+        //draw damage done by sunflash skill, from- and to a random amount of time
+        draw_text_bg(draw_dmg_x[i],draw_dmg_y[i],string(dmg[i]));
     }
 }
+
 
 
 //continuously decrement timer, kill instance when timer runs out.
