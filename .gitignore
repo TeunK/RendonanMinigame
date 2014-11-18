@@ -3,6 +3,7 @@
 !.gitignore
 
 !*/
+/Vendor/*
 !/app/AppKernel.php
 !/app/config/config.yml
 !/app/config/parameters.yml
