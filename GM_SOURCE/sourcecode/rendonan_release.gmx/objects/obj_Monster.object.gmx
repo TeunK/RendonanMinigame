@@ -26,8 +26,8 @@
           <argument>
             <kind>1</kind>
             <string>//MONSTER STATS
-name            = "Big Mean Green Slime";
 level           = 1;
+name            = "Big Mean Green Slime";
 str             = 3;
 agi             = 0;
 currenthp       = 10;
@@ -93,18 +93,55 @@ monster_death(currenthp,xpgain,moneygain);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_entity(name, currenthp, maxhp);
+            <string>//prevent sprite from auto-looping through sub-images
+image_speed=0; 
+
+//define_monster name and image_index depending on level.
+//(every 5 levels the monster image and name changes)
+switch (floor(level/5))
+{
+    case 0:
+        image_index=0;
+        name = "Big Mean Green Slime";
+        break;
+    case 1:
+        image_index=1;
+        name = "Rock Crawler";
+        break;
+    case 2:
+        image_index=2;
+        name = "Fire Mole";
+        break;
+    case 3:
+        image_index=3;
+        name = "Kraken";
+        break;
+    case 4:
+        image_index=4;
+        name = "Storm Wyvern";
+        break;
+    case 5:
+        image_index=5;
+        name = "Tribal Dino";
+        break;
+    default:
+        image_index=6;
+        name = "Ice Lizard";
+        break;
+}
+
+draw_entity(encode_name(name,level), currenthp, maxhp);
 
 test_timer(x-70, y+70, currenthp, maxhp, "Health: ");
 test_timer(x, y+120, atkTimer, atkLimit, "Attack Due: ");
 //SETUP ATTACK
 if (instance_exists(obj_Player))
 {
+    //increment attack timer
     if (autoatk)
     {
         atkTimer += (0.6+agi/50);
     }
-    
     
     //attack monster in case obj_Controller.autoatk is true (ie. auto-attack mode is active)
     dmg = attack(id, obj_Player, str, atkTimer, atkLimit, autoatk, false)
