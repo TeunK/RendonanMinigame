@@ -178,8 +178,9 @@ for (i=0; i&lt;array_length_1d(dmg); i+=1)
     //..and of course inflict the damage
     if (draw_dmg_timer[i] == draw_dmg_starttimer[i])
     {
-        draw_set_color(c_white);
-        draw_set_alpha(0.2+random(0.4));
+        draw_set_color(c_orange);
+        draw_set_alpha(0.05+random(0.1));
+        
         draw_rectangle(0,0,room_width,room_height,0);
         draw_restore();
         if (instance_exists(obj_Monster))
