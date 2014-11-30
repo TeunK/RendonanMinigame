@@ -65,15 +65,22 @@ class RegisterController extends Controller
 
     public function loginAction(Request $request) {
 
-        //range allowed for input-length of username and password
-        $rangemin = 4;
-        $rangemax = 20;
-
         //return boolean, true if length of string falls within min/max range
         function sizeRange($string, $min, $max)
         {
-            return (count($string) >= $min && count($string) <= $max);
+            if (strlen($string) >= $min && strlen($string) <= $max)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
         }
+
+        //range allowed for input-length of username and password
+        $rangemin = 4;
+        $rangemax = 20;
 
         $session = $request->getSession();
 
@@ -85,8 +92,14 @@ class RegisterController extends Controller
             $username = $request->get('_username');
             $password = ($request->get('_password'));
 
+            //validation check
+            $alphaUser = ctype_alnum($username);
+            $alphaPass = ctype_alnum($password);
+            $rangeUser = sizeRange($username,$rangemin,$rangemax);
+            $rangePass = sizeRange($password,$rangemin,$rangemax);
+
             //Form input validation, username and password must be alphanumeric between range 4 - 20 characters.
-            if (ctype_alnum($username) && ctype_alnum($password) && sizeRange($username,$rangemin,$rangemax) && sizeRange($password,$rangemin,$rangemax))
+            if ($alphaUser && $alphaPass && $rangeUser && $rangePass)
             {
                 $user = $repository->findOneBy(array('username' => $username, 'password' => $password));
                 if ($user)
@@ -127,7 +140,7 @@ class RegisterController extends Controller
                         'online'    => $getSessionData["online"],
                         'name'      => $getSessionData["username"],
                         'title'     => "Error,",
-                        'message'   => "Invalid input used for username / password: Must be alphanumeric with length $rangemin - $rangemax characters"
+                        'message'   => "Invalid input used for username / password: Must be alphanumeric with length $rangemin - $rangemax characters."
                     ));
             }
         }
