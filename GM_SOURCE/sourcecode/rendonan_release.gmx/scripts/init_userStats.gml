@@ -1,7 +1,7 @@
 //DOC:  init_userStats()
 //DESC: Initialises dummy user stat variables
 
-//USER STATS WILL BE FETCHED FROM DATABASE
+//USER STATS WILL BE FETCHED FROM DATABASE IN CONTROLLER DRAW (room_Connect) EVENT
 username        = "NOT CONNECTED";
 xp              = 0;
 coins           = 100;

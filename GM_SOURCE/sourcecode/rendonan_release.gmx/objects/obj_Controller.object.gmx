@@ -53,7 +53,7 @@ connectTimer = 60;
 // 1 = test_mode
 // 2 = unit_tests
 
-test_mode               = 1;
+test_mode               = 0;
 active_testing          = 0; //ignore, when toggled, will display popup messages with test-results
 toggle_active_testing   = vk_space; //required key to press to toggle active_testing
 
@@ -303,7 +303,7 @@ if (ds_map_find_value(async_load, "id") == http)
     monsterSpawnLevel      = 1;
     
     sunflashTimer=0;
-    sunflashLimit=30;
+    sunflashLimit=300;
 }
 </string>
           </argument>
