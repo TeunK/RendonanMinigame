@@ -105,7 +105,13 @@ class RegisterController extends Controller
         }
         else
         {
-
+            $getSession        = new GetSession();
+            $getSessionData    = $getSession->getData();
+            return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
+                array(
+                    'online'    => $getSessionData["online"],
+                    'name'      => $getSessionData["username"],
+                ));
         }
     }
 
@@ -144,7 +150,11 @@ class RegisterController extends Controller
         }
         else
         {
-
+            return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
+                array(
+                    'online'    => $sessionData["online"],
+                    'name'      => $sessionData["username"],
+                ));
         }
     }
 }
