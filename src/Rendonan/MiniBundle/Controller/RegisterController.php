@@ -61,10 +61,21 @@ class RegisterController extends Controller
         }
     }
 
+
+
     public function loginAction(Request $request) {
+
+        //range allowed for input-length of username and password
+        $rangemin = 4;
+        $rangemax = 20;
+
+        //return boolean, true if length of string falls within min/max range
+        function sizeRange($string, $min, $max)
+        {
+            return (count($string) >= $min && count($string) <= $max);
+        }
+
         $session = $request->getSession();
-
-
 
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('RendonanMiniBundle:Account');
@@ -73,22 +84,39 @@ class RegisterController extends Controller
             $session->clear();
             $username = $request->get('_username');
             $password = ($request->get('_password'));
-            $user = $repository->findOneBy(array('username' => $username, 'password' => $password));
-            if ($user)
+
+            //Form input validation, username and password must be alphanumeric between range 4 - 20 characters.
+            if (ctype_alnum($username) && ctype_alnum($password) && sizeRange($username,$rangemin,$rangemax) && sizeRange($password,$rangemin,$rangemax))
             {
-                $session->set('online',1);
-                $session->set('username',$username);
+                $user = $repository->findOneBy(array('username' => $username, 'password' => $password));
+                if ($user)
+                {
+                    $session->set('online',1);
+                    $session->set('username',$username);
 
-                $getSession        = new GetSession();
-                $getSessionData    = $getSession->getData();
+                    $getSession        = new GetSession();
+                    $getSessionData    = $getSession->getData();
 
-                return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
-                    array(
-                        'online'    => $getSessionData["online"],
-                        'name'      => $getSessionData["username"],
-                        'title'     => "Success!",
-                        'message'   => "Welcome ".$getSessionData["username"].", you are now logged in."
-                    ));
+                    return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
+                        array(
+                            'online'    => $getSessionData["online"],
+                            'name'      => $getSessionData["username"],
+                            'title'     => "Success!",
+                            'message'   => "Welcome ".$getSessionData["username"].", you are now logged in."
+                        ));
+                }
+                else
+                {
+                    $getSession        = new GetSession();
+                    $getSessionData    = $getSession->getData();
+                    return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
+                        array(
+                            'online'    => $getSessionData["online"],
+                            'name'      => $getSessionData["username"],
+                            'title'     => "Error,",
+                            'message'   => "username and password do not match."
+                        ));
+                }
             }
             else
             {
@@ -99,7 +127,7 @@ class RegisterController extends Controller
                         'online'    => $getSessionData["online"],
                         'name'      => $getSessionData["username"],
                         'title'     => "Error,",
-                        'message'   => "invalid username and/or password"
+                        'message'   => "Invalid input used for username / password: Must be alphanumeric with length $rangemin - $rangemax characters"
                     ));
             }
         }
