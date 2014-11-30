@@ -1,0 +1,147 @@
+Rendonan Minigame Documentation:
+Project split into 2 sections: Server and Game
+
+SERVER
+The url are defined in src/Rendonan/MiniBundle/Resources/config/routing.yml. This is where depending on the url that was used, the server will decide which controller and action are used in order to render the page.
+Inside each of the controllers, the actions will run scripts that either contribute to variables being displayed on the page (html twig), or a certain background action such as querying the server (assisted by Entities such as Account and Highscore using ORM), maintaining form input and managing sessions. After this, the action will generate the html twig, forwarding the generated variables.
+The html twigs display the content visually (having little to no logic involved as this is done in the controllers). 
+Stylesheets are found in web/css
+
+
+GAME
+Game starts in [room] room_Connect, at which point a persistent (instance does NOT get destroyed upon room-change) instance of [object] obj_Controller is created.
+1. In the create event of obj_Controller (first blocks to be executed, and only once), test-mode is defined (test==2 immediately forwards game to room_Test at which point obj_TestConnection is instantiated), url to specific server paths, and user stats are loaded.
+2. The draw event of obj_Controller where room==room_Connect will initialise the http request to receive the users data from the server database.
+3. This http request is then executed in the HTTP event, at which the user data is stored with according variable names (done with [function] read_userdata()).
+4. Once the user data has been loaded, the controller changes the room into room_Game
+Upon start of room_Game, timers are initialised and instances are created by the obj_Controller room_start event, at which point the game “officialy begins”.
+1. The controller’s step event increments timers (also saves the game every 5 seconds).
+2. The controller’s draw event draws the UI, menu, respawns monsters when required, and checks the player health variables (for regeneration and death).
+3. At this point obj_Controller controls a steady flow of events (mostly based on timers).
+o obj_Monster draws the monster instance and ensures the player gets attacked
+o obj_Player simply draws the player instance
+o obj_Button draws the button and increments a specific stat of the obj_Controller when 	pressed with sufficient coins.
+o obj_TestConnection executes tests, starting with unit tests, followed by a server-connection 	test, and load-userdata test in order to see if the game and server manage to interact 	correctly.
+o obj_Controller handles player attack timers, player stats, game saving and draws the menus
+4. When the player dies, the controller submits the highscore to the server and changes the room into room_Death, where the player gets notified. At this point the entire game can be restarted.
+
+GAME LOGIC FUNCTIONS
+
+Function:  button_pressed(id)
+Description: calculates the upgrade-cost and stat-add variables depending on the button in question
+Note: Depends on obj_Controller. Dependency is safe as obj_Controller is persistent and must always exist.
+
+Function:  btn_purchase(id,adds)
+Description: Adds the adds-amount to the controller's stat
+Note: Depends on obj_Controller. Dependency is safe as obj_Controller is persistent and must always exist.
+
+Function:  button_pressed(x0,y0,x1,y1,string)
+Description: Draws button in rectangular area defined by points (x0,y0), (x1,y1) along with the button inner text: str
+
+Function:  button_pressed(x0,y0,x1,y1,string1,string2)
+Description: Draws button in rectangular area defined by points (x0,y0), (x1,y1) along with the button inner text: string1, changes to string2 when onhover
+Note: Exactly same as button_pressed, except content string changes to string2 when hovered
+
+Function:  player_update()
+Description: updates the specified stats by fetching them from the obj_Controller object
+Note: Depends on obj_Controller. Dependency is safe as obj_Controller is persistent and must always exist.
+
+Function:  monster_death(hp,xpgain,moneygain);
+Description: checks if health drops below 0, if so, adds xpgain and moneygain to the controller stats
+Note: Depends on obj_Controller. Dependency is safe as obj_Controller is persistent and must always exist.
+
+Function:  calc_percent(part,total)
+Note: returns percentage double between 0 and 100, based on the values partial and total
+
+Function:  enter_area(x0,y0,x1,y1,x_pos,y_pos
+Description: Returns true if the point (x_pos,y_pos) is inside the rectangle defined by points (x0,y0), (x1,y1)
+
+Function:  implode_array(array, split_character);
+Description: takes array as input and returns each element concatenated with the ; character as string
+
+Function:  explode_string(string, split_character)
+Description: takes a string as input, and explodes it on split_character. ie. cuts string into slices at split_character and returns slices in form of an array
+
+Function:  attack(source_id, target_id, str, atkTimer, atkLimit, auto, force)
+Description: instance source_id attacks target_id, subtracts targets health based on str when the attack is executed (see variable Descriptionription below)
+Note: variables atkTimer, atkEvent must exist in source_id instance, currenthp must exist in target_id
+
+Function:  read_userdata(userdata)
+Description: userdata is an array containing userdata. read_userdata assigns these values to their according variable
+
+Function:  encode_name(name, level)
+Description: takes in a name and level, and returns a combination of the two in a neat fashion
+
+Function:  init_userStats()
+Description: Initialises dummy user stat variables
+
+Function:  save_game(url)
+Description: sends user variables to url, where the user's data will be stored in the database
+
+Function:  monster_respawn()
+Description: Respawns monster instance based on timer, which counts when no monster instance exists
+
+Function:  player_death()
+Description: Checks for player death. If hp drops below 0, the user's stats will be sent to the server and a new game will start
+
+GAME DRAWING FUNCTIONS
+Function:  draw_restore()
+Description: restores draw properties to standard settings
+
+Function:  draw_UI(username, xp, coins, currenthp, maxhp, strength, agility)
+Description: draws UI with given stats
+
+Function:  draw_dmg(src_id,tgt_id,src_name,damage)
+Description: draws line from source point to target point, and displays the fact that source_name has hit the target by [damage] damage.
+Note: src must have atkEvent variable defined
+
+Function:  draw_menu()
+Description: draws menu (bottom-right corner) with attack button, auto-atk-mode button, potion button, special attack button, monster-level selection and other visuals
+
+Function:  draw_entity(name, currenthp, maxhp)
+Description: draws interactive entity, along with its name and healthbar
+
+Function:  draw_text_bg(xx,yy,message)
+Description: draws message, but on top of a dark roundrectangular background
+
+Function:  draw_monster_controller(x,y)
+Description: draws monster level-controller with level-string being centered at x,y
+
+Function:  draw_crosshair(x,y)
+Description: draws crosshair at point (x,y), only works in test-mode
+Note: requires obj_Controller to exist.
+
+Function:  draw_sunflash(x,y, sunflashTimer, sunflashLimit);
+Description: draws sunflash super-skill at x,y position, using given timer for cooldown
+
+GAME TEST FUNCTIONS
+Function:  test_calc_percent
+Note: tests function calc_percent(part,total)
+
+Function:  test_mouse_enter()
+Description: Tests function mouse_enter(x0,y0,x1,y1,x_pos,y_pos
+
+Function:  test_explode_string()
+Description: tests function explode_string(string, split_character)
+
+Function:  test_implode_array()
+Description: tests function implode_array(array, split_character)
+
+Function:  test_timer(x, y, timer, limit, Description);
+Description: displays true values of timer and limit
+
+Function:  test_is_real(variable, Description, passive)
+Description: checks whether stated variable is of type real (number) when active_testing is turned on. passive = 1 means it will ONLY return failed test-result regardless of active-testing
+
+Function:  test_is_string(variable, Description, passive)
+Description: checks whether stated variable is of type string when active_testing is turned on. passive = 1 means it will ONLY return failed test-result regardless of active-testing
+
+Function:  test_exec()
+Description: executes all tests
+
+Function:  test_result(correct,testcount,test_unit)
+Description: returns true if correct==testcount, additionally, displays message of the amount of passed/total tests to see how often it fails
+
+Function:  test_toggleActiveMode(key)
+Description: toggles active-testing mode, when active: display popups with test results
+Note: requires caller to have active_testing and test_mode varibles defined, also must be called in draw-event

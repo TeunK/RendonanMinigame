@@ -1,6 +1,7 @@
 *
 
 !.gitignore
+!documentation.txt
 
 !*/
 /Vendor/*
