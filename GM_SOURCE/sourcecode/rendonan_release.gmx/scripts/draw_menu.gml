@@ -1,3 +1,6 @@
+//DOC:  draw_menu()
+//DESC: draws menu (bottom-right corner) with attack button, auto-atk-mode button, potion button, special attack button, monster-level selection and other visuals
+
 //background box
 draw_set_alpha(0.8);
 draw_set_color(c_black);

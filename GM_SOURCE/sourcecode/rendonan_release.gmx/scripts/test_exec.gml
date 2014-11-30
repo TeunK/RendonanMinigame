@@ -1,6 +1,6 @@
 //DOC:  test_exec()
+//DESC: executes all tests
 
-//executes all tests
 var correct, testcount;
 correct     = 0;
 testcount   = 0;

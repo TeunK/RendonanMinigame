@@ -1,5 +1,5 @@
-//DOC:  explode_string(string, split_character)
-//DESC: takes a string as input, and explodes it on split_character. ie. cuts string into slices at split_character and returns slices in form of an array
+//DOC:  test_explode_string()
+//DESC: tests function explode_string(string, split_character)
 
 //arg0 = input string
 //arg1 = character upon which the string is sliced

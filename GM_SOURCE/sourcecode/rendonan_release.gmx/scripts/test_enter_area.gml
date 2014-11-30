@@ -1,5 +1,5 @@
-//DOC:  mouse_enter(x0,y0,x1,y1,x_pos,y_pos
-//DESC: Returns true if the point (x_pos,y_pos) is inside the rectangle defined by points (x0,y0), (x1,y1)
+//DOC:  test_mouse_enter()
+//DESC: Tests function mouse_enter(x0,y0,x1,y1,x_pos,y_pos
 
 //arg0 = x0
 //arg1 = y0

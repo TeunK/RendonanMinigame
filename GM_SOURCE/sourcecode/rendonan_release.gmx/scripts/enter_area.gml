@@ -1,4 +1,4 @@
-//DOC:  mouse_enter(x0,y0,x1,y1,x_pos,y_pos
+//DOC:  enter_area(x0,y0,x1,y1,x_pos,y_pos
 //DESC: Returns true if the point (x_pos,y_pos) is inside the rectangle defined by points (x0,y0), (x1,y1)
 
 //arg0 = x0

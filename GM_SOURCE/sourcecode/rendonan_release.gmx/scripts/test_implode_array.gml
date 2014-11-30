@@ -1,5 +1,5 @@
-//DOC:  implode_array(array, split_character)
-//DESC: takes an array as input, and implodes it. ie. concatenates array into a string, adding the split_character between each position
+//DOC:  test_implode_array()
+//DESC: tests function implode_array(array, split_character)
 
 //arg0 = input array
 //arg1 = character that fills up the gap
