@@ -16,6 +16,9 @@ namespace Rendonan\MiniBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="Rendonan\MiniBundle\Repository\PersonRepository")
@@ -91,7 +94,37 @@ Class Account
 //////////////////////////USER PROTECTION////////////////////////
 /////////////////////////////////////////////////////////////////
 
+    //validation
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        //username may not be blank
+        $metadata->addPropertyConstraint('username', new Assert\NotBlank());
+        //username must be of specific length
+        $metadata->addPropertyConstraint('username', new Assert\Length(array(
+            'min'        => 4,
+            'max'        => 20,
+            'minMessage' => 'Your username must be at least {{ limit }} characters long',
+            'maxMessage' => 'Your username cannot be longer than {{ limit }} characters long',
+        )));
+        //alphanumeric username
+        $metadata->addPropertyConstraint('username', new Assert\Regex(array(
+            'pattern' => '/^[a-zA-Za0-9]+$/',
+            'message' => 'Username can only consist of letters and numbers'
+        )));
 
+        //password must be of specific length
+        $metadata->addPropertyConstraint('password', new Assert\Length(array(
+            'min'        => 4,
+            'max'        => 20,
+            'minMessage' => 'Your password must be at least {{ limit }} characters long',
+            'maxMessage' => 'Your password cannot be longer than {{ limit }} characters long',
+        )));
+        //alphanumeric password
+        $metadata->addPropertyConstraint('password', new Assert\Regex(array(
+            'pattern' => '/^[a-zA-Za0-9]+$/',
+            'message' => 'Password can only consist of letters and numbers'
+        )));
+    }
 
 
 
