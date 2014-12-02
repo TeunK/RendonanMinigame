@@ -86,8 +86,6 @@ class GameController extends Controller
 
         }
 
-
-
         return $this->render('RendonanMiniBundle:Default:HTTPrequests/userdata.html.twig',
             array(
                 'name'      => $username,
@@ -104,12 +102,6 @@ class GameController extends Controller
     public function savedataAction(Request $request)
     {
         $session = $request->getSession();
-        //init session
-        //$session        = new GetSession();
-        //$sessionData    = $session->getData();
-
-        //$session->set('username',"XXX");
-
 
         //bypass SSX security issues that would otherwise occur in certain browsers when trying to connect game using http_get():
         //this allows cross-domain access to happen

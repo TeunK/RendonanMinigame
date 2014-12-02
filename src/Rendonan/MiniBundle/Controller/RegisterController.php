@@ -25,6 +25,7 @@ class RegisterController extends Controller
                 'method' => 'POST'
             ));
 
+            //register new user
             $form->handleRequest($request);
             if ($form->isValid())
             {
@@ -60,8 +61,6 @@ class RegisterController extends Controller
                 ));
         }
     }
-
-
 
     public function loginAction(Request $request) {
 

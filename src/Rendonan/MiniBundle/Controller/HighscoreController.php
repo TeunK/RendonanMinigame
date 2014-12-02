@@ -23,7 +23,6 @@ class HighscoreController extends Controller
         $filterorder    = $order;
         $filteruser     = $user;
 
-
         //DEFINE STAT FILTER FOR DB-QUERY
         switch ($orderstat)
         {
@@ -58,12 +57,9 @@ class HighscoreController extends Controller
                 break;
         }
 
-        //IF NO USER SPECIFIED, TRANSLATE INTO * FOR DB-QUERY
+        //IF USER-BASED SEARCH SPECIFIED, ADD WHERE-CLAUSE TO SELECTION
         $WHERE = "";
         if ($user != "") { $WHERE = "WHERE scores.username = '".$user."' "; }
-
-        //FETCH POST(-username) INPUT
-
 
         //PREPARE DB-QUERY TO RECEIVE HIGHSCORES
         $em = $this->getDoctrine()->getManager();
