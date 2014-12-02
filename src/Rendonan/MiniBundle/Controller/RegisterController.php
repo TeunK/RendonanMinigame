@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rendonan\MiniBundle\Entity\Account;
 use Symfony\Component\HttpFoundation\Request;
 use Rendonan\MiniBundle\Scripts\GetSession;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class RegisterController extends Controller
 {
@@ -25,22 +26,28 @@ class RegisterController extends Controller
                 'method' => 'POST'
             ));
 
-            //register new user
             $form->handleRequest($request);
             if ($form->isValid())
             {
+                //register new user
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($form->getData());
+                $user = $form->getData();
+                $em->persist($user);
                 $em->flush();
 
-                $username = $request->get('_username');
-                return $this->redirect($this->generateUrl("rendonan_mini_thankyou",
-                    array(
-                        'online'    => 0,
-                        'name'      => $username,
-                        'title'     => "Congratulations ".$username."!",
-                        'message'   => "You have been succesfully registered and can now log in to your account."
-                    )));
+                //immediately log-in user
+                $username = $user->getUsername();
+                $password = $user->getPassword();
+
+                //auto-fillin login form, forward to login action
+                $loginRequest = new Request();
+                $loginRequest->request->set('_username',$username);
+                $loginRequest->request->set('_password',$password);
+                $loginRequest->setMethod('POST');
+                $this->loginAction($loginRequest);
+
+                //redirect to main page
+                return $this->redirect($this->generateUrl("rendonan_mini_homepage"));
             }
 
             return $this->render('RendonanMiniBundle:Default:Pages/register.html.twig',
@@ -81,13 +88,10 @@ class RegisterController extends Controller
         $rangemin = 4;
         $rangemax = 20;
 
-        $session = $request->getSession();
-
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('RendonanMiniBundle:Account');
         if ($request->getMethod() == 'POST')
         {
-            $session->clear();
             $username = $request->get('_username');
             $password = ($request->get('_password'));
 
@@ -103,6 +107,7 @@ class RegisterController extends Controller
                 $user = $repository->findOneBy(array('username' => $username, 'password' => $password));
                 if ($user)
                 {
+                    $session = new Session();
                     $session->set('online',1);
                     $session->set('username',$username);
 
@@ -157,13 +162,11 @@ class RegisterController extends Controller
 
     public function logoutAction()
     {
-        //destroy session
         session_destroy();
 
         //restart session as anonymous user (online=false)
         $session        = new GetSession();
         $sessionData    = $session->getData();
-
         return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
             array(
                 'online'    => $sessionData["online"],
@@ -176,8 +179,6 @@ class RegisterController extends Controller
     {
         $session        = new GetSession();
         $sessionData    = $session->getData();
-
-        //if user is already logged in, DO NOT allow registration
         if (!$sessionData["online"])
         {
             return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
