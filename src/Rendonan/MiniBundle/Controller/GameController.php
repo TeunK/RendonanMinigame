@@ -17,12 +17,16 @@ class GameController extends Controller
         $session        = new GetSession();
         $sessionData    = $session->getData();
 
+        //port number
+        $port = "8080";
+
         if ($sessionData["online"]) //if user is logged in, display game, otherwise forward
         {
             return $this->render('RendonanMiniBundle:Default:Pages/game.html.twig',
                 array(
                     'online'    => $sessionData["online"],
-                    'name'      => $sessionData["username"]
+                    'name'      => $sessionData["username"],
+                    'port'      => $port
                 ));
         }
         else
