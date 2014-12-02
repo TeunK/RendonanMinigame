@@ -1,28 +1,70 @@
-Rendonan Minigame Documentation:
+﻿Rendonan Minigame Documentation:
 Project split into 2 sections: Server and Game
 
-SERVER
+▬▬ι═══════ﺤ REQUIRED SOFTWARE	 -═══════ι▬▬
+- Jetbrains PHPStorm (to edit the website)
+- Gamemaker Studio with HTML5 export module (to edit the game)
+- WampServer (in order to run php on localhost)
+
+▬▬ι═══════ﺤ RUNNING -═══════ι▬▬
+SITE:
+As long as localhost is running, simply start up the site in a browser: localhost/rendonan_release/web/app_dev.php
+
+GAME:
+In Gamemaker, ensure “export as html5” is selected. Then press the “play” button and it will automatically generate the required files and run them in the browser.
+
+▬▬ι═══════ﺤ TESTING -═══════ι▬▬
+SITE: 
+The form input is tested both on the client- and server side. This is done in the Entity classes (e.g. Account.php and Highscore.php) and in the controllers (e.g. RegisterController.php). 
+
+GAME:
+All test scripts are found in the “Tests” folder. These are divided into UnitTests, LogicTests, TypeChecking and TestController.
+- UnitTests contains test scripts that test certain functions output based on input.
+- LogicTests contains test scripts that are constantly running during gameplay, displaying certain values depending on the testmode defined in obj_Controller. (testing 1=runtime testing)
+- TypeChecking contains test scripts that check whether the given variable is of the correct type (real / string). These scripts are also constantly running in the background when testmode is active, and will fire warnings when it fails at any point during gameplay. Note that these tests are embedded in all functions, so if any function is called with incorrect arguments, this will be noticed.
+- TestController contains scripts that control specific testing patterns. 
+o test_exec runs all UnitTests and will print out the details of which tests passed or failed.
+o Test_result compares the number of pass/fail, checking whether any errors occurred
+o Test_toggleActiveMode allows the software engineer to toggle the active-testing mode. Meaning that when in testing mode, even tests returning “success” will return the fact that they were indeed successful. Otherwise only “failures” will be mentioned.
+
+▬▬ι═══════ﺤ DEBUGGING -═══════ι▬▬
+SITE:
+GAME:
+during gameplay in testmode, if a function fails, it will mention which script it was that failed. From there it should be relatively easy to find out which event it was that triggered the script by recreating the error. 
+The LogicTests display values of specific variables, which can be compared and checked if they make sense. 
+Also gamemaker has a debugger at hand (red play button) which allows the software engineer to display specific values and query results.
+At any point in the code the function show_message(string) can be used, which will pause the game at the point where the function is called. The string can contain values that are to be tested.
+
+▬▬ι═══════ﺤ DEPLOYING -═══════ι▬▬
+SITE:
+This process is identical to “running” the site. The site is expected to run on localhost and thus deployment to an external source is not required.
+
+GAME:
+Rather than pressing the “play” button to run the game, in Gamemaker press “create application” and store the suggested “index.html” file in localhost/rendonan_release/web/game. Gamemaker will translate the game into JavaScript and generate further required files. The index.html location is where the server (site) will find the game, and refer to it using an iframe (note: rendonan_release/src/Rendonan/MiniBundle/Resources/views/Default/Pages/game.html.twig)
+
+▬▬ι═══════ﺤ WHERE TO START -═══════ι▬▬
+SITE:
 The url are defined in src/Rendonan/MiniBundle/Resources/config/routing.yml. This is where depending on the url that was used, the server will decide which controller and action are used in order to render the page.
 Inside each of the controllers, the actions will run scripts that either contribute to variables being displayed on the page (html twig), or a certain background action such as querying the server (assisted by Entities such as Account and Highscore using ORM), maintaining form input and managing sessions. After this, the action will generate the html twig, forwarding the generated variables.
 The html twigs display the content visually (having little to no logic involved as this is done in the controllers). 
 Stylesheets are found in web/css
 
 
-GAME
+GAME:
 Game starts in [room] room_Connect, at which point a persistent (instance does NOT get destroyed upon room-change) instance of [object] obj_Controller is created.
 1. In the create event of obj_Controller (first blocks to be executed, and only once), test-mode is defined (test==2 immediately forwards game to room_Test at which point obj_TestConnection is instantiated), url to specific server paths, and user stats are loaded.
 2. The draw event of obj_Controller where room==room_Connect will initialise the http request to receive the users data from the server database.
 3. This http request is then executed in the HTTP event, at which the user data is stored with according variable names (done with [function] read_userdata()).
 4. Once the user data has been loaded, the controller changes the room into room_Game
-Upon start of room_Game, timers are initialised and instances are created by the obj_Controller room_start event, at which point the game �officialy begins�.
-1. The controller�s step event increments timers (also saves the game every 5 seconds).
-2. The controller�s draw event draws the UI, menu, respawns monsters when required, and checks the player health variables (for regeneration and death).
+Upon start of room_Game, timers are initialised and instances are created by the obj_Controller room_start event, at which point the game “officialy begins”.
+1. The controller’s step event increments timers (also saves the game every 5 seconds).
+2. The controller’s draw event draws the UI, menu, respawns monsters when required, and checks the player health variables (for regeneration and death).
 3. At this point obj_Controller controls a steady flow of events (mostly based on timers).
-o obj_Monster draws the monster instance and ensures the player gets attacked
-o obj_Player simply draws the player instance
-o obj_Button draws the button and increments a specific stat of the obj_Controller when 	pressed with sufficient coins.
-o obj_TestConnection executes tests, starting with unit tests, followed by a server-connection 	test, and load-userdata test in order to see if the game and server manage to interact 	correctly.
-o obj_Controller handles player attack timers, player stats, game saving and draws the menus
+	o obj_Monster draws the monster instance and ensures the player 	gets attacked
+	o obj_Player simply draws the player instance
+	o obj_Button draws the button and increments a specific stat of the 	obj_Controller when 	pressed with sufficient coins.
+	o obj_TestConnection executes tests, starting with unit tests, 	followed by a server-connection 	test, and load-userdata test in 	order to see if the game and server manage to interact 	correctly.
+	o obj_Controller handles player attack timers, player stats, game 	saving and draws the menus
 4. When the player dies, the controller submits the highscore to the server and changes the room into room_Death, where the player gets notified. At this point the entire game can be restarted.
 
 GAME LOGIC FUNCTIONS
@@ -53,7 +95,7 @@ Note: Depends on obj_Controller. Dependency is safe as obj_Controller is persist
 Function:  calc_percent(part,total)
 Note: returns percentage double between 0 and 100, based on the values partial and total
 
-Function:  enter_area(x0,y0,x1,y1,x_pos,y_pos
+Function:  enter_area(x0,y0,x1,y1,x_pos,y_pos)
 Description: Returns true if the point (x_pos,y_pos) is inside the rectangle defined by points (x0,y0), (x1,y1)
 
 Function:  implode_array(array, split_character);
