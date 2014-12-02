@@ -53,7 +53,7 @@ connectTimer = 60;
 // 1 = test_mode
 // 2 = unit_tests
 
-test_mode               = 0;
+test_mode               = 1;
 active_testing          = 0; //ignore, when toggled, will display popup messages with test-results
 toggle_active_testing   = vk_space; //required key to press to toggle active_testing
 
@@ -102,15 +102,16 @@ if (test_mode==2)
           <argument>
             <kind>1</kind>
             <string>//HTTP CONNECTION URL'S
+port = 8080;
 
 //url for loading user data
-load_url    = "http://localhost/rendonan_release/web/app_dev.php/gameload";
+load_url    = string("http://localhost:")+string(port)+string("/rendonan_release/web/app_dev.php/gameload");
 
 //url for saving user progress
-save_url    = "http://localhost/rendonan_release/web/app_dev.php/gamesave";
+save_url    = string("http://localhost:")+string(port)+string("/rendonan_release/web/app_dev.php/gamesave");
 
 //url for saving user stats into highscores
-score_url   = "http://localhost/rendonan_release/web/app_dev.php/scoresave";
+score_url   = string("http://localhost:")+string(port)+string("/rendonan_release/web/app_dev.php/scoresave");
 
 </string>
           </argument>
@@ -342,7 +343,7 @@ if (room==room_Connect)
     if (connectTimer &lt;= 0)
     {
         http = http_get(load_url);
-        connectTimer = 60;
+        connectTimer = 1200;
     }
     
     //draw test-timers (in test-mode)
