@@ -35,12 +35,10 @@ class RegisterController extends Controller
                 $em->persist($user);
                 $em->flush();
 
-                //immediately log-in user
-                $username = $user->getUsername();
-                $password = $user->getPassword();
-
                 //auto-fillin login form, forward to login action
                 $loginRequest = new Request();
+                $username = $user->getUsername();
+                $password = $user->getPassword();
                 $loginRequest->request->set('_username',$username);
                 $loginRequest->request->set('_password',$password);
                 $loginRequest->setMethod('POST');
