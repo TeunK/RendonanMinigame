@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Rendonan\MiniBundle\Repository\HighscoreRepository")
  * @ORM\Table(name="tbl_Highscore")
  * @UniqueEntity(fields="username", message="Sorry, this username is already taken.")
  */

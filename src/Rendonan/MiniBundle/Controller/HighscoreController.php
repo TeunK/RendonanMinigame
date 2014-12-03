@@ -4,6 +4,7 @@ namespace Rendonan\MiniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rendonan\MiniBundle\Scripts\GetSession;
+use Rendonan\MiniBundle\Scripts\Score;
 use Symfony\Component\HttpFoundation\Request;
 use Rendonan\MiniBundle\Entity\Highscore;
 
@@ -61,10 +62,11 @@ class HighscoreController extends Controller
         $WHERE = "";
         if ($user != "") { $WHERE = "WHERE scores.username = '".$user."' "; }
 
-        //PREPARE DB-QUERY TO RECEIVE HIGHSCORES
+        $limit = 20;
+
+        //EXECUTE DB-QUERY
         $em = $this->getDoctrine()->getManager();
         $tbl = $em->getClassMetadata('RendonanMiniBundle:Highscore')->getTableName();
-        $limit = 100;
         $query = "
             SELECT
                 scores.username         AS user,
@@ -86,6 +88,11 @@ class HighscoreController extends Controller
         $stmt = $em->getConnection()->prepare($query);
         $stmt->execute();
         $results = $stmt->fetchAll();
+
+
+        //$repository = $this->getDoctrine()->getRepository('RendonanMiniBundle:Highscore');
+        //$results = $repository->findAll();
+        //echo $results;
 
         //RENDER HTML WEBPAGE
         return $this->render('RendonanMiniBundle:Default:Pages/highscore.html.twig',
