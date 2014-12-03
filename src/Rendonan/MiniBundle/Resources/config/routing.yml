@@ -1,6 +1,6 @@
 rendonan_mini_welcome:
     path:     /
-    defaults: { _controller: RendonanMiniBundle:Main:index }
+    defaults: { _controller: RendonanMiniBundle:Main:forward }
 
 rendonan_mini_homepage:
     path:     /main

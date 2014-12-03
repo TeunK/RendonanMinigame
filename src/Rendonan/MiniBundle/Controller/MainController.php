@@ -7,6 +7,12 @@ use Rendonan\MiniBundle\Scripts\GetSession;
 
 class MainController extends Controller
 {
+    public function forwardAction()
+    {
+        //forward user to main page url
+        return $this->redirect($this->generateUrl("rendonan_mini_homepage"));
+    }
+
     public function indexAction()
     {
         //Fetch highscore list
