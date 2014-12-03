@@ -1,7 +1,31 @@
 {% extends 'RendonanMiniBundle:Default:index.html.twig' %}
 
 {% block content %}
-    <div class="smallscore">small scorelist</div>
+    <div class="smallscore">
+        <table class="mini_highscore">
+            <tr class="top">
+                <td class="rank">
+                    Rank
+                </td>
+                <td class="username">
+                    Username
+                </td>
+                <td class="score">
+                    Score
+                </td>
+            </tr>
+
+            {% set rank = 1 %}
+            {% for user in users %}
+                <tr class="bottom">
+                    <td class="rank">{{ rank }}</td>
+                    <td>{{ user.user }}</td>
+                    <td>{{ user.score }}</td>
+                </tr>
+                {% set rank = rank+1 %}
+            {% endfor %}
+        </table>
+    </div>
     <div class="list">
         PLAY MINIGAME
         <hr/>
