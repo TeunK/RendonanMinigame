@@ -14,7 +14,7 @@ class GameController extends Controller
 {
     public function indexAction()
     {
-        $session        = new GetSession();
+        $session        = new GetSession($this->get('session'));
         $sessionData    = $session->getData();
 
         //port number
@@ -40,7 +40,7 @@ class GameController extends Controller
     public function loaddataAction()
     {
         //init session
-        $session        = new GetSession();
+        $session        = new GetSession($this->get('session'));
         $sessionData    = $session->getData();
 
         //bypass SSX security issues that would otherwise occur in certain browsers when trying to connect game using http_get():

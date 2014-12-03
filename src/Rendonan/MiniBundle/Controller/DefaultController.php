@@ -9,7 +9,7 @@ class DefaultController extends Controller
 {
     public function indexAction($name)
     {
-        $session        = new GetSession();
+        $session        = new GetSession($this->get('session'));
         $sessionData    = $session->getData();
 
         return $this->render('RendonanMiniBundle:Default:index.html.twig',

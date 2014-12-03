@@ -9,7 +9,7 @@ class PageNotFoundController extends Controller
 {
     public function indexAction()
     {
-        $session        = new GetSession();
+        $session        = new GetSession($this->get('session'));
         $sessionData    = $session->getData();
 
         return $this->render('RendonanMiniBundle:Default:Pages/404.html.twig',

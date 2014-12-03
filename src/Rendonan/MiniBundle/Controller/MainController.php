@@ -4,6 +4,7 @@ namespace Rendonan\MiniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rendonan\MiniBundle\Scripts\GetSession;
+use Symfony\Component\HttpFoundation\Request;
 
 class MainController extends Controller
 {
@@ -43,7 +44,7 @@ class MainController extends Controller
         $stmt->execute();
         $results = $stmt->fetchAll();
 
-        $session        = new GetSession();
+        $session        = new GetSession($this->get('session'));
         $sessionData    = $session->getData();
         return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
             array(

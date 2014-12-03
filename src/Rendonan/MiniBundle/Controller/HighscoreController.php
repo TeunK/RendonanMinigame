@@ -13,7 +13,7 @@ class HighscoreController extends Controller
     public function indexAction(Request $request)
     {
         //INITIALISE SESSION
-        $session        = new GetSession();
+        $session        = new GetSession($this->get('session'));
         $sessionData    = $session->getData();
 
         //FETCH GET-INPUT

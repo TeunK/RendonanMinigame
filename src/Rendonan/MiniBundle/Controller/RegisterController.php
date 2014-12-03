@@ -13,7 +13,7 @@ class RegisterController extends Controller
 {
     public function indexAction(Request $request)
     {
-        $getSession        = new GetSession();
+        $getSession        = new GetSession($this->get('session'));
         $getSessionData    = $getSession->getData();
 
         //if user is already logged in, DO NOT allow registration
@@ -109,7 +109,7 @@ class RegisterController extends Controller
                     $session->set('online',1);
                     $session->set('username',$username);
 
-                    $getSession        = new GetSession();
+                    $getSession        = new GetSession($this->get('session'));
                     $getSessionData    = $getSession->getData();
 
                     return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
@@ -122,7 +122,7 @@ class RegisterController extends Controller
                 }
                 else
                 {
-                    $getSession        = new GetSession();
+                    $getSession        = new GetSession($this->get('session'));
                     $getSessionData    = $getSession->getData();
                     return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
                         array(
@@ -135,7 +135,7 @@ class RegisterController extends Controller
             }
             else
             {
-                $getSession        = new GetSession();
+                $getSession        = new GetSession($this->get('session'));
                 $getSessionData    = $getSession->getData();
                 return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
                     array(
@@ -148,7 +148,7 @@ class RegisterController extends Controller
         }
         else
         {
-            $getSession        = new GetSession();
+            $getSession        = new GetSession($this->get('session'));
             $getSessionData    = $getSession->getData();
             return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
                 array(
@@ -160,22 +160,19 @@ class RegisterController extends Controller
 
     public function logoutAction()
     {
-        session_destroy();
+        //destroy the session
+        $session = $this->get('session');
+        $session->clear();
 
         //restart session as anonymous user (online=false)
-        $session        = new GetSession();
+        $session        = new GetSession($this->get('session'));
         $sessionData    = $session->getData();
-        return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
-            array(
-                'online'    => $sessionData["online"],
-                'name'      => $sessionData["username"]
-            )
-        );
+        return $this->redirect($this->generateUrl("rendonan_mini_homepage"));
     }
 
     public function thankyouAction()
     {
-        $session        = new GetSession();
+        $session        = new GetSession($this->get('session'));
         $sessionData    = $session->getData();
         if (!$sessionData["online"])
         {
