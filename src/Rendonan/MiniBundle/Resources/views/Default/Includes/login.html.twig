@@ -1,13 +1,19 @@
 {% if not online %}
     <form action="{{ path('rendonan_mini_login') }}" method="post">
-        <label for="username">username:</label>
-        <input type="text" id="username" name="_username" value=""/>
 
-        <label for="password">password:</label>
-        <input type="password" name="_password"/>
+        <label for="username">
+            username:
+        </label>
+        <input type="text" id="_username" name="_username" value=""/>
 
-        <button type="submit"/>Log-in!</button>
+        <label for="password">
+            password:
+        </label>
+        <input type="password" id="_password" name="_password"/>
+
+        <button type="submit" id="user_login" name="user_login"/>Log-in!</button>
+
     </form>
 {% else %}
-    Logged in as: {{ name }} | <a href="{{ path('rendonan_mini_logout') }}">LOGOUT</a>
+    Logged in as: {{ name }} | <a href="{{ path('rendonan_mini_logout') }}">LOGOUT</a> | <a href="{{ path('rendonan_mini_delete') }}">DELETE ACCOUNT</a>
 {% endif %}
