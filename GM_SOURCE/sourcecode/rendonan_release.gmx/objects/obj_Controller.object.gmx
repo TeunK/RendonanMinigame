@@ -377,7 +377,7 @@ else if (room==room_Game)
     { currenthp = maxhp; }
     
     //Update Player Level
-    level = floor(logn(2,(xp/5)));
+    level = calc_playerLevel(xp);
 }
 else if (room==room_Death)
 {
