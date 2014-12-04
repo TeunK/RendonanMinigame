@@ -58,6 +58,7 @@
       <script>scripts\draw_monster_controller.gml</script>
       <script>scripts\draw_crosshair.gml</script>
       <script>scripts\draw_sunflash.gml</script>
+      <script>scripts\draw_text_bg_ext.gml</script>
     </scripts>
     <scripts name="Functions">
       <scripts name="Buttons">
