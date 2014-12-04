@@ -105,13 +105,13 @@ if (test_mode==2)
 port = 8080;
 
 //url for loading user data
-load_url    = string("http://localhost:")+string(port)+string("/rendonan_release/web/app_dev.php/gameload");
+load_url    = string("http://localhost:")+string(port)+string("/web/app_dev.php/gameload");
 
 //url for saving user progress
-save_url    = string("http://localhost:")+string(port)+string("/rendonan_release/web/app_dev.php/gamesave");
+save_url    = string("http://localhost:")+string(port)+string("/web/app_dev.php/gamesave");
 
 //url for saving user stats into highscores
-score_url   = string("http://localhost:")+string(port)+string("/rendonan_release/web/app_dev.php/scoresave");
+score_url   = string("http://localhost:")+string(port)+string("/web/app_dev.php/scoresave");
 
 </string>
           </argument>
