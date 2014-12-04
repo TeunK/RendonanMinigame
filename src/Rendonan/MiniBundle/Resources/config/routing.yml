@@ -46,6 +46,10 @@ rendonan_mini_delete:
     pattern:  /delete
     defaults: { _controller: RendonanMiniBundle:Register:unregister }
 
+rendonan_mini_deletescore:
+    pattern:  /deletescore
+    defaults: { _controller: RendonanMiniBundle:Highscore:removescore}
+
 rendonan_mini_404:
     path:     /{url}
     defaults: { _controller: RendonanMiniBundle:PageNotFound:index }

@@ -4,9 +4,10 @@ namespace Rendonan\MiniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rendonan\MiniBundle\Scripts\GetSession;
-use Rendonan\MiniBundle\Scripts\Score;
 use Symfony\Component\HttpFoundation\Request;
 use Rendonan\MiniBundle\Entity\Highscore;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Response;
 
 class HighscoreController extends Controller
 {
@@ -114,20 +115,9 @@ class HighscoreController extends Controller
 
         //bypass SSX security issues that would otherwise occur in certain browsers when trying to connect game using http_get():
         //this allows cross-domain access to happen
-        if (isset($_SERVER["HTTP_ORIGIN"]))
-        {
-            //only allow access to local domain
-            $http_origin = $_SERVER['HTTP_ORIGIN'];
-            if ($http_origin == "http://127.0.0.1:51268")
-            {
-                header('Access-Control-Allow-Origin: *');
-            }
-        }
-        else
-        {
-            //if HTTP_ORIGIN is not set, allow any origin (priority on working game rather than security for now)
-            header('Access-Control-Allow-Origin: *');
-        }
+        $response = new Response();
+        $response->headers->set('Access-Control-Allow-Origin','*');
+        $response->send();
 
         //fetch data from POST-data received from game
         if ($request->isMethod('POST'))
@@ -141,7 +131,7 @@ class HighscoreController extends Controller
             $strength   = $request->request->get('strength');
             $agility    = $request->request->get('agility');
             //calculate score
-            $userscore  = (($xp + $coins + 1) * ceil($maxhp/10) * ceil($strength+1) * ceil($agility+1));
+            $userscore  = min((($xp + $coins + 1) * ceil($maxhp/10) * ceil($strength+1) * ceil($agility+1)),999999999);
 
             //INITIALIZE DB-CONNECTION
             $em = $this->getDoctrine()->getManager();
@@ -186,5 +176,34 @@ class HighscoreController extends Controller
         }
 
         return $this->redirect($this->generateUrl("rendonan_mini_registration"));
+    }
+
+    public function removescoreAction()
+    {
+        //get the logged-in-user from database
+        $getSession        = new GetSession($this->get('session'));
+        $getSessionData    = $getSession->getData();
+
+        if ($getSessionData["online"])
+        {
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('RendonanMiniBundle:Highscore');
+
+            $username = $getSessionData["username"];
+            $scores = $repository->findBy(array('username' => $username));
+
+            //remove all scores from the user from the highscore table
+            foreach ($scores as $score)
+            {
+                $em->remove($score);
+            }
+            $em->flush();
+
+            return $this->redirect($this->generateUrl("rendonan_mini_homepage"));
+        }
+        else
+        {
+            return $this->redirect($this->generateUrl("rendonan_mini_homepage"));
+        }
     }
 }
