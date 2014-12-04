@@ -10,12 +10,8 @@ bgcol   = argument4;
 alpha   = argument5;
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[draw_text_bg_ext] ";
-
 test_is_real(   xx,      testmodule+"xx: ",     true);
 test_is_real(   yy,      testmodule+"yy: ",     true);
 test_is_string( message, testmodule+"message: ",true);

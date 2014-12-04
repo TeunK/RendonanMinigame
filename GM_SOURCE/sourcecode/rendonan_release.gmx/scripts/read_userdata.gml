@@ -1,7 +1,6 @@
 //DOC:  read_userdata(userdata)
 //DESC: userdata is an array containing userdata. read_userdata assigns these values to their according variable
 
-//arg0 = userdata
 userdata = argument0;
 
 if (array_length_1d(userdata) == 7)

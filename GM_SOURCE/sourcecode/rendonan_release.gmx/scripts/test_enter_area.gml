@@ -1,13 +1,6 @@
 //DOC:  test_mouse_enter()
 //DESC: Tests function mouse_enter(x0,y0,x1,y1,x_pos,y_pos
 
-//arg0 = x0
-//arg1 = y0
-//arg2 = x1
-//arg3 = y1
-//arg4 = x_pos
-//arg5 = y_pos
-
 var correct, testcount;
 correct     = 0;
 testcount   = 0;

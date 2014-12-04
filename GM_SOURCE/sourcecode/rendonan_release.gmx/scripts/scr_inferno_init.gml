@@ -1,9 +1,10 @@
-//argument0 = ID
+var ID;
+ID = argument0;
 
 //Initialise particles
 infernops = part_system_create();
 infernopt = part_type_create();
-infernope[argument0] = part_emitter_create(infernops);
+infernope[ID] = part_emitter_create(infernops);
 
 //Define particle properties
 part_system_depth(infernops,-99);

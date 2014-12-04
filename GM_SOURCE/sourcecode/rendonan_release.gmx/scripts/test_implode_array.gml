@@ -1,9 +1,6 @@
 //DOC:  test_implode_array()
 //DESC: tests function implode_array(array, split_character)
 
-//arg0 = input array
-//arg1 = character that fills up the gap
-
 var correct, testcount;
 correct     = 0;
 testcount   = 0;

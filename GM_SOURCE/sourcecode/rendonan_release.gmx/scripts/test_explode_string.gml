@@ -1,9 +1,6 @@
 //DOC:  test_explode_string()
 //DESC: tests function explode_string(string, split_character)
 
-//arg0 = input string
-//arg1 = character upon which the string is sliced
-
 var correct, testcount;
 correct     = 0;
 testcount   = 0;

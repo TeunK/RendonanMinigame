@@ -16,12 +16,8 @@ y1  = argument3;
 str = argument4;
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[button_pressed] ";
-
 test_is_real(   x0,      testmodule+"x0: ",   true);
 test_is_real(   y0,      testmodule+"y0: ",   true);
 test_is_real(   x1,      testmodule+"x1: ",   true);

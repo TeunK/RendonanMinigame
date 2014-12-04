@@ -10,12 +10,8 @@ limit       = argument3;
 desc        = argument4;
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[test_timer] ";
-
 test_is_real(   xx,         testmodule+"xx: ",    true);
 test_is_real(   yy,         testmodule+"yy: ",    true);
 test_is_real(   timer,      testmodule+"timer: ", true);

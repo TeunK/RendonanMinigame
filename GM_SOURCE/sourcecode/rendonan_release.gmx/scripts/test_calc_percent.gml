@@ -1,10 +1,6 @@
 //DOC:  test_calc_percent
 //Note: tests function calc_percent(part,total)
 
-//arg0 = partial
-//arg1 = total
-
-
 var correct, testcount;
 correct     = 0;
 testcount   = 0;

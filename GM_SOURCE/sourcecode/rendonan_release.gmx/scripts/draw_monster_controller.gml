@@ -9,12 +9,8 @@ centerx = argument0;
 centery = argument1;
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[draw_monster_controller] ";
-
 test_is_real(   centerx,      testmodule+"centerx: ",   true);
 test_is_real(   centery,      testmodule+"centery: ",   true);
 /*******************************/

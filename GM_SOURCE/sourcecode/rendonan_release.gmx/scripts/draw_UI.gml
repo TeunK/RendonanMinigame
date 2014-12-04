@@ -19,12 +19,8 @@ strength    = round(argument5);
 agility     = round(argument6);
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[draw_UI] ";
-
 test_is_string( username,    testmodule+"username: ",    true);
 test_is_real(   xp,          testmodule+"xp: ",          true);
 test_is_real(   coins,       testmodule+"coins: ",       true);

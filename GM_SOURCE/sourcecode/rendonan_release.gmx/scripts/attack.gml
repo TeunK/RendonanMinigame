@@ -13,9 +13,6 @@ auto        = argument5; //defines if auto-attack is enabled
 force       = argument6; //force attack, this being 1 forces the attack to execute
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[attack] ";
 

@@ -11,12 +11,8 @@ if (instance_exists(obj_Controller))
         yy      = argument1;
         
         /*******************************/
-        /*Type-checking input arguments*/
-        //DOC:  test_is_real(variable, desc, passive)
-        //DOC:  test_is_string(variable, desc, passive)
         var testmodule;
         testmodule = "[draw_crosshair] ";
-        
         test_is_real(   xx,      testmodule+"xx: ",   true);
         test_is_real(   yy,      testmodule+"yy: ",   true);
         /*******************************/

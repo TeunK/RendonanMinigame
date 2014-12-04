@@ -1,18 +1,12 @@
 //DOC:  explode_string(string, split_character)
 //DESC: takes a string as input, and explodes it on split_character. ie. cuts string into slices at split_character and returns slices in form of an array
 
-//arg0 = input string
-//arg1 = character upon which the string is sliced
-
 //Initialize variables
 var str, splitter;
 splitter    = argument1;
 str         = argument0 + splitter;
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[explode_string] ";
 

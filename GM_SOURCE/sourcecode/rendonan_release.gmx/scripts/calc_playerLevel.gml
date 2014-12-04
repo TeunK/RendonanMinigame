@@ -6,12 +6,8 @@ var xp;
 xp = argument0;
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[calc_playerLevel] ";
-
 test_is_real(xp, testmodule+"xp: ", true);
 /*******************************/
 

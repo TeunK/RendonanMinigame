@@ -1,16 +1,11 @@
 //DOC:  save_game(url)
 //DESC: sends user variables to url, where the user's data will be stored in the database
 
-//arg0 = url to which the data will be sent
-
 //Initialize variables
 var url;
 url = argument0
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[save_game] ";
 

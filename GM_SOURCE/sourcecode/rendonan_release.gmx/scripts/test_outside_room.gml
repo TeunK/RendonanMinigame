@@ -1,8 +1,6 @@
 //DOC:  test_outside_room
 //Note: tests function outside_room(x,y)
 
-//arg0 = x
-//arg1 = y
 var correct, testcount;
 correct     = 0;
 testcount   = 0;

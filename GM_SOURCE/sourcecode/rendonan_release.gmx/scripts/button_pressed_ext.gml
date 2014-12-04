@@ -2,13 +2,6 @@
 //DESC: Draws button in rectangular area defined by points (x0,y0), (x1,y1) along with the button inner text: string1, changes to string2 when onhover
 //NOTE: Exactly same as button_pressed, except content string changes to string2 when hovered
 
-//arg0 = x0
-//arg1 = y0
-//arg2 = x1
-//arg3 = y1
-//arg4 = button string1
-//arg4 = button string2
-
 //Initialize variables
 var x0, y0, x1, y1, str1, str2;
 x0      = argument0;
@@ -19,12 +12,8 @@ str1    = argument4;
 str2    = argument5;
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[button_pressed_ext] ";
-
 test_is_real(   x0,      testmodule+"x0: ",   true);
 test_is_real(   y0,      testmodule+"y0: ",   true);
 test_is_real(   x1,      testmodule+"x1: ",   true);

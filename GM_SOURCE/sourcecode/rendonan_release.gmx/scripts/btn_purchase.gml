@@ -11,12 +11,8 @@ btn_id  = argument0;
 adds    = argument1;
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[btn_purchase] ";
-
 test_is_real(   btn_id,    testmodule+"btn_id: ",   true);
 test_is_real(   adds,      testmodule+"adds: ",     true);
 /*******************************/

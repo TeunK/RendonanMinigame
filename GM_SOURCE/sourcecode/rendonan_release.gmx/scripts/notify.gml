@@ -13,12 +13,8 @@ hspd    = argument6;
 vspd    = argument7;
 
 /*******************************/
-/*Type-checking input arguments*/
-//DOC:  test_is_real(variable, desc, passive)
-//DOC:  test_is_string(variable, desc, passive)
 var testmodule;
 testmodule = "[notify] ";
-
 test_is_real(xx,        testmodule+"xx: ",      true);
 test_is_real(yy,        testmodule+"yy: ",      true);
 test_is_real(bgcol,     testmodule+"bgcol: ",   true);
