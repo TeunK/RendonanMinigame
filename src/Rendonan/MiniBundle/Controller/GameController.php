@@ -4,10 +4,9 @@ namespace Rendonan\MiniBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Rendonan\MiniBundle\Scripts\GetSession;
-use Rendonan\MiniBundle\Entity\Account;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session;
-
+use Symfony\Component\HttpFoundation\Response;
 
 
 class GameController extends Controller
@@ -45,19 +44,9 @@ class GameController extends Controller
 
         //bypass SSX security issues that would otherwise occur in certain browsers when trying to connect game using http_get():
         //this allows cross-domain access to happen
-        if (isset($_SERVER["HTTP_ORIGIN"]))
-        {
-            //only allow access to local domain
-            $http_origin = $_SERVER['HTTP_ORIGIN'];
-            if ($http_origin == "http://127.0.0.1:51268")
-            {
-                header('Access-Control-Allow-Origin: *');
-            }
-        }
-        else
-        {
-            header('Access-Control-Allow-Origin: *');
-        }
+        $response = new Response();
+        $response->headers->set('Access-Control-Allow-Origin','*');
+        $response->send();
 
         //init user data to output in page for game to pick up
         $username   = "LOCAL PLAYER";
@@ -105,19 +94,9 @@ class GameController extends Controller
 
         //bypass SSX security issues that would otherwise occur in certain browsers when trying to connect game using http_get():
         //this allows cross-domain access to happen
-        if (isset($_SERVER["HTTP_ORIGIN"]))
-        {
-            //only allow access to local domain
-            $http_origin = $_SERVER['HTTP_ORIGIN'];
-            if ($http_origin == "http://127.0.0.1:51268")
-            {
-                header('Access-Control-Allow-Origin: *');
-            }
-        }
-        else
-        {
-            header('Access-Control-Allow-Origin: *');
-        }
+        $response = new Response();
+        $response->headers->set('Access-Control-Allow-Origin','*');
+        $response->send();
 
         //fetch data from POST-data received from game
         if ($request->isMethod('POST')) {
