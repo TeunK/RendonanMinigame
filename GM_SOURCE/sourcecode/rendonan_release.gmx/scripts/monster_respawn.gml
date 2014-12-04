@@ -8,12 +8,13 @@ if (!instance_exists(obj_Monster))
     
     if (monsterSpawnTimer >= monsterSpawnLimit)
     {
+        var newmonsterlvl = 1+round(random(monsterSpawnLevel-1))
         //create monster with given stats
         newmonster = instance_create(760,200,obj_Monster);
-        newmonster.level        = monsterSpawnLevel;
-        newmonster.str          = monsterSpawnLevel*2+random(2);
-        newmonster.agi          = round((1+random(2))*monsterSpawnLevel);
-        newmonster.maxhp        = round(8+power(monsterSpawnLevel,3));
+        newmonster.level        = newmonsterlvl;
+        newmonster.str          = newmonsterlvl*2+random(2);
+        newmonster.agi          = round((1+random(2))*newmonsterlvl);
+        newmonster.maxhp        = round(8+power(newmonsterlvl,3));
         newmonster.currenthp    = newmonster.maxhp;
         
         monsterSpawnTimer=0;
