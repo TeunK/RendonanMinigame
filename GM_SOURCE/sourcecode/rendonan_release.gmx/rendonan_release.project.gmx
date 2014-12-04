@@ -82,6 +82,7 @@
         <script>scripts\read_userdata.gml</script>
         <script>scripts\encode_name.gml</script>
         <script>scripts\outside_room.gml</script>
+        <script>scripts\notify.gml</script>
       </scripts>
       <scripts name="Controller">
         <script>scripts\init_userStats.gml</script>
