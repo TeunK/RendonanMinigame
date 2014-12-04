@@ -44,7 +44,7 @@ draw_rectangle(margin_left-50,margin_top-10,margin_left+340,margin_top+180,0);
 draw_set_alpha(1);
 draw_set_color(c_white);
 draw_text(margin_left,y+margin_top+0*spacing, "Username: "+username);
-draw_text(margin_left,y+margin_top+1*spacing, "");
+draw_text(margin_left,y+margin_top+1*spacing, "Level: "+(calc_playerLevel(xp)+1));
 draw_text(margin_left,y+margin_top+2*spacing, "Experience: "+xp);
 draw_text(margin_left,y+margin_top+3*spacing, "Coins: "+coins);
 draw_text(margin_left,y+margin_top+4*spacing, "");
