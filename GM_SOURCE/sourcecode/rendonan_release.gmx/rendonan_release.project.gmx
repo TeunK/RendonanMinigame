@@ -33,6 +33,7 @@
         <script>scripts\test_enter_area.gml</script>
         <script>scripts\test_explode_string.gml</script>
         <script>scripts\test_implode_array.gml</script>
+        <script>scripts\test_outside_room.gml</script>
       </scripts>
       <scripts name="LogicTests">
         <script>scripts\test_timer.gml</script>
@@ -79,6 +80,7 @@
         <script>scripts\attack.gml</script>
         <script>scripts\read_userdata.gml</script>
         <script>scripts\encode_name.gml</script>
+        <script>scripts\outside_room.gml</script>
       </scripts>
       <scripts name="Controller">
         <script>scripts\init_userStats.gml</script>
@@ -105,6 +107,7 @@
       <object>objects\obj_Sunflash</object>
     </objects>
     <object>objects\obj_TestConnection</object>
+    <object>objects\obj_Notifier</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room_Connect</room>
