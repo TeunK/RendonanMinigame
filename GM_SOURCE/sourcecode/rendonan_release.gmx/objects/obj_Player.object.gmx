@@ -28,6 +28,8 @@
             <string>//Store user variables locally
 //NOTE: these variables are immediately updated to their proper values by calling player_update()
 username    = "";
+level       = 0;
+xp          = 0;
 str         = 0;
 agi         = 0;
 currenthp   = 100;
@@ -85,7 +87,21 @@ player_update();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_entity(username, currenthp, maxhp);
+            <string>image_speed=0;
+
+//Change player sprite index based on the amount of user experience.
+//Limit index to max level to break the loop of starting back at 0 when experience exceeds amount of existing indexes
+if (level &lt; image_number-1)
+{
+    image_index = level;
+}
+else
+{
+    image_index = image_number-1;
+}
+test_timer(x+120, y-60, level, image_index, "index/img");
+
+draw_entity(username, currenthp, maxhp);
 
 //SETUP ATTACK
 if (instance_exists(obj_Monster))

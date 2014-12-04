@@ -3,6 +3,7 @@
 
 //USER STATS WILL BE FETCHED FROM DATABASE IN CONTROLLER DRAW (room_Connect) EVENT
 username        = "NOT CONNECTED";
+level           = 0;
 xp              = 0;
 coins           = 100;
 maxhp           = 100;
