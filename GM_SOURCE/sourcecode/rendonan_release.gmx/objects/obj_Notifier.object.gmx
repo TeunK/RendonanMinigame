@@ -75,7 +75,7 @@ if (outside_room(x,y) || alpha &lt;= 0)
 else
 {
     alpha -= 0.01;
-    draw_text_bg_ext(x,y,text,textcolor,bgcolor);
+    draw_text_bg_ext(x,y,text,textcolor,bgcolor, alpha);
 }
 </string>
           </argument>
