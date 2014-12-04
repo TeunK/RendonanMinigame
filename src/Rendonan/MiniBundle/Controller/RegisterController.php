@@ -148,13 +148,7 @@ class RegisterController extends Controller
         }
         else
         {
-            $getSession        = new GetSession($this->get('session'));
-            $getSessionData    = $getSession->getData();
-            return $this->render('RendonanMiniBundle:Default:Pages/main.html.twig',
-                array(
-                    'online'    => $getSessionData["online"],
-                    'name'      => $getSessionData["username"],
-                ));
+            return $this->redirect($this->generateUrl("rendonan_mini_homepage"));
         }
     }
 
