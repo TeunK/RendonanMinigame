@@ -50,7 +50,7 @@ class GameController extends Controller
 
         //init user data to output in page for game to pick up
         $username   = "LOCAL PLAYER";
-        $xp         = 999999;
+        $xp         = 0;
         $coins      = 999999;
         $maxhp      = 10000000;
         $currenthp  = 10000000;
