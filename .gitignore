@@ -22,7 +22,6 @@
 !/src/Rendonan/MiniBundle/Resources/views/Default/Includes/*
 !/src/Rendonan/MiniBundle/Resources/views/Default/HTTPrequests/*
 
-
 !/web/html5game/*
 !/web/app.php
 !/web/app_dev.php
@@ -33,6 +32,7 @@
 !/src/Rendonan/MiniBundle/Form/Model/*
 !/src/Rendonan/MiniBundle/Form/Type/*
 !/src/Rendonan/MiniBundle/Repository/*
+!/src/Rendonan/MiniBundle/Tests/Controller/*
 
 !/src/Rendonan/MiniBundle/Scripts/*
 
