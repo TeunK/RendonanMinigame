@@ -11,6 +11,19 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class RegisterController extends Controller
 {
+    //return boolean, true if length of string falls within min/max range
+    function sizeRange($string, $min, $max)
+    {
+        if (strlen($string) >= $min && strlen($string) <= $max)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
     public function indexAction(Request $request)
     {
         $getSession        = new GetSession($this->get('session'));
@@ -69,19 +82,6 @@ class RegisterController extends Controller
 
     public function loginAction(Request $request) {
 
-        //return boolean, true if length of string falls within min/max range
-        function sizeRange($string, $min, $max)
-        {
-            if (strlen($string) >= $min && strlen($string) <= $max)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-
         //range allowed for input-length of username and password
         $rangemin = 4;
         $rangemax = 20;
@@ -96,8 +96,8 @@ class RegisterController extends Controller
             //validation check
             $alphaUser = ctype_alnum($username);
             $alphaPass = ctype_alnum($password);
-            $rangeUser = sizeRange($username,$rangemin,$rangemax);
-            $rangePass = sizeRange($password,$rangemin,$rangemax);
+            $rangeUser = $this->sizeRange($username,$rangemin,$rangemax);
+            $rangePass = $this->sizeRange($password,$rangemin,$rangemax);
 
             //Form input validation, username and password must be alphanumeric between range 4 - 20 characters.
             if ($alphaUser && $alphaPass && $rangeUser && $rangePass)
