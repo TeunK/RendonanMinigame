@@ -193,4 +193,31 @@ class RegisterController extends Controller
                 ));
         }
     }
+
+    public function unregisterAction()
+    {
+        //get the logged-in-user from database
+        $getSession        = new GetSession($this->get('session'));
+        $getSessionData    = $getSession->getData();
+
+        if ($getSessionData["online"])
+        {
+            $em = $this->getDoctrine()->getManager();
+            $repository = $em->getRepository('RendonanMiniBundle:Account');
+
+            $username = $getSessionData["username"];
+            $user = $repository->findOneBy(array('username' => $username));
+
+            //remove the user from database
+            $em->remove($user);
+            $em->flush();
+
+            //logout, final goodbye.
+            return $this->redirect($this->generateUrl("rendonan_mini_logout"));
+        }
+        else
+        {
+            return $this->redirect($this->generateUrl("rendonan_mini_homepage"));
+        }
+    }
 }
