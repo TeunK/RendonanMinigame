@@ -105,11 +105,11 @@ class RegisterController extends Controller
                 $user = $repository->findOneBy(array('username' => $username, 'password' => $password));
                 if ($user)
                 {
-                    $session = new Session();
+                    $session = $this->get('session');
                     $session->set('online',1);
                     $session->set('username',$username);
 
-                    $getSession        = new GetSession($this->get('session'));
+                    $getSession        = new GetSession($session);
                     $getSessionData    = $getSession->getData();
 
                     return $this->render('RendonanMiniBundle:Default:Pages/thankyou.html.twig',
