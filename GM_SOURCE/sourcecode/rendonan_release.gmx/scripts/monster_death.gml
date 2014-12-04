@@ -22,6 +22,15 @@ test_is_real(   moneygain,  testmodule+"moneygain: ",   true);
 //main function
 if (hp <= 0)
 {
+    //test if player leveled up, if so: create notification for this
+    if (calc_playerLevel(obj_Controller.xp) != calc_playerLevel(obj_Controller.xp+xpgain))
+    {
+        for (i=0; i<5; i+=1)
+        {
+            notify(obj_Player.x,obj_Player.y,c_yellow,c_black,"LEVEL UP!",0.6+random(0.6),6+random(6),-10-random(10));
+        }
+    }
+    
     instance_destroy();
     obj_Controller.xp += xpgain;
     obj_Controller.coins += moneygain;
