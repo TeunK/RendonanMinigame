@@ -16,7 +16,7 @@ yy = argument1;
 var testmodule;
 testmodule = "[outside_room] ";
 
-test_is_string(xx,        testmodule+"xx: ",       true);
+test_is_real(xx,        testmodule+"xx: ",       true);
 test_is_real(  yy,        testmodule+"yy: ",       true);
 /*******************************/
 
