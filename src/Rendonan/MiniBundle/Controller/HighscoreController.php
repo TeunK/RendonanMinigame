@@ -131,7 +131,8 @@ class HighscoreController extends Controller
             $strength   = $request->request->get('strength');
             $agility    = $request->request->get('agility');
             //calculate score
-            $userscore  = min((($xp + $coins + 1) * ceil($maxhp/10) * ceil($strength+1) * ceil($agility+1)),999999999);
+            $userscore  = min((floor($xp/40)+floor($coins/20)+floor($maxhp/10)+$strength+$agility),999999999);
+
 
             //INITIALIZE DB-CONNECTION
             $em = $this->getDoctrine()->getManager();
