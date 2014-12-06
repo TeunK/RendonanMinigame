@@ -63,6 +63,8 @@ if (instance_exists(source_id) && instance_exists(target_id))
             subtarget.currenthp -=  dmg
             
             notify(target_id.x,target_id.y,c_red,c_black,"HP -"+string(dmg),1,-3+random(6),-10);
+            draw_sprite_ext(target_id.sprite_index,target_id.image_index,target_id.x-4+random(8),target_id.y-4+random(8),1.05,1.05,-2+random(4),c_red,0.6);
+            instance_create(target_id.x,target_id.y,obj_Slash);
         }
     }
 }
