@@ -10,7 +10,7 @@ if (test_calc_percent()) {correct +=1;} testcount+=1;
 if (test_explode_string()) {correct +=1;} testcount+=1;
 if (test_implode_array()) {correct +=1;} testcount+=1;
 if (test_outside_room()) {correct +=1;} testcount+=1;
-
+if (test_build_url()) {correct +=1;} testcount+=1;
 
 //Calculate result
 if (test_result(correct,testcount,"GLOBAL TEST EXECUTION"))

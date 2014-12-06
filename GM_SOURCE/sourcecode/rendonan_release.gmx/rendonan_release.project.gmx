@@ -30,6 +30,7 @@
     <scripts name="Tests">
       <scripts name="UnitTests">
         <script>scripts\test_calc_percent.gml</script>
+        <script>scripts\test_build_url.gml</script>
         <script>scripts\test_enter_area.gml</script>
         <script>scripts\test_explode_string.gml</script>
         <script>scripts\test_implode_array.gml</script>
