@@ -101,7 +101,7 @@ else
 }
 test_timer(x+120, y-60, level, image_index, "index/img");
 
-draw_entity(username, currenthp, maxhp);
+draw_entity(encode_name(username,calc_playerLevel(xp)+1), currenthp, maxhp);
 
 //SETUP ATTACK
 if (instance_exists(obj_Monster))
