@@ -74,7 +74,6 @@
         <script>scripts\monster_death.gml</script>
       </scripts>
       <scripts name="General">
-        <script>scripts\calc_percent.gml</script>
         <script>scripts\enter_area.gml</script>
         <script>scripts\implode_array.gml</script>
         <script>scripts\explode_string.gml</script>
@@ -83,7 +82,10 @@
         <script>scripts\encode_name.gml</script>
         <script>scripts\outside_room.gml</script>
         <script>scripts\notify.gml</script>
-        <script>scripts\calc_playerLevel.gml</script>
+        <scripts name="Formulae">
+          <script>scripts\calc_percent.gml</script>
+          <script>scripts\calc_playerLevel.gml</script>
+        </scripts>
       </scripts>
       <scripts name="Controller">
         <script>scripts\init_userStats.gml</script>
