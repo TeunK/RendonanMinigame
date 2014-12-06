@@ -25,8 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Store user variables locally
-//NOTE: these variables are immediately updated to their proper values by calling player_update()
+            <string>
+/***************************************************
+  CREATE EVENT
+***************************************************/
 username    = "";
 level       = 0;
 xp          = 0;
@@ -36,9 +38,9 @@ currenthp   = 100;
 maxhp       = 100;
 player_update();
 
-//Other variables
-atkEvent    = 0;
+atkEvent    = 0; //timer for attack display-duration
 hpPercent   = calc_percent(currenthp,maxhp);
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -61,10 +63,13 @@ hpPercent   = calc_percent(currenthp,maxhp);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Synchronise the "true" player variables, which are stored in obj_Controller
+            <string>
+/***************************************************
+  STEP EVENT
+***************************************************/
+//Synchronise player variables which are stored in obj_Controller
 player_update();
-
-
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -87,10 +92,12 @@ player_update();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>image_speed=0;
+            <string>
+/***************************************************
+  DRAW EVENT
+***************************************************/
+image_speed=0;
 
-//Change player sprite index based on the amount of user experience.
-//Limit index to max level to break the loop of starting back at 0 when experience exceeds amount of existing indexes
 if (level &lt; image_number-1)
 {
     image_index = level;
@@ -103,19 +110,16 @@ test_timer(x+120, y-60, level, image_index, "index/img");
 
 draw_entity(encode_name(username,calc_playerLevel(xp)+1), currenthp, maxhp);
 
-//SETUP ATTACK
+//Attack
 if (instance_exists(obj_Monster))
 {
-    
-    //attack monster in case obj_Controller.autoatk is true (ie. auto-attack mode is active)
     dmg = attack(id, obj_Monster, str, obj_Controller.atkTimer, obj_Controller.atkLimit, obj_Controller.autoatk, false)
-    
-    //attacking monster emotion
     if (atkEvent&gt;0)
     {
         draw_dmg(id,obj_Monster,"Player",dmg)
     }
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>

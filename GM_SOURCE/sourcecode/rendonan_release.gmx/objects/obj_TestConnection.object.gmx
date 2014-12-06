@@ -25,11 +25,16 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//[TESTMOD] start with unit tests
+            <string>
+/***************************************************
+  CREATE EVENT
+***************************************************/
+//[TESTMOD] start with unit tests
 testmod = "unit-tests";
 
 init_userStats();
 username=""; //override username to be empty to ensure that it will be set to something later
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -52,10 +57,15 @@ username=""; //override username to be empty to ensure that it will be set to so
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (testmod == "save-user data")
+            <string>
+/***************************************************
+  STEP EVENT
+***************************************************/
+if (testmod == "save-user data")
 {
     game_end();
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -78,7 +88,11 @@ username=""; //override username to be empty to ensure that it will be set to so
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (testmod == "server connection")
+            <string>
+/***************************************************
+  HTTP EVENT
+***************************************************/
+if (testmod == "server connection")
 {
     //FETCH USER DATA FROM HTTP REQUEST
     if (ds_map_find_value(async_load, "id") == http)
@@ -90,14 +104,15 @@ username=""; //override username to be empty to ensure that it will be set to so
             testmod = "load-user data";
             
             var user_data
-            user_data = ds_map_find_value(async_load, "result"); //user_data = string from received from php file
-            user_data = explode_string(user_data,";"); //user_data = array (exploded string resulting from php-string)
+            user_data = ds_map_find_value(async_load, "result");
+            user_data = explode_string(user_data,";");
             
             //render user_data array into user stat variables
             read_userdata(user_data);
         }
     }
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -120,9 +135,12 @@ username=""; //override username to be empty to ensure that it will be set to so
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text_bg(room_width/2,room_height/2,string("Testing: ")+string(testmod)+string("...#Please Hold."));
+            <string>
+/***************************************************
+  DRAW EVENT
+***************************************************/
+draw_text_bg(room_width/2,room_height/2,string("Testing: ")+string(testmod)+string("...#Please Hold."));
 
-//[TESTMOD] start with unit tests
 if (testmod == "unit-tests")
 {
     if (test_exec())
@@ -139,7 +157,7 @@ if (testmod == "unit-tests")
 
 if (testmod == "load-user data")
 {
-    //test if all values have been received from server
+    //test if username was received from server
     if (username != "")
     {
         //[TESTMOD] loaded user data, proceed to saving
@@ -159,7 +177,7 @@ if (testmod == "save-user data")
     show_message("Tests executed.");
     testmod = "Nothing#Testing was completed.";
 }
-
+/**************************************************/
 </string>
           </argument>
         </arguments>

@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//store original x- and y positions of instance
+            <string>
+/***************************************************
+  CREATE EVENT
+***************************************************/
+//store original x- and y positions of instance
 xxx=x
 yyy=y
 
@@ -43,7 +47,7 @@ hitcount = 30   //number of times the sunflash skill will hit the monster
 //for each hit
 for (i=0; i&lt;hitcount; i+=1)
 {
-    //Initiate damage per hit
+    //Initialise damage per hit
     dmg[i] = round((0.02*obj_Controller.strength+random(4))*random(5));
     
     //set a random position near x and y position for each strike
@@ -56,7 +60,6 @@ for (i=0; i&lt;hitcount; i+=1)
     draw_dmg_stoptimer[i]   = 45 + round(random(45));
 }
 
-//call the particle creation script
 scr_sunflash_init(0);
 
 //set up the particle emitter region
@@ -72,6 +75,7 @@ for (i=0; i&lt;edges; i+=1)
     y2[i+1] = yyy+rad1*sin(-(360/edges)/2)
     scr_sunflash_init(i+1)
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -94,11 +98,15 @@ for (i=0; i&lt;edges; i+=1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//destroy emitter when instance is destroyed
+            <string>
+/***************************************************
+  DESTROY EVENT
+***************************************************/
 for (i=0; i&lt;edges+1; i+=1)
 {
     part_emitter_destroy(sunflashpartsys_fire,mypart[i]);
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -121,7 +129,11 @@ for (i=0; i&lt;edges+1; i+=1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//PARTICLE CENTER EMITTER LOCATION
+            <string>
+/***************************************************
+  STEP EVENT
+***************************************************/
+//PARTICLE CENTER EMITTER LOCATION
 part_emitter_region(sunflashpartsys_fire,mypart[0],xxx-10,xxx+10,yyy-5,yyy+5,ps_shape_rectangle,ps_distr_linear);
 part_emitter_burst(sunflashpartsys_fire,mypart[0],sunflashpart_fire,10);
 
@@ -141,9 +153,9 @@ for (i=0; i&lt;edges; i+=1)
     part_emitter_burst(sunflashpartsys_fire,mypart[i+1],sunflashpart_fire,10);
 }
 
-//continuously increment radians
 rad1+=10
 if rad1 &gt;= radmax {rad1=0};
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -166,16 +178,18 @@ if rad1 &gt;= radmax {rad1=0};
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//draw main line of sunflash in the skill center
+            <string>
+/***************************************************
+  STEP EVENT
+***************************************************/
+//draw main line of sunflash in the skill center
 draw_sprite_ext(spr_Sunflash,0,xinit,yinit,1,(y-yinit),0,c_white,1);
 
-//draw each damage message-box
 for (i=0; i&lt;array_length_1d(dmg); i+=1)
 {
-    draw_dmg_timer[i] +=1; //increment all timers
+    draw_dmg_timer[i] +=1; //increment all dmg-box-display timers
     
-    //more special effects: flash screen each time a new box pops up
-    //..and of course inflict the damage
+    //flash screen each time a new box pops up (..and of course inflict the damage)
     if (draw_dmg_timer[i] == draw_dmg_starttimer[i])
     {
         draw_set_color(c_orange);
@@ -196,11 +210,10 @@ for (i=0; i&lt;array_length_1d(dmg); i+=1)
     }
 }
 
-
-
 //continuously decrement timer, kill instance when timer runs out.
 time-=1;
 if time &lt;= 0 {instance_destroy();}
+/**************************************************/
 </string>
           </argument>
         </arguments>

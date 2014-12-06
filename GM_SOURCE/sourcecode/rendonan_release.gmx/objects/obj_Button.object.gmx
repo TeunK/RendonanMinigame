@@ -25,14 +25,17 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//freeze button image
+            <string>
+/***************************************************
+  CREATE EVENT
+***************************************************/
+//freeze button image
 image_speed=0;
 
-//define variables
-//NOTE: cost and adds are immediately updated to their proper values
 cost = 0;
 adds = 0;
 btn_update(id);
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -55,8 +58,12 @@ btn_update(id);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//auto-update cost and adds values
+            <string>
+/***************************************************
+  STEP EVENT
+***************************************************/
 btn_update(id);
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -79,23 +86,23 @@ btn_update(id);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//If mouse enters button
+            <string>
+/***************************************************
+  DRAW EVENT
+***************************************************/
+//If mouse enters button
 if enter_area(x,y,x+sprite_get_width(sprite_index),y+sprite_get_height(sprite_index),mouse_x,mouse_y)
 {
-    //draw the button   
     draw_sprite(sprite_index,1,x,y);
     draw_set_color(c_white);
     draw_set_alpha(1);
     draw_rectangle(x+160,y,x+300,y+sprite_get_height(sprite_index),0);
-    
-    //draw the cost/adds information
     draw_set_color(c_black)
     draw_text(x+170,y,"Cost: "+string(cost)+" [+"+string(adds)+"]");
     
     if (mouse_check_button_pressed(mb_left) &amp;&amp; obj_Controller.coins &gt;= cost)
     {
         btn_purchase(id, adds);
-
         obj_Controller.coins -= cost;
     }  
 }
@@ -105,6 +112,7 @@ else
 }
 
 draw_restore();
+/**************************************************/
 </string>
           </argument>
         </arguments>

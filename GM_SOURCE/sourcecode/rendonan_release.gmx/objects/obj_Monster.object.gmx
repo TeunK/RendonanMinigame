@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//MONSTER STATS
+            <string>
+/***************************************************
+  CREATE EVENT
+***************************************************/
 level           = 1;
 name            = "Big Mean Green Slime";
 str             = 3;
@@ -33,16 +36,14 @@ agi             = 0;
 currenthp       = 10;
 maxhp           = 10;
 
-
-//Other variables
 hpPercent       = calc_percent(currenthp,maxhp);
 atkLimit        = 50;
 atkTimer        = atkLimit/2;
 atkEvent        = 0
 
-//Settings
 autoatk         = true;
 autostr         = "Auto Atk";
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -65,12 +66,16 @@ autostr         = "Auto Atk";
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var xpgain, moneygain;
+            <string>
+/***************************************************
+  STEP EVENT
+***************************************************/
+var xpgain, moneygain;
 xpgain      = level*(5+round(random(2)));
 moneygain   = level*(5+round(random(5)));
 
 monster_death(currenthp,xpgain,moneygain);
-
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -93,11 +98,12 @@ monster_death(currenthp,xpgain,moneygain);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//prevent sprite from auto-looping through sub-images
+            <string>
+/***************************************************
+  DRAW EVENT
+***************************************************/
 image_speed=0; 
 
-//define_monster name and image_index depending on level.
-//(every 5 levels the monster image and name changes)
 switch (floor(level/5))
 {
     case 0:
@@ -134,22 +140,19 @@ draw_entity(encode_name(name,level), currenthp, maxhp);
 
 test_timer(x-70, y+70, currenthp, maxhp, "Health: ");
 test_timer(x, y+120, atkTimer, atkLimit, "Attack Due: ");
-//SETUP ATTACK
+
+//attack
 if (instance_exists(obj_Player))
 {
-    //increment attack timer
-
     atkTimer += calc_incAtkTimer(agi,autoatk)
     
-    //attack monster in case obj_Controller.autoatk is true (ie. auto-attack mode is active)
     dmg = attack(id, obj_Player, str, atkTimer, atkLimit, autoatk, false)
-    
-    //attacking monster emotion
     if (atkEvent&gt;0)
     {
         draw_dmg(id,obj_Player,"Monster",dmg)
     }
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>

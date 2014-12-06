@@ -25,7 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>xx=x;
+            <string>
+/***************************************************
+  CREATE EVENT
+***************************************************/
+xx=x;
 yy=y;
 radius=100;
 time=200;
@@ -33,7 +37,6 @@ rot=-radius;
 
 flames=10; //keep this even, amount of flames per ring
 clouds=14;
-
 
 //Multiple flame spots
 //inner circle flames
@@ -58,6 +61,7 @@ for (i=0; i&lt;clouds; i+=1)
     xdiff[i] = round(irandom_range(-2,2));
     ydiff[i] = round(irandom_range(-2,2));
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -80,11 +84,15 @@ for (i=0; i&lt;clouds; i+=1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//destroy particle emitter when instance is destroyed
+            <string>
+/***************************************************
+  DESTROY EVENT
+***************************************************/
 for (i=0; i&lt;2*flames; i+=1)
 {
     part_emitter_destroy(infernops,infernope[i]);
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -107,7 +115,11 @@ for (i=0; i&lt;2*flames; i+=1)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Multiple flame spots
+            <string>
+/***************************************************
+  STEP EVENT
+***************************************************/
+//re-calculate flame positions
 for (i=0; i&lt;flames; i+=1)
 {
     scr_inferno_init(i);
@@ -115,34 +127,33 @@ for (i=0; i&lt;flames; i+=1)
     yyy[i] = yy+(radius+rot)*sin(i*20+20*rot);
 }
 
-
-//multiple flame spots, inner circle
+//(inner circle) update particle emitter regions
 for (i=0; i&lt;flames; i+=1)
 {
     part_emitter_region(infernops,infernope[i],xxx[i]-15,xxx[i]+15,yyy[i],yyy[i]+1,ps_shape_ellipse,ps_distr_linear);
     part_emitter_burst(infernops,infernope[i],infernopt,6);
 }
 
-//multiple flame spots, outer circle
+//(outer circle) update particle emitter regions
 for (i=0; i&lt;flames; i+=1)
 {
     part_emitter_region(infernops,infernope[i+flames],xxx[i+flames]-15,xxx[i+flames]+15,yyy[i+flames],yyy[i+flames]+1,ps_shape_ellipse,ps_distr_linear);
     part_emitter_burst(infernops,infernope[i+flames],infernopt,1);
 }
 
-//increment rotation counter (defines position)
 if rot &lt; 60 {rot+=6;}
 if rot &gt;= 60
 {
     rot=60;
 }
 
-//decrement timer (defines life-duration of instance and thus particles)
+//time life-duration of instance (and thus particles)
 time-=1
 if time&lt;=0
 {
     instance_destroy();
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -165,7 +176,11 @@ if time&lt;=0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//after given time, randomise r-variable: r indicates size of effect sprite
+            <string>
+/***************************************************
+  DRAW EVENT
+***************************************************/
+//after given time, randomise r-variable: r indicates size of effect sprite
 if time &gt; 20 {r = random(0.2)-random(0.2);}
 else {r+=0.1}
 
@@ -187,14 +202,14 @@ draw_set_color(c_white)
 draw_line(x,y,xx,yy)
 draw_set_color(c_black)
 
-
-//draw clouds
+//draw cloud sprites
 for (i=0; i&lt;clouds; i+=1)
 {
     cloudx[i] += xdiff[i];
     cloudy[i] += ydiff[i];
     draw_sprite_ext(spr_Smoke,0,cloudx[i],cloudy[i],1,1,0,c_white,alpha)
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
