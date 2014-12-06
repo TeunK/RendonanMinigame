@@ -61,6 +61,8 @@ if (instance_exists(source_id) && instance_exists(target_id))
             
             test_is_real(dmg, "Testing dmg variable in attack script: ", false);
             subtarget.currenthp -=  dmg
+            
+            notify(target_id.x,target_id.y,c_red,c_black,"HP -"+string(dmg),1,-3+random(6),-10);
         }
     }
 }
