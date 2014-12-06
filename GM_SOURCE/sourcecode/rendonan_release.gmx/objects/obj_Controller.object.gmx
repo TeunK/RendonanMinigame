@@ -57,6 +57,7 @@ save_url    = build_url(host,port,path,"/gamesave");
 score_url   = build_url(host,port,path,"/scoresave");
 
 init_userStats();
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -79,22 +80,23 @@ init_userStats();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (room==room_Game)
+            <string>
+/***************************************************
+  STEP EVENT
+***************************************************/
+if (room==room_Game)
 {
-    //set atkTimer increase depending on auto-atk-mode and agility
     atkTimer += calc_incAtkTimer(agility,autoatk);
     
-    //SAVE SCRIPT
-    //save timer
     savetimer += 1;
-    savedelay = 300; //auto-save game progress every 5 seconds
-    
+    savedelay = 300;
     if (savetimer &gt;= savedelay)
     {
         savetimer=0;
         save_game(save_url);
     }
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -117,7 +119,11 @@ init_userStats();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//FETCH USER DATA FROM HTTP REQUEST
+            <string>
+/***************************************************
+  HTTP EVENT
+***************************************************/
+//FETCH USER DATA FROM HTTP REQUEST
 if (ds_map_find_value(async_load, "id") == http)
 {
     if (ds_map_find_value(async_load, "status") &gt;= 0)
@@ -128,38 +134,17 @@ if (ds_map_find_value(async_load, "id") == http)
         
         //render user_data array into user stat variables
         read_userdata(user_data);
-        if (room==room_Connect)
-        {
-            room_goto(room_Game)
-        }
+        
+        if (room==room_Connect) { room_goto(room_Game) }
     }
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="7" enumb="4">
-      <action>
-        <libid>1</libid>
-        <id>605</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>INIT VARIABLES</string>
-          </argument>
-        </arguments>
-      </action>
       <action>
         <libid>1</libid>
         <id>603</id>
@@ -176,29 +161,28 @@ if (ds_map_find_value(async_load, "id") == http)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (room==room_Game)
+            <string>
+/***************************************************
+  ROOM-START EVENT
+***************************************************/
+if (room==room_Game)
 {
-    //CREATE PLAYER INSTANCE
     instance_create(96,384,obj_Player);
 
-    //SAVE TIMER
     savetimer = 0;
-    savedelay = 300; //auto-save game progress every 5 seconds
+    savedelay = 300;
     
-    //CALC STAT
     hpPercent   = calc_percent(currenthp,maxhp);
     autoatk     = false;
     autostr     = "Manual Atk";
     atkTimer    = 5;
     atkLimit    = 45;
     
-    //CREATE MENU BUTTONS
     btnHP   = instance_create(20,y+20+5*15,obj_Button);
     btnStr  = instance_create(20,y+20+6*15,obj_Button);
     btnAgi  = instance_create(20,y+20+7*15,obj_Button);
     
-    //CREATE MONSTER
-    monsterSpawnTimer      = 0 //sake of initialization, ignore.
+    monsterSpawnTimer      = 0
     monsterSpawnLimit      = 60;
     monsterSpawnLevel      = 1;
     
@@ -215,6 +199,7 @@ if (room==room_Test)
 {
     instance_create(x,y,obj_TestConnection);
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
@@ -237,45 +222,41 @@ if (room==room_Test)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//Crosshair for in-game building purpose:
+            <string>
+/***************************************************
+  DRAW EVENT
+***************************************************/
 if (keyboard_check(vk_control))
 {
     draw_crosshair(mouse_x,mouse_y);
 }
-/////////////////////////////////////////
 
 if (room==room_Connect)
 {
-
-    //delay to trigger connection
     connectTimer -=1;
     if (connectTimer &lt;= 0)
     {
         http = http_get(load_url);
-        connectTimer = 1200;
+        connectTimer = 600;
     }
     
-    //draw test-timers (in test-mode)
     test_timer(80,40,connectTimer,0,"Connecting..");
     draw_text_bg(room_width/2,room_height/2,"Attempting to establish connection to server...#Please Wait");
 }
 else if (room==room_Game)
 {
-    //toggle test_mode (in test-mode)
     test_toggleActiveMode(toggle_active_testing);
-    
-    //draw game-save panel (in test-mode)
+
     test_timer(room_width/2, 30, savedelay-savetimer, 0, "Saving Game...");
     
-    //draw interfaces
-    draw_UI(username, xp, coins, currenthp, maxhp, strength, agility);
     draw_menu();
+    draw_UI(username, xp, coins, currenthp, maxhp, strength, agility);
     
-    //Respawn Monsters
     monster_respawn();
     
-    //Player Death
     player_death();
+    
+    level = calc_playerLevel(xp);
     
     //Health Regeneration
     if (currenthp &lt; maxhp)
@@ -284,13 +265,9 @@ else if (room==room_Game)
     //Limit Health
     if currenthp &gt; maxhp
     { currenthp = maxhp; }
-    
-    //Update Player Level
-    level = calc_playerLevel(xp);
 }
 else if (room==room_Death)
 {
-
     draw_text_bg(room_width/2,room_height/2,"Oh dear.. You have died.##Your memorial has been passed on to the highscores.#Press &lt;spacebar&gt; to be reborn.");
 
     //restart game upon spacebar-press
@@ -299,6 +276,7 @@ else if (room==room_Death)
         game_restart();
     }
 }
+/**************************************************/
 </string>
           </argument>
         </arguments>
