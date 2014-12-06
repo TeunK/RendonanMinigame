@@ -4,7 +4,7 @@
 
 if (instance_exists(obj_Controller))
 {
-    if (test_mode==1)
+    if (test_mode==obj_Controller.t_test)
     {
         //Initialize variables
         xx      = argument0;

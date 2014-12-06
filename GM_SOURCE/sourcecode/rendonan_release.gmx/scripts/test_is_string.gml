@@ -8,7 +8,7 @@ desc        = argument1;
 passive     = argument2;
 
 //if in game test_mode
-if (obj_Controller.test_mode == 1)
+if (obj_Controller.test_mode == obj_Controller.t_test)
 {
     var message;
     message = desc;

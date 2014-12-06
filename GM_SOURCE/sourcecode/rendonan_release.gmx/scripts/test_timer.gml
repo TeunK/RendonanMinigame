@@ -21,7 +21,7 @@ test_is_string( desc,       testmodule+"desc: ",  true);
 
 draw_restore();
 
-if (obj_Controller.test_mode == 1)
+if (obj_Controller.test_mode == obj_Controller.t_test)
 {
     draw_text_bg(xx,yy,string(desc)+string(timer)+"/"+string(limit));
 }

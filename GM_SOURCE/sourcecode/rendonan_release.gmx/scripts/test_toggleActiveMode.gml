@@ -13,7 +13,7 @@ if keyboard_check_pressed(key)
 }
 
 //draw active_testing mode
-if (test_mode == 1)
+if (test_mode == obj_Controller.t_test)
 {
     if (active_testing)
     {
