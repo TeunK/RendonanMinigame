@@ -5,17 +5,19 @@ Project split into 2 sections: Server and Game
 - Jetbrains PHPStorm (to edit the website)
 - Gamemaker Studio with HTML5 export module (to edit the game)
 - WampServer (in order to run php on localhost)
-
+- PHPUnit (in order to execute unit tests)
 ▬▬ι═══════ﺤ RUNNING -═══════ι▬▬
 SITE:
 As long as localhost is running, simply start up the site in a browser: localhost/rendonan_release/web/app_dev.php
 
 GAME:
 In Gamemaker, ensure “export as html5” is selected. Then press the “play” button and it will automatically generate the required files and run them in the browser.
+If graphics start acting corrupted when compiling, press the "Clean project asset compiler cache" button in order to refresh the compiler cache.
 
 ▬▬ι═══════ﺤ TESTING -═══════ι▬▬
 SITE: 
 The form input is tested both on the client- and server side. This is done in the Entity classes (e.g. Account.php and Highscore.php) and in the controllers (e.g. RegisterController.php). 
+Unit tests for the controllers are written in the tests folder. Use PHPUnit to run them by starting up the terminal in the rendonan_release folder and run: phpunit -c app/
 
 GAME:
 All test scripts are found in the “Tests” folder. These are divided into UnitTests, LogicTests, TypeChecking and TestController.
@@ -28,7 +30,6 @@ o Test_result compares the number of pass/fail, checking whether any errors occu
 o Test_toggleActiveMode allows the software engineer to toggle the active-testing mode. Meaning that when in testing mode, even tests returning “success” will return the fact that they were indeed successful. Otherwise only “failures” will be mentioned.
 
 ▬▬ι═══════ﺤ DEBUGGING -═══════ι▬▬
-SITE:
 GAME:
 during gameplay in testmode, if a function fails, it will mention which script it was that failed. From there it should be relatively easy to find out which event it was that triggered the script by recreating the error. 
 The LogicTests display values of specific variables, which can be compared and checked if they make sense. 
@@ -51,6 +52,12 @@ Stylesheets are found in web/css
 
 
 GAME:
+A quick note with regard to Gamemaker as these inbuilt-variables come back repeatedly:
+image_alpha = drawing opacity
+image_number = number of sub-images in sprite.
+image_index is currently selected image in sprite.
+image_speed is the speed at which the image_index are iterated through.
+
 Game starts in [room] room_Connect, at which point a persistent (instance does NOT get destroyed upon room-change) instance of [object] obj_Controller is created.
 1. In the create event of obj_Controller (first blocks to be executed, and only once), test-mode is defined (test==2 immediately forwards game to room_Test at which point obj_TestConnection is instantiated), url to specific server paths, and user stats are loaded.
 2. The draw event of obj_Controller where room==room_Connect will initialise the http request to receive the users data from the server database.
@@ -69,7 +76,7 @@ Upon start of room_Game, timers are initialised and instances are created by the
 
 GAME LOGIC FUNCTIONS
 
-Function:  button_pressed(id)
+Function:  btn_update(id)
 Description: calculates the upgrade-cost and stat-add variables depending on the button in question
 Note: Depends on obj_Controller. Dependency is safe as obj_Controller is persistent and must always exist.
 
@@ -80,7 +87,7 @@ Note: Depends on obj_Controller. Dependency is safe as obj_Controller is persist
 Function:  button_pressed(x0,y0,x1,y1,string)
 Description: Draws button in rectangular area defined by points (x0,y0), (x1,y1) along with the button inner text: str
 
-Function:  button_pressed(x0,y0,x1,y1,string1,string2)
+Function:  button_pressed_ext(x0,y0,x1,y1,string1,string2)
 Description: Draws button in rectangular area defined by points (x0,y0), (x1,y1) along with the button inner text: string1, changes to string2 when onhover
 Note: Exactly same as button_pressed, except content string changes to string2 when hovered
 
@@ -92,9 +99,6 @@ Function:  monster_death(hp,xpgain,moneygain);
 Description: checks if health drops below 0, if so, adds xpgain and moneygain to the controller stats
 Note: Depends on obj_Controller. Dependency is safe as obj_Controller is persistent and must always exist.
 
-Function:  calc_percent(part,total)
-Note: returns percentage double between 0 and 100, based on the values partial and total
-
 Function:  enter_area(x0,y0,x1,y1,x_pos,y_pos)
 Description: Returns true if the point (x_pos,y_pos) is inside the rectangle defined by points (x0,y0), (x1,y1)
 
@@ -103,6 +107,9 @@ Description: takes array as input and returns each element concatenated with the
 
 Function:  explode_string(string, split_character)
 Description: takes a string as input, and explodes it on split_character. ie. cuts string into slices at split_character and returns slices in form of an array
+
+Function:  build_url(host,port,path,file)
+Description: Concatenates host, port, path and file into one url string.
 
 Function:  attack(source_id, target_id, str, atkTimer, atkLimit, auto, force)
 Description: instance source_id attacks target_id, subtracts targets health based on str when the attack is executed (see variable Descriptionription below)
@@ -113,6 +120,21 @@ Description: userdata is an array containing userdata. read_userdata assigns the
 
 Function:  encode_name(name, level)
 Description: takes in a name and level, and returns a combination of the two in a neat fashion
+
+Function:  outside_room(x,y);
+Description: Tests whether point (x,y) falls outside room boundaries. returns true if it is the case
+
+Function:  notify(x,y,bgcol,fontcol,text,gravity,hspeed,vspeed);
+Description: Create notify instance with given x,y coordinates, bg/text colors, text, gravity, horizontal and vertical speed
+
+Function:  calc_percent(part,total)
+Note: returns percentage double between 0 and 100, based on the values partial and total
+
+Function:  calc_playerLevel(xp)
+Description: calculates player level based on xp and returns it.
+
+Function:  calc_incAtkTimer(agility, auto)
+Description: calculates by how much the attack timer has to increase, based on atility and auto-attack mode
 
 Function:  init_userStats()
 Description: Initialises dummy user stat variables
@@ -156,18 +178,27 @@ Note: requires obj_Controller to exist.
 Function:  draw_sunflash(x,y, sunflashTimer, sunflashLimit);
 Description: draws sunflash super-skill at x,y position, using given timer for cooldown
 
+Function:  draw_text_bg_ext(xx,yy,message,fontcolor,bgcolor,alpha)
+Description: draws message similar to draw_text_bg, but with extended options to set font and background box color
+
 GAME TEST FUNCTIONS
 Function:  test_calc_percent
 Note: tests function calc_percent(part,total)
 
-Function:  test_mouse_enter()
-Description: Tests function mouse_enter(x0,y0,x1,y1,x_pos,y_pos
+Function:  test_build_url
+Note: tests function build_url(host,port,path,file)
+
+Function:  test_enter_area()
+Description: Tests function test_enter_area(x0,y0,x1,y1,x_pos,y_pos
 
 Function:  test_explode_string()
 Description: tests function explode_string(string, split_character)
 
 Function:  test_implode_array()
 Description: tests function implode_array(array, split_character)
+
+Function:  test_outside_room()
+Note: tests function outside_room(x,y)
 
 Function:  test_timer(x, y, timer, limit, Description);
 Description: displays true values of timer and limit

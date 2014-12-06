@@ -1,5 +1,5 @@
-//DOC:  test_mouse_enter()
-//DESC: Tests function mouse_enter(x0,y0,x1,y1,x_pos,y_pos
+//DOC:  test_enter_area()
+//DESC: Tests function test_enter_area(x0,y0,x1,y1,x_pos,y_pos
 
 var correct, testcount;
 correct     = 0;

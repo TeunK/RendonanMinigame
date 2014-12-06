@@ -1,4 +1,4 @@
-//DOC:  button_pressed(id)
+//DOC:  btn_update(id)
 //DESC: calculates the upgrade-cost and stat-add variables depending on the button in question
 //NOTE: Depends on obj_Controller. Dependency is safe as obj_Controller is persistent and must always exist.
 

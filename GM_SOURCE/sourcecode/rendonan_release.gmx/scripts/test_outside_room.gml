@@ -1,4 +1,4 @@
-//DOC:  test_outside_room
+//DOC:  test_outside_room()
 //Note: tests function outside_room(x,y)
 
 var correct, testcount;

@@ -1,4 +1,4 @@
-//DOC:  button_pressed(x0,y0,x1,y1,string1,string2)
+//DOC:  button_pressed_ext(x0,y0,x1,y1,string1,string2)
 //DESC: Draws button in rectangular area defined by points (x0,y0), (x1,y1) along with the button inner text: string1, changes to string2 when onhover
 //NOTE: Exactly same as button_pressed, except content string changes to string2 when hovered
 
