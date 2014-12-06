@@ -32,7 +32,7 @@ class GameControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/gameload');
         $this->assertGreaterThan(
             0,
-            $crawler->filter('html:contains("LOCAL PLAYER;999999;999999;10000000;10000000;999999;0")')->count()
+            $crawler->filter('html:contains("LOCAL PLAYER;0;999999;10000000;10000000;999999;0")')->count()
         );
 
 
