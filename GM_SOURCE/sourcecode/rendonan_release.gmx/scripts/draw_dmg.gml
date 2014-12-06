@@ -37,15 +37,18 @@ if (src_id.atkEvent > 40)
     draw_line(src_x,src_y+1,tgt_x,tgt_y+1);
 }
 
-draw_set_color(c_black);
-draw_set_alpha(1);
-draw_roundrect(tgt_x-margin, tgt_y-margin, tgt_x+margin+string_width(message), tgt_y+margin+string_height(message),1);
-draw_set_alpha(0.6);
-draw_roundrect(tgt_x-margin, tgt_y-margin, tgt_x+margin+string_width(message), tgt_y+margin+string_height(message),0);
-
-draw_set_alpha(1);
-draw_set_color(c_orange);
-draw_text(tgt_x,tgt_y,message);
+if (obj_Controller.test_mode == obj_Controller.t_test)
+{
+    draw_set_color(c_black);
+    draw_set_alpha(1);
+    draw_roundrect(tgt_x-margin, tgt_y-margin, tgt_x+margin+string_width(message), tgt_y+margin+string_height(message),1);
+    draw_set_alpha(0.6);
+    draw_roundrect(tgt_x-margin, tgt_y-margin, tgt_x+margin+string_width(message), tgt_y+margin+string_height(message),0);
+    
+    draw_set_alpha(1);
+    draw_set_color(c_orange);
+    draw_text(tgt_x,tgt_y,message);
+}
 
 //subtract atkEvent timer (-1 every (1/30) seconds)
 src_id.atkEvent -=1;
