@@ -179,14 +179,7 @@ score_url   = string("http://localhost:")+string(port)+string("/web/app_dev.php/
             <string>if (room==room_Game)
 {
     //set atkTimer increase depending on auto-atk-mode and agility
-    if (!autoatk) 
-    {
-        atkTimer += (0.6+agility/50);
-    }
-    else
-    {
-        atkTimer += (0.3+agility/80);
-    }
+    atkTimer += calc_incAtkTimer(agility,autoatk);
     
     //SAVE SCRIPT
     //save timer

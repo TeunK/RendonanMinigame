@@ -85,6 +85,7 @@
         <scripts name="Formulae">
           <script>scripts\calc_percent.gml</script>
           <script>scripts\calc_playerLevel.gml</script>
+          <script>scripts\calc_incAtkTimer.gml</script>
         </scripts>
       </scripts>
       <scripts name="Controller">

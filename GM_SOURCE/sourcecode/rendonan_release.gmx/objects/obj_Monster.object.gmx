@@ -138,10 +138,8 @@ test_timer(x, y+120, atkTimer, atkLimit, "Attack Due: ");
 if (instance_exists(obj_Player))
 {
     //increment attack timer
-    if (autoatk)
-    {
-        atkTimer += (0.6+agi/50);
-    }
+
+    atkTimer += calc_incAtkTimer(agi,autoatk)
     
     //attack monster in case obj_Controller.autoatk is true (ie. auto-attack mode is active)
     dmg = attack(id, obj_Player, str, atkTimer, atkLimit, autoatk, false)
