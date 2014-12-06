@@ -103,7 +103,7 @@ Similar to the website, the game is expected to log a user in, allow the user to
 \item The combat menu
 \begin{itemize}
 \item Displays a charging attack-bar based on the controllers attack-cooldown timers (influenced by the agility stat), which when filled allows the player to attack.
-\item Draws an attack button when not in auto-combat mode, which can be pressed in order to attack the monster (\textsl{attack()}).
+\item Draws an \textsl{attack()} button when not in auto-combat mode, which can be pressed in order to attack the monster.
 \item Draws an auto-attack button which toggles the auto-combat mode variable in the controller. When auto-combat mode is on, the attack-bar charges slower, but the attack button will disappear as the player will automatically \textsl{attack()} the monster when the bar is filled instead.
 \item Draws a potion button which can be pressed to heal the player slightly at the cost of money.
 \item Draws a \textsl{monster\_controller()} which includes in-/decrement buttons for the future monster's re-spawn-level range.
@@ -138,22 +138,60 @@ It took me several days to solve this issue, having created a separate project j
 \end{itemize}
 
 \section*{Testing}
-test strategy: how tested implementation. tested enough?
+\subsection*{Website}
+My apologies for waiting so long for researching on how to do testing in a php framework. This was partially because due to lack of imagination on what can be tested, as well as the fact that, the lack of understanding on how the framework itself works, added sufficient complication on its own to not immediately demand for further research on how this could then also be tested. However if I were to add a mark to the "bus-factor" before my tests were written, this would have been a bad excuse for making a high-end company lose revenue.\\
+On a positive note, I did succeed in installing a testing unit called "phpunit", with which I wrote the tests for the following:
+\begin{itemize}
+\item each of the pages were tested to load correctly
+\item When no page was specified by the user, he/she will automatically be redirected to the main page
+\item The registration and login form validations were tested for "bad" input (e.g. quotes, semi-colons, unaccepted string-length, etc.).
+\item The error-messages returned by the form validation
+\item Successful registration tested to indeed be successful
+\item Account deletion tested to indeed delete the account
+\item Adding a user highscore was tested using a long sequence of tests, starting from registering the user, logging it in, saving new game data, letting it "die" to store the data into the highscores, ensuring the game score was reset, (removing the highscore entry again), and removing the user.
+\item The load and save-game scripts were tested which the game will be using to access in order to load and store data onto the server.
+\end{itemize}
+\subsection*{Game}
+Tests were also written for parts of the game engine (front-end). Since Gamemaker does not come with any testing modules, i created my own, and have split them up into 4 sections:
+\begin{enumerate}
+\item \emph{\textbf{Type Checks:}} Since I used many functions, each function call has been embedded with type-checks to ensure that the input contains the correct type, making sure that when calling a function it has been given proper arguments. Since GML is a dynamically typed language, not knowing a function has been given a wrong argument type may be difficult to spot.
+\item \emph{\textbf{Logic tests:}} From my personal experience, logic errors are the most commonly occurring, most difficult to spot and therefore also most difficult to fix. The best method of testing if the game logics work correctly is generally to actually run the game and see if everything happens the way it is expected to.\\
+However, I did create some methods that display in-game variables (that would otherwise be hidden). Being able to see the actual values of these variables is one of the fastest ways to spot if something is wrong.\\
+Most potential for these errors lies in event triggers and erroneous timers. So these are displayed when the test-mode is active.
+\item \emph{\textbf{Unit tests:}} Each function that takes input and has a return-value can be tested with unit tests. Therefore each function that matches these criteria is considered with unit tests.
+\item \emph{\textbf{Connection tests:}} A more complex type of test, but also one of the more important one. Since the game is expected to connect to the database, tests are written that confirm that the game indeed manages to successfully connect to the server, and manages to receive user data.
+\end{enumerate}
+I have created my own testing module to execute the latter 2 testing types. This will trigger when the test\_mode in the controller object is set to unit-testing. At this point, all of the unit tests will be executed, as well as the connection to the server.\\
+If at point in time, any of the tests mentioned above fails when either in test-mode or unit-test mode, a warning message will be displayed.\\
+The controller object also contains an "active-testing" variable (which can be toggled by pressing spacebar), while in testing-mode. When active, even tests that passed will return a message, confirming that the test was executed and passed.\\
+If the game is in regular game-mode, of course none of these messages will pop-up. The game would execute as if nothing happened.
+\subsection*{Test Coverage}
+Of course everything could be tested in much greater depth, both the website and the game. However for the level of this project, the amount of testing done roughly matches the requirement.\\
+One of the more immediate things that could be tested is testing the game-save script from the game's point of view (as opposed to what is currently only done from the website's perspective). This would require the POST-request sent by the game, to also expect to receive a return value about whether or not the request was received successfully. The same concept applies for storing the user's score into the highscores table.\\
+Another (very interesting) test would be a complete system test, not only covering either the website or game separately, but both at the same time. Registering a user-account, making it log in, start-up the game, let the game execute in an automated-mode, expecting it to save the score (check if this works), expect the bot to die at some point and see if the score was saved, then going to the highscore page to confirm the score is there, and then delete the score and the user account.\\
+This system would cover the typical lifetime of a standard user. Meaning that if this test passes, it can be expected that users following the same pattern won't have any issues either. The only problem is that writing this test would involve the server sending an additional value to the game stating that it should run in automated mode. Although most of this is indeed already done as the player can enter auto-attack mode, the point of converting from web-platform testing to game-testing (and back) adds complication as intuitively neither of the elements actually know of eachothers existence.
 
 \section*{Deficiencies}
-Deficiencies justified and caused by errors in decision making
-
-issues with using Symfony modules. eg entity query repository, user-login via firewall and security shit
+I do not believe I have made any large "errors" in my decisions when planning out the setup of the project elements. All in all I feel like I have followed a rather smooth and consistent workflow without large drawbacks.\\
+The biggest issues I have stumbled upon are, again, the lack of knowledge on the Symfony platform from my part. Although it is arguable whether this is due to a "bad decision" or an expected side-effect of a choice to learn industrially-accepted software engineering standards for PHP development.\\
+Either way, the deficiencies I am most aware of are:
+\begin{itemize}
+\item Having repeatedly failed to use Symfony's methods of generalising database queries, referred to as "entity repositories". I had made many different attempts, used forums, read the manual etc. in order to figure out how these repositories were supposed to be used. I managed to use them for standard queries, but in order to give it arguments I had to re-write the entire query with just that argument being different. Therefore after a long struggle for several times I gave up and decided to run the queries directly inside the controllers that rendered the pages (queries for fetching highscore data and user data).
+\item As mentioned previously, the user-login system for the Symfony inbuilt-system was another major drawback as I made many attempts but still could not get this to work. Also here I was forced to fall back to my old knowledge of using sessions.
+\item In Gamemaker, it is not possible to define a function inside a script. Instead, it expects the user to create a new individual function script, and the name of the file will be the name of the function. Arguments passed will be referred to as "argumentx" (with x being any number from 0 up to 19). For an engineer that is used to programming in languages such as Java and C++ this may seem weird at first.
+\end{itemize}
 
 \section*{Future Improvements}
-Things I would do differently: choose the right language/technology? voor herhaling vatbaar?\\
-
-Mention this would be an option given the time: create a bot to play the game, such that the entire system can be tested throughout: register, login, play game, bot playing game, game repeatedly updates bot stats, bot dies, see if score resets and highscore is saved. check highscore etc.\\
-\\
-In the testing room, the test-object could also test whether saving data to the server is successful. This requires a response from the server, which has to then be picked up again by the game.
+\subsection*{Choice of technology / language}
+The reason why I like php is due to its simplicity. It does not require any compiling and works on almost any webserver. However I learnt that using a framework such as Symfony removed the simplicity, and it is no longer supported on any webserver either. Therefore using php does not have any more value when planning to build relatively large and stable web platforms.\\
+Writing plain JavaScript, especially complete games, can become messy very easily. However using Gamemaker solves this issue perfectly.
+\subsection*{Future project potentials}
+There are many ways in which this project can improve, and at high speed. I have attempted to follow an as solid implementation as possible, enabling the ability to build new elements on top of this foundation very quickly and easily.\\
+The game can include items that the user can purchase, an inventory system can be added, monsters may get special skills, requiring the player to pay more close attention to the game during play, etc.\\
+The website could become much more interactive, by adding visual and technical improvements. Aside of having plain highscores, it could be possible to compare user stats.\\
+Perhaps it is possible to make the game multiplayer over the network entirely, although this would require further research in order to find out how to solve delay and server/client-firewall issues (especially when using a UDP connection), to which every browser may respond differently.
 
 \section*{Conclusion}
-conclusion: am I happy with what I have?
 It is safe to say that by the time I got accepted to Edinburgh University, I had already spent well over 1000 hours programming in Gamemaker. This comes both with up and down-sides. No-one has taught me how to work with it, I did all the experimenting on my own and have thus far come to the conclusion that the structure of building-up projects in the order I have used for this one is the most efficient and requires least re-factoring. By "this structure" I mean to say: creating a controller object and let it take care of everything. Let it store all the important variables of the user, create instances on demand, and allow these instances to depend on the controller if required. But not make the controller dependent of anything else.\\
 Like writing a book, every new feature (be it a menu, chatbox, attack event, mathematical formula to calculate a stat) should be written in one piece, on one location as separate function, preferably being completely independent of everything (other than the input arguments it received).\\
 This way, it is possible to "zoom in" on each part (/module), and be able to edit it without having to worry about anything else breaking down.\\
