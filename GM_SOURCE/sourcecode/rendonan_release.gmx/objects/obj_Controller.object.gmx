@@ -11,26 +11,6 @@
     <event eventtype="0" enumb="0">
       <action>
         <libid>1</libid>
-        <id>605</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>TEST MODE</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
         <id>603</id>
         <kind>7</kind>
         <userelative>0</userelative>
@@ -45,8 +25,14 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_font(font0);
-connectTimer = 60;
+            <string>
+/***************************************************
+  CREATE EVENT
+***************************************************/
+draw_set_font(font0);
+
+//start connection when timer reaches 0
+connectTimer = 60; 
 
 // TEST_MODE:
 t_game = 0; //regular game mode
@@ -54,106 +40,21 @@ t_test = 1; //runtime test mode
 t_unit = 2; //unit test mode
 
 test_mode               = t_test;
-active_testing          = false; //ignore, when toggled, will display popup messages with test-results
+active_testing          = false; //allow popup messages to display with successful test-results
 toggle_active_testing   = vk_space; //required key to press to toggle active_testing
 
 if (test_mode==obj_Controller.t_unit)
 {
     room_goto(room_Test);
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>605</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>HTTP FETCH USER</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>//HTTP CONNECTION URL'S
+
+//HTTP CONNECTION URL'S
 port = 8080;
-
-//url for loading user data
 load_url    = string("http://localhost:")+string(port)+string("/web/app_dev.php/gameload");
-
-//url for saving user progress
 save_url    = string("http://localhost:")+string(port)+string("/web/app_dev.php/gamesave");
-
-//url for saving user stats into highscores
 score_url   = string("http://localhost:")+string(port)+string("/web/app_dev.php/scoresave");
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>605</id>
-        <kind>0</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>0</useapplyto>
-        <exetype>0</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>INIT DUMMY USER STATS</string>
-          </argument>
-        </arguments>
-      </action>
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>init_userStats();
+init_userStats();
 </string>
           </argument>
         </arguments>
