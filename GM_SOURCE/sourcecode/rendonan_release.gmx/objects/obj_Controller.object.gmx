@@ -54,7 +54,7 @@ t_test = 1; //runtime test mode
 t_unit = 2; //unit test mode
 
 test_mode               = t_test;
-active_testing          = 0; //ignore, when toggled, will display popup messages with test-results
+active_testing          = false; //ignore, when toggled, will display popup messages with test-results
 toggle_active_testing   = vk_space; //required key to press to toggle active_testing
 
 if (test_mode==obj_Controller.t_unit)
