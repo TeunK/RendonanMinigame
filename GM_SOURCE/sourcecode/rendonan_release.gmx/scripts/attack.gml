@@ -43,7 +43,7 @@ if (instance_exists(obj_Player) && instance_exists(obj_Controller))
 
 
 //dmg = amount of damage that will be done. May be changed into a formula based on str (and possible future stats such as defence, agility etc.)
-dmg = str;
+dmg = round(0.2*str + random(str) + random(1));
 
 //ensure both source and target instances exist before executing
 if (instance_exists(source_id) && instance_exists(target_id))
