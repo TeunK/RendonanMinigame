@@ -53,7 +53,7 @@ connectTimer = 60;
 // 1 = test_mode
 // 2 = unit_tests
 
-test_mode               = 1;
+test_mode               = 2;
 active_testing          = 0; //ignore, when toggled, will display popup messages with test-results
 toggle_active_testing   = vk_space; //required key to press to toggle active_testing
 
@@ -282,6 +282,9 @@ if (ds_map_find_value(async_load, "id") == http)
             <kind>1</kind>
             <string>if (room==room_Game)
 {
+    //CREATE PLAYER INSTANCE
+    instance_create(96,384,obj_Player);
+
     //SAVE TIMER
     savetimer = 0;
     savedelay = 300; //auto-save game progress every 5 seconds
@@ -305,6 +308,16 @@ if (ds_map_find_value(async_load, "id") == http)
     
     sunflashTimer=0;
     sunflashLimit=1500;
+}
+
+if (room==room_Death)
+{
+    instance_create(room_width/2,room_height/2,obj_Inferno);
+}
+
+if (room==room_Test)
+{
+    instance_create(x,y,obj_TestConnection);
 }
 </string>
           </argument>
