@@ -4,6 +4,10 @@
 !*/
 /Vendor/*
 
+!/report/report.tex
+!/report/report.pdf
+!/report/logo.png
+
 !/app/AppKernel.php
 !/app/config/config.yml
 !/app/config/parameters.yml
