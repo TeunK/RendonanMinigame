@@ -32,9 +32,7 @@ test_is_real(   agility,     testmodule+"agility: ",     true);
 
 
 //draw background box
-draw_set_alpha(0.5);
-draw_set_color(c_black);
-draw_rectangle(margin_left-50,margin_top-10,margin_left+340,margin_top+180,0);
+draw_sprite_ext(spr_Board,0,margin_left-50,margin_top-10,1,1,0,c_white,1);
 
 //draw content
 draw_set_alpha(1);

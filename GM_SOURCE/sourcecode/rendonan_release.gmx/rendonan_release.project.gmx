@@ -21,6 +21,7 @@
       <sprite>sprites\spr_sunflash_fire</sprite>
     </sprites>
     <sprite>sprites\spr_Slash</sprite>
+    <sprite>sprites\spr_Board</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_sky</background>
