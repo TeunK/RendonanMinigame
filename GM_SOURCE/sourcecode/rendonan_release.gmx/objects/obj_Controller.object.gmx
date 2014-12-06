@@ -49,10 +49,12 @@ if (test_mode==obj_Controller.t_unit)
 }
 
 //HTTP CONNECTION URL'S
-port = 8080;
-load_url    = string("http://localhost:")+string(port)+string("/web/app_dev.php/gameload");
-save_url    = string("http://localhost:")+string(port)+string("/web/app_dev.php/gamesave");
-score_url   = string("http://localhost:")+string(port)+string("/web/app_dev.php/scoresave");
+host = "http://localhost";
+port = ":8080";
+path = "/web/app.php";
+load_url    = build_url(host,port,path,"/gameload");
+save_url    = build_url(host,port,path,"/gamesave");
+score_url   = build_url(host,port,path,"/scoresave");
 
 init_userStats();
 </string>
