@@ -31,7 +31,7 @@ if (hp <= 0)
     obj_Controller.xp += xpgain;
     obj_Controller.coins += moneygain;
     
-    notify(x,y,c_red,c_black,"Enemy Monster Died",1,-12,-15);
+    notify(x,y,c_black,c_red,"Enemy Monster Died",1,-12,-15);
     notify(x,y,c_yellow,c_black,"XP "+string(xpgain),1.5,-8,-12);
     notify(x,y,c_yellow,c_black,"$ "+string(moneygain),1.6,-8,-10);
 }
