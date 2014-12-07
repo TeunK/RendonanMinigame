@@ -20,4 +20,22 @@ class MainControllerTest extends WebTestCase
             $crawler->filter('html:contains("PLAY MINIGAME")')->count()
         );
     }
+
+    public function test404Page()
+    {
+        $client = static::createClient();
+
+        $crawler = $client->request('GET', '/23og2l3kja');
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('html:contains("404")')->count()
+        );
+
+        //TEST IF PAGE AUTO FORWARDS WHEN NO PAGE IS SPECIFIED
+        $crawler = $client->request('GET', '/123/456/abc/def/xyz');
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('html:contains("404")')->count()
+        );
+    }
 }
