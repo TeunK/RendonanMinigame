@@ -38,7 +38,7 @@ The highscores can be viewed on the website, and contain the stats of each death
 \section*{Structure}
 \subsection*{Website}
 \subsubsection{Design}
-Coming up with this design was pretty straight-forward. In order to play a game, as a specific user, and be able to see the highscores, on a website, the website is divided into 4 (user-interact-able) pages: Main, Game, Highscore and Registration.
+Coming up with the following design was pretty straight-forward. In order to play a game, as a specific user, and be able to see the highscores, on a website, the website is divided into 4 (user-interact-able) pages: Main, Game, Highscore and Registration.
 \begin{enumerate}
 \item Starting from the \emph{\textbf{main page}}, a few things can be noticed:
 \begin{enumerate}
@@ -66,13 +66,23 @@ Additionally, specific usernames can be sought for using the user-search-bar rig
 \end{itemize}
 \end{enumerate}
 \end{enumerate}
+Symfony follows a systematic approach to rendering html responses, which in simplified form looks as follows:
+
+\begin{figure}[h]
+\centering
+\makebox[\textwidth]{ \includegraphics[scale=0.33]{symfonySystem.jpg}}
+\caption{Displays the back-end path from a http request to generating the appropriate response.}
+\end{figure}
+Following this structure, the controllers take care for generating the required output, with each of the requirements being mentioned in the points above. Aside of the pages that are visibly rendered for the user, some actions contain pure logic blocks, e.g. user logout and game-load/save. These will execute the appropriate logic commands (typically session and/or database related) and will then redirect to a different page.
+
+
 \subsubsection{Refactoring}
 As for refactoring the website, little refactoring was required. This is because I did not have to write many re-usable "modules". The main task here was to set-up the routing in order to direct the right url to the right controller with the right action (function). The code used inside the controllers was generally quite unique for each page, as each page is indeed unique on its own. The only common factor is the user-session, for which I created a separate class. This class contains a method \emph{get\_sessionData()} which returns an array containing all the useful user data.\\\\
 If at any point I wanted to store a new piece of information about the user, only this class would have to be modified, and then every page would immediately have access to it.\\
 
 \subsection*{Game}
 \subsubsection{Design}
-Similar to the website, the game is expected to log a user in, allow the user to play, stop the game when the user dies, and be tested by the developer when required. Therefore it is separated in 4 individual rooms / views: Connect, Game, Death, Test.
+Similar to the website, the game is expected to log a user in, allow the user to play, stop the game when the user dies, and be tested by the developer when required. Therefore it is separated in 4 individual rooms / views: Connect, Game, Death and Test.
 \begin{enumerate}
 \item In the \emph{\textbf{connection room}}, the controller object is instantiated, which controls the entire gameflow. At this point, its main tasks are to check whether the game should run in game-mode, runtime-test mode or unit-test mode.
 \begin{enumerate}
@@ -85,9 +95,9 @@ Similar to the website, the game is expected to log a user in, allow the user to
 \begin{itemize}
 \item creates stat-upgrade purchase-buttons for each of the upgradable stats
 \item creates the player instance
-\item respawns the monsters \textsl{monster\_respawn()}
-\item draws the user interface \textsl{draw\_UI()} (stats menu)
-\item draws the combat menu \textsl{draw\_menu()}
+\item respawns the monsters: \textsl{monster\_respawn()}
+\item draws the user interface: \textsl{draw\_UI()} (stats menu)
+\item draws the combat menu: \textsl{draw\_menu()}
 \item tracks the user stats
 \item controls game event timers
 \end{itemize}  
@@ -109,6 +119,14 @@ Similar to the website, the game is expected to log a user in, allow the user to
 \item Draws a \textsl{monster\_controller()} which includes in-/decrement buttons for the future monster's re-spawn-level range.
 \item Draws a special-skill (\textsl{draw\_sunflash()}) charge bar which when filled displays an activation button, which in turn triggers a particle system object that damages the monster.
 \end{itemize}
+Due to the complexity, here is a visual representation showing the game room:
+
+\begin{figure}[h]
+\centering
+\makebox[\textwidth]{ \includegraphics[scale=0.33]{userGuide.jpg}}
+\caption{Visual representation of the game room, displaying many of the modules mentioned above.}
+\end{figure}
+
 \end{enumerate}
 \item In the \emph{\textbf{Death room}}, the controller draws a simple message notifying the user of his/her death and waits for a user-input response to restart the game.
 \item In the \emph{\textbf{Test room}}, the controller instantiates a test-object \emph{obj\_TestConnection}, which:
@@ -119,10 +137,18 @@ Similar to the website, the game is expected to log a user in, allow the user to
 \end{enumerate}
 \end{enumerate}
 \subsubsection{Refactoring}
-Little to no "RE-factoring" was required as I have spent a lot of time working on projects in Gamemaker in the past, having given me the experience and knowledge of many potential threats and issues that are lurking in the near (and even distant) future. Therefore many of these issues were (mostly unconsciously) treated before they became an issue.\\
+Little "RE-factoring" was required as I have spent a lot of time working on projects in Gamemaker in the past, having given me the experience and knowledge of many potential threats and issues that may be lurking in the near (and even distant) future. Therefore many of these issues were (mostly unconsciously) treated before they became an issue.\\
 It should indeed have become apparent that the controller object sets the entire game in motion. Every instance is responsible for only itself, and is at most dependent on the controller, of which only exactly 1 instance exists at any time, meaning that this dependency is harmless.\\
 Due to this design, it is unlikely that modifying any module breaks any other module (as long as I (or whichever programmer) sticks to the rules of the module in question, meaning that for example the return type should not change).\\
 
+\subsubsection{Function Structure}
+Since Gamemaker builds an xml-like structure in order to organise the functions in sub-folders, but on the harddrive only stores the scriptnames in one single folder, here is an image the structure:
+
+\begin{figure}[h]
+\makebox[\textwidth]{\includegraphics[scale=0.52]{script_hierachy.jpg}}
+\caption{Script Hierachy, displaying the alignment of scripts used in gamemaker. Their content is located in the folder GM\_SOURCE/sourcecode/rendonan\_release.gmx/scripts.}
+\end{figure}
+\vspace{2em}
 \section*{Difficulties}
 Before the development started (around the time of writing the proposals) I successfully predicted to get stuck for a relatively long period of time on exactly 3 points:
 \begin{itemize}
