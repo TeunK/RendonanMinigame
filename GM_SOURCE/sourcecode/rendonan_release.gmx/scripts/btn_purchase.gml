@@ -21,6 +21,7 @@ test_is_real(   adds,      testmodule+"adds: ",     true);
 if (btn_id==obj_Controller.btnHP)
 {
     obj_Controller.maxhp+=adds;
+    obj_Controller.currenthp+=adds;
 }
 else if (btn_id==obj_Controller.btnStr)
 {
