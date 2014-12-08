@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="Rendonan\MiniBundle\Repository\HighscoreRepository")
+ * @ORM\Entity
  * @ORM\Table(name="tbl_Highscore")
  * @UniqueEntity(fields="username", message="Sorry, this username is already taken.")
  */
@@ -136,6 +136,7 @@ Class Highscore
 /////////////////////////////////////////////////////////////////
 /////////////////////////GETTERS / SETTERS///////////////////////
 /////////////////////////////////////////////////////////////////
+    /* id commented for future use
     public function setId($id)
     {
         $this->id = $id;
@@ -145,6 +146,7 @@ Class Highscore
     {
         return $this->id;
     }
+    */
 
     public function setUsername($username)
     {

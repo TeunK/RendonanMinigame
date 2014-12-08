@@ -12,6 +12,7 @@
 !/app/config/config.yml
 !/app/config/parameters.yml
 !/app/config/security.yml
+!/app/config/routing_dev.yml
 !/app/Resources/views/base.html.twig
 
 !/app/rendonan_minigame.db

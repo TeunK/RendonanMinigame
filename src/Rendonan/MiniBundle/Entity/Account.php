@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
- * @ORM\Entity(repositoryClass="Rendonan\MiniBundle\Repository\PersonRepository")
+ * @ORM\Entity
  * @ORM\Table(name="tbl_Users")
  * @UniqueEntity(fields="username", message="Sorry, this username is already taken.")
  */
@@ -169,14 +169,6 @@ Class Account
     public function getHp()
     {
         return $this->user_hp;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USER');
     }
 
     ///////////////////////////////////////
