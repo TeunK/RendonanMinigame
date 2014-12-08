@@ -131,6 +131,7 @@ Class Account
 /////////////////////////////////////////////////////////////////
 /////////////////////////GETTERS / SETTERS///////////////////////
 /////////////////////////////////////////////////////////////////
+    /* id commented for future use
     public function setId($id)
     {
         $this->id = $id;
@@ -140,6 +141,7 @@ Class Account
     {
         return $this->id;
     }
+    */
 
     public function setUsername($username)
     {
