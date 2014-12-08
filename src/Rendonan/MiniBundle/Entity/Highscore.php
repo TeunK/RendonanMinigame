@@ -81,58 +81,6 @@ Class Highscore
     protected $stat_agility = 0;
 
 
-
-/////////////////////////////////////////////////////////////////
-//////////////////////////USER PROTECTION////////////////////////
-/////////////////////////////////////////////////////////////////
-
-    //validation
-    public static function loadValidatorMetadata(ClassMetadata $metadata)
-    {
-        //username may not be blank
-        $metadata->addPropertyConstraint('username', new Assert\NotBlank());
-        //username must be of specific length
-        $metadata->addPropertyConstraint('username', new Assert\Length(array(
-            'min'        => 4,
-            'max'        => 20,
-            'minMessage' => 'Your username must be at least {{ limit }} characters long',
-            'maxMessage' => 'Your username cannot be longer than {{ limit }} characters long',
-        )));
-        //alphanumeric username
-        $metadata->addPropertyConstraint('username', new Assert\Regex(array(
-            'pattern' => '/^[a-zA-Za0-9]+$/',
-            'message' => 'Username can only consist of letters and numbers'
-        )));
-
-        //validating user stats, ensure type = integer
-        $metadata->addPropertyConstraint('user_score', new Assert\Type(array(
-            'type'    => 'integer',
-            'message' => 'The value {{ value }} is not a valid {{ type }}.',
-        )));
-        $metadata->addPropertyConstraint('user_experience', new Assert\Type(array(
-            'type'    => 'integer',
-            'message' => 'The value {{ value }} is not a valid {{ type }}.',
-        )));
-        $metadata->addPropertyConstraint('user_coins', new Assert\Type(array(
-            'type'    => 'integer',
-            'message' => 'The value {{ value }} is not a valid {{ type }}.',
-        )));
-        $metadata->addPropertyConstraint('stat_hp', new Assert\Type(array(
-            'type'    => 'integer',
-            'message' => 'The value {{ value }} is not a valid {{ type }}.',
-        )));
-        $metadata->addPropertyConstraint('stat_strength', new Assert\Type(array(
-            'type'    => 'integer',
-            'message' => 'The value {{ value }} is not a valid {{ type }}.',
-        )));
-        $metadata->addPropertyConstraint('stat_agility', new Assert\Type(array(
-            'type'    => 'integer',
-            'message' => 'The value {{ value }} is not a valid {{ type }}.',
-        )));
-    }
-
-
-
 /////////////////////////////////////////////////////////////////
 /////////////////////////GETTERS / SETTERS///////////////////////
 /////////////////////////////////////////////////////////////////
