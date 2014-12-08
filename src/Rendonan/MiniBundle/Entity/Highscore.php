@@ -101,19 +101,9 @@ Class Highscore
         $this->username = $username;
     }
 
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
     public function setScore($user_score)
     {
         $this->user_score = $user_score;
-    }
-
-    public function getScore()
-    {
-        return $this->user_score;
     }
     ///////////////////////////////////////
 
@@ -122,19 +112,9 @@ Class Highscore
         $this->stat_agility = $stat_agility;
     }
 
-    public function getStatAgility()
-    {
-        return $this->stat_agility;
-    }
-
     public function setStatHp($stat_hp)
     {
         $this->stat_hp = $stat_hp;
-    }
-
-    public function getStatHp()
-    {
-        return $this->stat_hp;
     }
 
     public function setStatStrength($stat_strength)
@@ -142,19 +122,9 @@ Class Highscore
         $this->stat_strength = $stat_strength;
     }
 
-    public function getStatStrength()
-    {
-        return $this->stat_strength;
-    }
-
     public function setUserCoins($user_coins)
     {
         $this->user_coins = $user_coins;
-    }
-
-    public function getUserCoins()
-    {
-        return $this->user_coins;
     }
 
     public function setUserExperience($user_experience)
@@ -162,8 +132,4 @@ Class Highscore
         $this->user_experience = $user_experience;
     }
 
-    public function getUserExperience()
-    {
-        return $this->user_experience;
-    }
 }
