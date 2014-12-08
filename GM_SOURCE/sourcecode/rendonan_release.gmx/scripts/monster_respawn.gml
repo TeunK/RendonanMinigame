@@ -10,7 +10,7 @@ if (!instance_exists(obj_Monster))
     {
         var newmonsterlvl = 1+round(random(monsterSpawnLevel-1))
         //create monster with given stats
-        newmonster = instance_create(760,200,obj_Monster);
+        newmonster = instance_create(740,220,obj_Monster);
         newmonster.level        = newmonsterlvl;
         newmonster.str          = newmonsterlvl*2+random(2);
         newmonster.agi          = round((1+random(2))*newmonsterlvl);

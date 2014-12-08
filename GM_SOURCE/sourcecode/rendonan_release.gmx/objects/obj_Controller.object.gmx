@@ -31,6 +31,8 @@
 ***************************************************/
 draw_set_font(font0);
 
+audio_play_sound(snd_bgloop, 10, true);
+
 //start connection when timer reaches 0
 connectTimer = 60; 
 
@@ -39,7 +41,7 @@ t_game = 0; //regular game mode
 t_test = 1; //runtime test mode
 t_unit = 2; //unit test mode
 
-test_mode               = t_test;
+test_mode               = t_game;
 active_testing          = false; //allow popup messages to display with successful test-results
 toggle_active_testing   = vk_space; //required key to press to toggle active_testing
 
@@ -167,7 +169,7 @@ if (ds_map_find_value(async_load, "id") == http)
 ***************************************************/
 if (room==room_Game)
 {
-    instance_create(96,384,obj_Player);
+    instance_create(160,384,obj_Player);
 
     savetimer = 0;
     savedelay = 300;
@@ -245,6 +247,8 @@ if (room==room_Connect)
 }
 else if (room==room_Game)
 {
+    draw_background(bg_branch,0,0);
+
     test_toggleActiveMode(toggle_active_testing);
 
     test_timer(room_width/2, 30, savedelay-savetimer, 0, "Saving Game...");
