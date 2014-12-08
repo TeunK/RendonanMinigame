@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class MainControllerTest extends WebTestCase
 {
-    public function testEmptyPage()
+    public function testEmptyUrl()
     {
         $client = static::createClient();
 
