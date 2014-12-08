@@ -1,23 +1,45 @@
 ﻿Rendonan Minigame Documentation:
 Project split into 2 sections: Server and Game
 
-▬▬ι═══════ﺤ REQUIRED SOFTWARE	 -═══════ι▬▬
+====== REQUIRED SOFTWARE ======
 - Jetbrains PHPStorm (to edit the website)
 - Gamemaker Studio with HTML5 export module (to edit the game)
 - WampServer (in order to run php on localhost)
 - PHPUnit (in order to execute unit tests)
-▬▬ι═══════ﺤ RUNNING -═══════ι▬▬
+
+====== PATHS ======
+Game project file (open with Gamemaker): GM_SOURCE/sourcecode/rendonan_release.gmx/rendonan_release.project.gmx
+
+Website routing: src/Rendonan/MiniBundle/Resources/config/routing.yml
+Website controllers: src/Rendonan/MiniBundle/Controller/
+Website entity classes (db tables): src/Rendonan/MiniBundle/Entity/
+Website views: src/Rendonan/MiniBundle/Resources/views/
+
+====== RUNNING ======
+SERVER:
+Start-up localhost with port number 8080, from the rendonan_release directory by opening the terminal from here and run “php –S localhost:8080” (port 8080 is what the game will be looking for in order to connect to the server, defined in the create event of obj_Controller).
+
 SITE:
-As long as localhost is running, simply start up the site in a browser: localhost/rendonan_release/web/app_dev.php
+As long as localhost is running, simply start up the site in a browser: localhost:8080/web/app_dev.php
 
 GAME:
 In Gamemaker, ensure “export as html5” is selected. Then press the “play” button and it will automatically generate the required files and run them in the browser.
 If graphics start acting corrupted when compiling, press the "Clean project asset compiler cache" button in order to refresh the compiler cache.
 
-▬▬ι═══════ﺤ TESTING -═══════ι▬▬
+====== TESTING ======
 SITE: 
 The form input is tested both on the client- and server side. This is done in the Entity classes (e.g. Account.php and Highscore.php) and in the controllers (e.g. RegisterController.php). 
-Unit tests for the controllers are written in the tests folder. Use PHPUnit to run them by starting up the terminal in the rendonan_release folder and run: phpunit -c app/
+Unit tests for the controllers are written in the tests folder. 
+
+Use PHPUnit to run them by starting up the terminal in the rendonan_release folder and run:
+phpunit -c app/
+
+In order to generate a log of the test-coverage inside the testcoverage folder, run:
+Phpunit –c app –coverage-html testcoverage
+
+If necessary, it is possible to generate a log of the test results in a json format by running:
+phpunit –c app –log-json testresult/test.json
+
 
 GAME:
 All test scripts are found in the “Tests” folder. These are divided into UnitTests, LogicTests, TypeChecking and TestController.
@@ -29,16 +51,16 @@ o test_exec runs all UnitTests and will print out the details of which tests pas
 o Test_result compares the number of pass/fail, checking whether any errors occurred
 o Test_toggleActiveMode allows the software engineer to toggle the active-testing mode. Meaning that when in testing mode, even tests returning “success” will return the fact that they were indeed successful. Otherwise only “failures” will be mentioned.
 
-▬▬ι═══════ﺤ DEBUGGING -═══════ι▬▬
+====== DEBUGGING ======
 GAME:
 during gameplay in testmode, if a function fails, it will mention which script it was that failed. From there it should be relatively easy to find out which event it was that triggered the script by recreating the error. 
 The LogicTests display values of specific variables, which can be compared and checked if they make sense. 
 Also gamemaker has a debugger at hand (red play button) which allows the software engineer to display specific values and query results.
 At any point in the code the function show_message(string) can be used, which will pause the game at the point where the function is called. The string can contain values that are to be tested.
 
-▬▬ι═══════ﺤ DEPLOYING -═══════ι▬▬
+====== DEPLOYING ======
 SITE:
-This process is identical to “running” the site. The site is expected to run on localhost and thus deployment to an external source is not required.
+This process is identical to “running” the site. The site is expected to run on localhost and thus deployment to an external source is not required. (Although ensure that the app/cache/ folder is clear when running the server on a different machine.)
 
 GAME:
 Rather than pressing the “play” button to run the game, in Gamemaker press “create application” and store the suggested “index.html” file in localhost/rendonan_release/web/game. Gamemaker will translate the game into JavaScript and generate further required files. The index.html location is where the server (site) will find the game, and refer to it using an iframe (note: rendonan_release/src/Rendonan/MiniBundle/Resources/views/Default/Pages/game.html.twig)
@@ -52,7 +74,7 @@ Stylesheets are found in web/css
 
 
 GAME:
-A quick note with regard to Gamemaker as these inbuilt-variables come back repeatedly:
+A quick note with regard to Gamemaker as these inbuilt-variables are used repeatedly:
 image_alpha = drawing opacity
 image_number = number of sub-images in sprite.
 image_index is currently selected image in sprite.
