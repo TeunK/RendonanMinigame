@@ -25,7 +25,10 @@
 My project is the combination of a website, database and a turn-based game, with the game itself at its core. Users are able to register an account on the website, requiring only a username and password, and can then immediately jump in to play the game.\\
 Players start with a basic set of stats: \textit{experience, money, health, strength and agility}. From this point the player is expected to fight the monsters that will continuously re-spawn upon death. By killing the monsters, the player earns both money and experience, where the money can be used to upgrade stat points, making the player stronger and able to combat harder, more rewarding monsters. The experience plays a major role in the user ranking and contributes to leveling up the user, improving his looks.\\
 When the player leaves the game, the game progress will be saved and re-loaded when he/she returns. However, when the player dies, all progress will be lost. Only at this point, the stats will be stored in the highscores.\\
-The highscores can be viewed on the website, and contain the stats of each death that occurred for players. The ranks are decided stat-wise, each stat can be selected and filtered individually in ascending/descending order. Additionally, each player can be sought for manually, in the search-bar.
+The highscores can be viewed on the website, and contain the stats of each death that occurred for players. The ranks are decided stat-wise, each stat can be selected and filtered individually in ascending/descending order. Additionally, each player can be sought for manually, in the search-bar.\\\\
+If you wish to jump straight into the mid-level gameplay to try it out with plenty of money to immediately upgrade your stats, login with\\ \textbf{user:} admin, \textbf{password:} admin\\
+Use app/sqliteBACKUP.db to reset the original database app/sqlite.db if ever necessary.
+
 \vspace{2em}
 \begin{quote}
 \textit{Due to my excitement for software engineering, and in hope to improve my mark, I successfully managed to find an abundance of time and made it well-spent.}
@@ -54,6 +57,7 @@ Files: /GM\_SOURCE/sourcecode/rendonan.gmx/...
 \item test coverage: /testcoverage/index.html and testcoverage/dashboard.html
 \item test results: /testresult
 \end{itemize}
+\item Example Video: \url{https://www.youtube.com/watch?v=9hUZTXsLuDc}
 \end{itemize}
 \pagebreak
 
@@ -251,7 +255,7 @@ The website could become much more interactive, by adding visual and technical i
 Perhaps it is possible to make the game multiplayer over the network entirely, allowing players to cooperate fighting monsters, although this would require further research in order to find out how to solve delay and server/client-firewall issues (especially when using a UDP connection), to which every browser may respond differently.
 
 \section*{Conclusion}
-It is safe to say that by the time I got accepted to Edinburgh University, I had already spent well over 1000 hours programming in Gamemaker. This comes both with up and down-sides.\newpage 
+It is safe to say that by the time I got accepted to Edinburgh University, I had already spent well over 1000 hours programming in Gamemaker. This comes both with up and down-sides:\\
 No-one has taught me how to work with it, I did all the experimenting on my own and have thus far come to the conclusion that the structure of building-up projects in the order I have used for this project is the most efficient and requires least post-re-factoring. By "this structure" I mean to say: creating a controller object and let it take care of everything. Let it store all the important variables of the user, create instances on demand, and allow these instances to depend on the controller if required. But not make them dependent of anything else.\\
 Like writing a book, every new feature (be it a menu, chatbox, attack event, mathematical formula to calculate a stat) should be written in one piece (individual sections, possibly with subsections, eg. draw\_menu() with sub-components), on one location as separate function, preferably being completely independent of everything (other than the input arguments it received).\\
 This way, it is possible to "zoom in" on each part (/component), and be able to edit it without having to worry about anything else breaking down.\\
