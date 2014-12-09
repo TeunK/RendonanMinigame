@@ -16,6 +16,8 @@
 !/app/Resources/views/base.html.twig
 
 !/app/rendonan_minigame.db
+!/app/sqlite.db
+!/app/sqliteBACKUP.db
 !/src/Rendonan/MiniBundle/Classes/*
 !/src/Rendonan/MiniBundle/Entity/*
 !/src/Rendonan/MiniBundle/Form/Model/*
