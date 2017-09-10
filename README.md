@@ -1,5 +1,9 @@
 Software Engineering Large Practical, Edinburgh University
 
+[![Creation Guide](https://img.youtube.com/vi/894i39gHJUM/default.jpg)](https://youtu.be/894i39gHJUM)
+
+[![Project in action](https://img.youtube.com/vi/9hUZTXsLuDc/default.jpg)](https://youtu.be/9hUZTXsLuDc)
+
 _______________________
 -----------------------
 -------- OTHER --------
